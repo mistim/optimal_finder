@@ -26,7 +26,8 @@ config :admin_web, AdminWeb.Endpoint,
   secret_key_base: "qZhiF9iFkOYbmDeG3iJOdYXx091uNxnzP18Du22opbCtdRHxbFUNGaHyEWLnTKIb",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:admin, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:admin, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:admin, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -90,7 +91,8 @@ config :optimal_finder_web, OptimalFinderWeb.Endpoint,
   secret_key_base: "8KyUx5V1tpzTaC1RhjxkzBdmZ4qsgSezhkV4RsN2FT7UfEseKtkDT5beO9N4+CbO",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support

@@ -32,7 +32,7 @@ defmodule AdminWeb.ConnCase do
   end
 
   setup tags do
-    AdminWeb.DataCase.setup_sandbox(tags)
+    Admin.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

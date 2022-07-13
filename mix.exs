@@ -24,7 +24,10 @@ defmodule OptimalFinder.Umbrella.MixProject do
   # Dependencies listed here are available only for this project
   # and cannot be accessed from applications inside the apps/ folder.
   defp deps do
-    []
+    [
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:petal_components, "~> 0.17"}
+    ]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

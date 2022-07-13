@@ -1,5 +1,8 @@
-<main class="container">
+<%= render(OptimalFinderWeb.LayoutView, "_header.html", assigns) %>
+<main class="container mt-[60px] desktop:mt-[54px] pt-[20px]">
   <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
   <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
   <%= @inner_content %>
 </main>
+<%= render(OptimalFinderWeb.LayoutView, "_footer.html", assigns) %>
+<%= render(OptimalFinderWeb.LayoutView, "_aside.html", assigns) %>  

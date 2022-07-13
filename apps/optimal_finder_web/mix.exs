@@ -49,6 +49,8 @@ defmodule OptimalFinderWeb.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
       {:optimal_finder, in_umbrella: true},
+      {:admin_web, in_umbrella: true},
+      {:petal_components, "~> 0.17"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"}
     ]
@@ -61,7 +63,7 @@ defmodule OptimalFinderWeb.MixProject do
     [
       setup: ["deps.get"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end

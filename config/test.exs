@@ -7,7 +7,7 @@ import Config
 # Run `mix help test` for more information.
 config :admin, Admin.Repo,
   username: "root",
-  password: "",
+  password: "root",
   hostname: "localhost",
   database: "admin_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
@@ -27,7 +27,7 @@ config :admin_web, AdminWeb.Endpoint,
 # Run `mix help test` for more information.
 config :optimal_finder, OptimalFinder.Repo,
   username: "root",
-  password: "",
+  password: "root",
   hostname: "localhost",
   database: "optimal_finder_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,

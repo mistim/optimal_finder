@@ -98,6 +98,8 @@ defmodule OptimalFinderWeb do
       import OptimalFinderWeb.ErrorHelpers
       import OptimalFinderWeb.Gettext
       alias OptimalFinderWeb.Router.Helpers, as: Routes
+
+      use PetalComponents
     end
   end
 
