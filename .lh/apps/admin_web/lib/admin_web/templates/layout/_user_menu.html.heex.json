@@ -1,0 +1,158 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/layout/_user_menu.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 35,
+            "patches": [
+                {
+                    "date": 1657795315621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657795359166,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<ul class=\"p-2\">\n+<ul class=\"p-3\">\n <%= if @current_user do %>\n   <li><%= @current_user.email %></li>\n   <li><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n"
+                },
+                {
+                    "date": 1657795386152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<ul class=\"p-3\">\n+<ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n   <li><%= @current_user.email %></li>\n   <li><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n"
+                },
+                {
+                    "date": 1657795420054,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,10 +1,10 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li><%= @current_user.email %></li>\n-  <li><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n-  <li><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n+  <li class=\"p-1\"><%= @current_user.email %></li>\n+  <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n+  <li class=\"p-1\"><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n <% else %>\n-  <li><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n-  <li><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n+  <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n+  <li class=\"p-1\"><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n <% end %>\n </ul>\n"
+                },
+                {
+                    "date": 1657795711120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,7 +4,11 @@\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\"><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n-  <li class=\"p-1\"><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n+  <li class=\"p-1\">\n+    <%= link to: Routes.user_session_path(@conn, :new) do %>\n+      \"Log in\"\n+    <% end %>\n+  </li>\n <% end %>\n </ul>\n"
+                },
+                {
+                    "date": 1657795821543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,14 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n-  <li class=\"p-1\"><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n-<% else %>\n-  <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n   <li class=\"p-1\">\n-    <%= link to: Routes.user_session_path(@conn, :new) do %>\n-      \"Log in\"\n+    <%= link to: Routes.user_session_path(@conn, :delete), method: :delete %>\n+      <Heroicons.Outline.logout /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n+<% else %>\n+  <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n+  <li class=\"p-1\"><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n <% end %>\n </ul>\n"
+                },
+                {
+                    "date": 1657795840681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <%= if @current_user do %>\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n-    <%= link to: Routes.user_session_path(@conn, :delete), method: :delete %>\n+    <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n       <Heroicons.Outline.logout /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n"
+                },
+                {
+                    "date": 1657795869351,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Solid.logout /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657795883588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Solid.logout /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"h-3 h-3\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657795896399,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"h-3 h-3\" /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"w-4 h-4\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657795957965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4\" /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657795991200,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block\" /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block leading-3\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657796012268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block leading-3\" /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block pv-1\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657796042120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block pv-1\" /><span class=\"pl-2\">Log out</span>\n+      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657796077236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,13 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n   <li class=\"p-1\"><%= @current_user.email %></li>\n-  <li class=\"p-1\"><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n   <li class=\"p-1\">\n+    <%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) do %>\n+      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n+    <% end %>\n+  </li>\n+  <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n       <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n"
+                },
+                {
+                    "date": 1657796086812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n-    <%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) do %>\n+    <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n   </li>\n   <li class=\"p-1\">\n"
+                },
+                {
+                    "date": 1657796115522,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <%= if @current_user do %>\n   <li class=\"p-1\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n+      <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n   </li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n"
+                },
+                {
+                    "date": 1657796152153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1\"><%= @current_user.email %></li>\n+  <li class=\"p-1 mb-2\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796176886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1 mb-2\"><%= @current_user.email %></li>\n+  <li class=\"p-1 mb-2 border border-gray-300\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796185867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1 mb-2 border border-gray-300\"><%= @current_user.email %></li>\n+  <li class=\"p-1 mb-2 border-b border-gray-300\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796199861,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1 mb-2 border-b border-gray-300\"><%= @current_user.email %></li>\n+  <li class=\"p-1 pb-2 mb-2 border-b border-gray-300\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796215777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-3 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1 pb-2 mb-2 border-b border-gray-300\"><%= @current_user.email %></li>\n+  <li class=\"p-1 pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796250107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<ul class=\"py-3 px-5\">\n+<ul class=\"py-2 px-5\">\n <%= if @current_user do %>\n   <li class=\"p-1 pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n"
+                },
+                {
+                    "date": 1657796259458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<ul class=\"py-2 px-5\">\n+<ul class=\"py-1 px-5\">\n <%= if @current_user do %>\n   <li class=\"p-1 pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n   <li class=\"p-1\">\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n"
+                },
+                {
+                    "date": 1657796314131,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n-<ul class=\"py-1 px-5\">\n+<ul class=\"py-2 px-5\">\n <%= if @current_user do %>\n-  <li class=\"p-1 pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n-  <li class=\"p-1\">\n+  <li class=\"pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n+  <li>\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n   </li>\n-  <li class=\"p-1\">\n+  <li>\n     <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n       <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n     <% end %>\n   </li>\n"
+                },
+                {
+                    "date": 1657796374614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,10 @@\n <ul class=\"py-2 px-5\">\n <%= if @current_user do %>\n-  <li class=\"pb-2 mb-2 border-b border-gray-200\"><%= @current_user.email %></li>\n+  <li class=\"pb-2 mb-2\">\n+    <span><%= @current_user.email %></span>\n+  </li>\n+  <li class=\"border-b border-gray-200\"></li>\n   <li>\n     <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n       <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n     <% end %>\n"
+                },
+                {
+                    "date": 1657796393424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <ul class=\"py-2 px-5\">\n <%= if @current_user do %>\n-  <li class=\"pb-2 mb-2\">\n+  <li>\n     <span><%= @current_user.email %></span>\n   </li>\n   <li class=\"border-b border-gray-200\"></li>\n   <li>\n"
+                },
+                {
+                    "date": 1657796410779,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<ul class=\"py-2 px-5\">\n+<ul class=\"py-2 px-0\">\n <%= if @current_user do %>\n   <li>\n     <span><%= @current_user.email %></span>\n   </li>\n"
+                },
+                {
+                    "date": 1657796505588,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,23 @@\n-<ul class=\"py-2 px-0\">\n+<ul class=\"p-0\">\n <%= if @current_user do %>\n   <li>\n-    <span><%= @current_user.email %></span>\n+    <span class=\"px-1 py-2\"><%= @current_user.email %></span>\n   </li>\n   <li class=\"border-b border-gray-200\"></li>\n   <li>\n-    <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n-      <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n-    <% end %>\n+    <span class=\"px-1 py-2\">\n+      <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n+        <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n+      <% end %>\n+    </span>\n   </li>\n   <li>\n-    <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n-      <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n-    <% end %>\n+    <span class=\"px-1 py-2\">\n+      <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n+        <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n+      <% end %>\n+    </span>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n   <li class=\"p-1\"><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657796535589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,23 +1,23 @@\n <ul class=\"p-0\">\n <%= if @current_user do %>\n   <li>\n-    <span class=\"px-1 py-2\"><%= @current_user.email %></span>\n+    <div class=\"px-1 py-2\"><%= @current_user.email %></div>\n   </li>\n   <li class=\"border-b border-gray-200\"></li>\n   <li>\n-    <span class=\"px-1 py-2\">\n+    <div class=\"px-1 py-2\">\n       <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n         <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n       <% end %>\n-    </span>\n+    </div>\n   </li>\n   <li>\n-    <span class=\"px-1 py-2\">\n+    <div class=\"px-1 py-2\">\n       <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n         <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n       <% end %>\n-    </span>\n+    </div>\n   </li>\n <% else %>\n   <li class=\"p-1\"><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n   <li class=\"p-1\"><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n"
+                },
+                {
+                    "date": 1657796557962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,19 +1,19 @@\n <ul class=\"p-0\">\n <%= if @current_user do %>\n   <li>\n-    <div class=\"px-1 py-2\"><%= @current_user.email %></div>\n+    <div class=\"px-3 py-2\"><%= @current_user.email %></div>\n   </li>\n   <li class=\"border-b border-gray-200\"></li>\n   <li>\n-    <div class=\"px-1 py-2\">\n+    <div class=\"px-3 py-2\">\n       <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n         <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n       <% end %>\n     </div>\n   </li>\n   <li>\n-    <div class=\"px-1 py-2\">\n+    <div class=\"px-3 py-2\">\n       <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n         <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n       <% end %>\n     </div>\n"
+                },
+                {
+                    "date": 1657796586074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,18 +2,18 @@\n <%= if @current_user do %>\n   <li>\n     <div class=\"px-3 py-2\"><%= @current_user.email %></div>\n   </li>\n-  <li class=\"border-b border-gray-200\"></li>\n+  <li class=\"border-b border-gray-200 mt-1\"></li>\n   <li>\n-    <div class=\"px-3 py-2\">\n+    <div class=\"px-3 py-1\">\n       <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n         <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n       <% end %>\n     </div>\n   </li>\n   <li>\n-    <div class=\"px-3 py-2\">\n+    <div class=\"px-3 py-1\">\n       <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n         <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n       <% end %>\n     </div>\n"
+                },
+                {
+                    "date": 1657796611563,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <%= if @current_user do %>\n   <li>\n     <div class=\"px-3 py-2\"><%= @current_user.email %></div>\n   </li>\n-  <li class=\"border-b border-gray-200 mt-1\"></li>\n+  <li class=\"border-b border-gray-200 mb-1\"></li>\n   <li>\n     <div class=\"px-3 py-1\">\n       <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n         <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n"
+                },
+                {
+                    "date": 1657796619726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n <%= if @current_user do %>\n   <li>\n     <div class=\"px-3 py-2\"><%= @current_user.email %></div>\n   </li>\n-  <li class=\"border-b border-gray-200 mb-1\"></li>\n+  <li class=\"border-b border-gray-200 mb-2\"></li>\n   <li>\n     <div class=\"px-3 py-1\">\n       <%= link to: Routes.user_settings_path(@conn, :edit) do %>\n         <Heroicons.Outline.cog class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Settings</span>\n"
+                },
+                {
+                    "date": 1657796655916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       <% end %>\n     </div>\n   </li>\n   <li>\n-    <div class=\"px-3 py-1\">\n+    <div class=\"px-3 py-1 mt-1\">\n       <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n         <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n       <% end %>\n     </div>\n"
+                },
+                {
+                    "date": 1657796666160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       <% end %>\n     </div>\n   </li>\n   <li>\n-    <div class=\"px-3 py-1 mt-1\">\n+    <div class=\"px-3 py-1 mb-1\">\n       <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>\n         <Heroicons.Outline.logout class=\"w-4 h-4 inline-block mb-1\" /><span class=\"pl-2\">Log out</span>\n       <% end %>\n     </div>\n"
+                }
+            ],
+            "date": 1657795315621,
+            "name": "Commit-0",
+            "content": "<ul class=\"p-2\">\n<%= if @current_user do %>\n  <li><%= @current_user.email %></li>\n  <li><%= link \"Settings\", to: Routes.user_settings_path(@conn, :edit) %></li>\n  <li><%= link \"Log out\", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>\n<% else %>\n  <li><%= link \"Register\", to: Routes.user_registration_path(@conn, :new) %></li>\n  <li><%= link \"Log in\", to: Routes.user_session_path(@conn, :new) %></li>\n<% end %>\n</ul>\n"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+<ul class="p-0">
+<%= if @current_user do %>
+  <li>
+    <div class="px-3 py-2"><%= @current_user.email %></div>
+  </li>
+  <li class="border-b border-gray-200 mb-2"></li>
+  <li>
+    <div class="px-3 py-1">
+      <%= link to: Routes.user_settings_path(@conn, :edit) do %>
+        <Heroicons.Outline.cog class="w-4 h-4 inline-block mb-1" /><span class="pl-2">Settings</span>
+      <% end %>
+    </div>
+  </li>
+  <li>
+    <div class="px-3 py-1 mb-1">
+      <%= link to: Routes.user_session_path(@conn, :delete), method: :delete do %>
+        <Heroicons.Outline.logout class="w-4 h-4 inline-block mb-1" /><span class="pl-2">Log out</span>
+      <% end %>
+    </div>
+  </li>
+<% else %>
+  <li class="p-1"><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+  <li class="p-1"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+<% end %>
+</ul>

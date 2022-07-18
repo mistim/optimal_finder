@@ -1,0 +1,22 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/layout/app.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1657788386454,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657788407596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <%= render(AdminWeb.LayoutView, \"_header.html\", assigns) %>  \n <div class=\"flex overflow-hidden bg-white pt-16\">\n   <p class=\"alert alert-info\" role=\"alert\"><%= get_flash(@conn, :info) %></p>\n   <p class=\"alert alert-danger\" role=\"alert\"><%= get_flash(@conn, :error) %></p>\n-  <%= render(AdminWeb.LayoutView, \"_side.html\", conn: @conn) %>  \n+  <%= render(AdminWeb.LayoutView, \"_side.html\", assigns) %>  \n   <div class=\"bg-gray-900 opacity-50 hidden fixed inset-0 z-10\" id=\"sidebarBackdrop\"></div>\n   <div id=\"main-content\" class=\"h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64\">\n     <main>\n       <%= @inner_content %>\n"
+                }
+            ],
+            "date": 1657788386454,
+            "name": "Commit-0",
+            "content": "<%= render(AdminWeb.LayoutView, \"_header.html\", assigns) %>  \n<div class=\"flex overflow-hidden bg-white pt-16\">\n  <p class=\"alert alert-info\" role=\"alert\"><%= get_flash(@conn, :info) %></p>\n  <p class=\"alert alert-danger\" role=\"alert\"><%= get_flash(@conn, :error) %></p>\n  <%= render(AdminWeb.LayoutView, \"_side.html\", conn: @conn) %>  \n  <div class=\"bg-gray-900 opacity-50 hidden fixed inset-0 z-10\" id=\"sidebarBackdrop\"></div>\n  <div id=\"main-content\" class=\"h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64\">\n    <main>\n      <%= @inner_content %>\n    </main>\n  </div>\n</div>\n"
+        }
+    ]
+}

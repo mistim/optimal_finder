@@ -1,0 +1,26 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/html/show_button.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1658039739098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658050646700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,18 +37,18 @@\n   def build_show_hide_fields_button(%Params{show_field_buttons: true} = params) do\n     params\n     |> Text.text(:hide_field_buttons)\n     |> Helpers.tag(:a,\n-      class: \"exz-info-button\",\n+      class: Params.get_dt_class(:info_button),\n       \"phx-click\": \"hide_buttons\"\n     )\n   end\n \n   def build_show_hide_fields_button(%Params{} = params) do\n     params\n     |> Text.text(:show_field_buttons)\n     |> Helpers.tag(:a,\n-      class: \"exz-info-button\",\n+      class: Params.get_dt_class(:info_button),\n       \"phx-click\": \"show_buttons\"\n     )\n   end\n end\n"
+                },
+                {
+                    "date": 1658050663905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n     params\n     |> Text.text(:show_field, name)\n     |> Helpers.tag(:a,\n-      class: \"exz-show-button\",\n+      class: Params.get_dt_class(:show_button),\n       \"phx-click\": \"show_column\",\n       \"phx-value-column\": key\n     )\n   end\n"
+                }
+            ],
+            "date": 1658039739098,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.HTML.ShowButton do\n  @moduledoc \"Show buttons and the buttons that toggle their visibility\"\n  alias DataTableLive.HTML.{Filter, Format, Helpers}\n  alias DataTableLive.{Params, Text}\n\n  @doc \"Returns HTML for all the show column buttons that should be visible\"\n  @spec show_buttons(Params.t()) :: [{:safe, iolist}]\n  def show_buttons(%Params{disable_hide: true}), do: [{:safe, [\"\"]}]\n  def show_buttons(%Params{show_field_buttons: false}), do: [{:safe, [\"\"]}]\n\n  def show_buttons(%Params{fields: fields} = params) do\n    fields\n    |> Filter.fields_where(:hidden)\n    |> Enum.map(&build_show_button(params, &1))\n  end\n\n  @doc \"Returns HTML for the show column button\"\n  @spec build_show_button(Params.t(), {atom, map}) :: {:safe, iolist}\n  def build_show_button(%Params{} = params, {key, _value} = field) do\n    name = Format.header(params, field)\n\n    params\n    |> Text.text(:show_field, name)\n    |> Helpers.tag(:a,\n      class: \"exz-show-button\",\n      \"phx-click\": \"show_column\",\n      \"phx-value-column\": key\n    )\n  end\n\n  @doc \"\"\"\n    Button for showing and hiding the buttons that show/hide fields\n  \"\"\"\n  @spec build_show_hide_fields_button(Params.t()) :: {:safe, iolist}\n  def build_show_hide_fields_button(%Params{disable_hide: true}), do: {:safe, [\"\"]}\n\n  def build_show_hide_fields_button(%Params{show_field_buttons: true} = params) do\n    params\n    |> Text.text(:hide_field_buttons)\n    |> Helpers.tag(:a,\n      class: \"exz-info-button\",\n      \"phx-click\": \"hide_buttons\"\n    )\n  end\n\n  def build_show_hide_fields_button(%Params{} = params) do\n    params\n    |> Text.text(:show_field_buttons)\n    |> Helpers.tag(:a,\n      class: \"exz-info-button\",\n      \"phx-click\": \"show_buttons\"\n    )\n  end\nend\n"
+        }
+    ]
+}

@@ -1,0 +1,74 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/views/layout_view.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 14,
+            "patches": [
+                {
+                    "date": 1657829135602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657830322875,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,13 +8,13 @@\n   def menu() do\n     [\n       [\n         label: \"Dashboard\",\n-        icon: \"\",\n+        icon: :chart_pie,\n         route: \"\"\n       ], [\n         label: \"Users\",\n-        icon: \"\",\n+        icon: :user_group,\n         route: \"\"\n       ]\n     ]\n   end\n"
+                },
+                {
+                    "date": 1657830473244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n defmodule AdminWeb.LayoutView do\n   use AdminWeb, :view\n \n+  alias AdminWeb.Router.Helpers, as: Routes\n+\n   # Phoenix LiveDashboard is available only in development by default,\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n"
+                },
+                {
+                    "date": 1657830485883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n   # Phoenix LiveDashboard is available only in development by default,\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n-  def menu() do\n+  def menu(conn) do\n     [\n       [\n         label: \"Dashboard\",\n         icon: :chart_pie,\n"
+                },
+                {
+                    "date": 1657830523627,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,14 +1,15 @@\n defmodule AdminWeb.LayoutView do\n   use AdminWeb, :view\n \n   alias AdminWeb.Router.Helpers, as: Routes\n+  alias AdminWeb.Endpoint\n \n   # Phoenix LiveDashboard is available only in development by default,\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n-  def menu(conn) do\n+  def menu() do\n     [\n       [\n         label: \"Dashboard\",\n         icon: :chart_pie,\n"
+                },
+                {
+                    "date": 1657830584812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,13 +12,13 @@\n     [\n       [\n         label: \"Dashboard\",\n         icon: :chart_pie,\n-        route: \"\"\n+        route: Routes.page_path(Endpoint, :index)\n       ], [\n         label: \"Users\",\n         icon: :user_group,\n-        route: \"\"\n+        route: Routes.page_path(Endpoint, :index)\n       ]\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657831461385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n   def menu() do\n-    [\n+    {\n       [\n         label: \"Dashboard\",\n         icon: :chart_pie,\n         route: Routes.page_path(Endpoint, :index)\n@@ -18,7 +18,7 @@\n         label: \"Users\",\n         icon: :user_group,\n         route: Routes.page_path(Endpoint, :index)\n       ]\n-    ]\n+    }\n   end\n end\n"
+                },
+                {
+                    "date": 1657831481660,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n   def menu() do\n-    {\n+    [\n       [\n         label: \"Dashboard\",\n         icon: :chart_pie,\n         route: Routes.page_path(Endpoint, :index)\n@@ -18,7 +18,7 @@\n         label: \"Users\",\n         icon: :user_group,\n         route: Routes.page_path(Endpoint, :index)\n       ]\n-    }\n+    ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657831892767,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,16 @@\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n   def menu() do\n     [\n-      [\n+      %{\n         label: \"Dashboard\",\n         icon: :chart_pie,\n         route: Routes.page_path(Endpoint, :index)\n-      ], [\n+      }, %{\n         label: \"Users\",\n         icon: :user_group,\n         route: Routes.page_path(Endpoint, :index)\n-      ]\n+      }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657832178211,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,13 +11,13 @@\n   def menu() do\n     [\n       %{\n         label: \"Dashboard\",\n-        icon: :chart_pie,\n+        icon: \"chart_pie\",\n         route: Routes.page_path(Endpoint, :index)\n       }, %{\n         label: \"Users\",\n-        icon: :user_group,\n+        icon: \"user_group\",\n         route: Routes.page_path(Endpoint, :index)\n       }\n     ]\n   end\n"
+                },
+                {
+                    "date": 1657832443529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,16 @@\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n   def menu() do\n     [\n-      %{\n+      [\n         label: \"Dashboard\",\n-        icon: \"chart_pie\",\n+        icon: :chart_pie,\n         route: Routes.page_path(Endpoint, :index)\n-      }, %{\n+      ], [\n         label: \"Users\",\n-        icon: \"user_group\",\n+        icon: :user_group,\n         route: Routes.page_path(Endpoint, :index)\n-      }\n+      ]\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657832464547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,13 +11,13 @@\n   def menu() do\n     [\n       [\n         label: \"Dashboard\",\n-        icon: :chart_pie,\n+        icon: \"chart_pie\",\n         route: Routes.page_path(Endpoint, :index)\n       ], [\n         label: \"Users\",\n-        icon: :user_group,\n+        icon: \"user_group\",\n         route: Routes.page_path(Endpoint, :index)\n       ]\n     ]\n   end\n"
+                },
+                {
+                    "date": 1657832496436,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,16 +9,16 @@\n   @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n \n   def menu() do\n     [\n-      [\n+      %{\n         label: \"Dashboard\",\n         icon: \"chart_pie\",\n         route: Routes.page_path(Endpoint, :index)\n-      ], [\n+      }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n         route: Routes.page_path(Endpoint, :index)\n-      ]\n+      }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657901671647,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         route: Routes.page_path(Endpoint, :index)\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n-        route: Routes.page_path(Endpoint, :index)\n+        route: Routes.users_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1657901998893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         route: Routes.page_path(Endpoint, :index)\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n-        route: Routes.users_path(Endpoint, :index)\n+        route: Routes.user_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                }
+            ],
+            "date": 1657829135602,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.LayoutView do\n  use AdminWeb, :view\n\n  # Phoenix LiveDashboard is available only in development by default,\n  # so we instruct Elixir to not warn if the dashboard route is missing.\n  @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\n\n  def menu() do\n    [\n      [\n        label: \"Dashboard\",\n        icon: \"\",\n        route: \"\"\n      ], [\n        label: \"Users\",\n        icon: \"\",\n        route: \"\"\n      ]\n    ]\n  end\nend\n"
+        }
+    ]
+}

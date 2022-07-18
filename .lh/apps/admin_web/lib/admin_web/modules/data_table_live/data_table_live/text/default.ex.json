@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/text/default.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658039749964,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658039749964,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Text.Default do\n  @moduledoc \"Default text for the DataTableLive HTML interface\"\n  @behaviour DataTableLive.Text\n\n  # Action buttons\n\n  @impl DataTableLive.Text\n  def actions(_assigns), do: \"Actions\"\n  @impl DataTableLive.Text\n  def new(_assigns), do: \"New\"\n  @impl DataTableLive.Text\n  def show(_assigns), do: \"Show\"\n  @impl DataTableLive.Text\n  def edit(_assigns), do: \"Edit\"\n  @impl DataTableLive.Text\n  def delete(_assigns), do: \"Delete\"\n  @impl DataTableLive.Text\n  def confirm_action(_assigns), do: \"Are you sure?\"\n\n  # Pagination\n\n  @impl DataTableLive.Text\n  def previous(_assigns), do: \"Previous\"\n  @impl DataTableLive.Text\n  def next(_assigns), do: \"Next\"\n\n  # Search\n\n  @impl DataTableLive.Text\n  def search(_assigns), do: \"Search\"\n  @impl DataTableLive.Text\n  def nothing_found(_assigns), do: \"Nothing found\"\n\n  # Show and hide fields\n\n  @impl DataTableLive.Text\n  def show_field_buttons(_assigns), do: \"Show Field Buttons\"\n  @impl DataTableLive.Text\n  def hide_field_buttons(_assigns), do: \"Hide Field Buttons\"\n  @impl DataTableLive.Text\n  def show_field(_assigns, field), do: \"Show #{field}\"\n  @impl DataTableLive.Text\n  def hide(_assigns), do: \"hide\"\n  @impl DataTableLive.Text\n  def sort(_assigns), do: \"sort\"\nend\n"
+        }
+    ]
+}

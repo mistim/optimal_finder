@@ -1,0 +1,178 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/layout/sign.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 40,
+            "patches": [
+                {
+                    "date": 1657740401755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657740425903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5 max-w-md\">\n+<main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <.card>\n         <.card_content>\n             <%= @inner_content %>\n         </.card_content>\n"
+                },
+                {
+                    "date": 1657740536233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,9 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <.card>\n-        <.card_content>\n-            <%= @inner_content %>\n-        </.card_content>\n-      </.card>\n+    <div class=\"max-w-xl\">\n+        <.card>\n+            <.card_content>\n+                <%= @inner_content %>\n+            </.card_content>\n+        </.card>\n+    </div>\n </main>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1657740577872,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"max-w-xl\">\n+    <div class=\"min-w-min\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1657740596062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"min-w-min\">\n+    <div class=\"min-w-max\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1657740633733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"min-w-max\">\n+    <div class=\"min-w-[320px]\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1657740659292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"min-w-[320px]\">\n+    <div class=\"min-w-[450px]\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1657743541026,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"min-w-[450px]\">\n-        <.card>\n+        <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1657743583621,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"min-w-[450px]\">\n-        <.card variant=\"outline\">\n+        <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1657745614829,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"min-w-[450px]\">\n+    <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1658143253676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n+    <div>\n+        <img src=\"<%= static_path(@conn, \"/images/logo_op.svg\") %>\" />\n+    </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n"
+                },
+                {
+                    "date": 1658143380165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div>\n-        <img src=\"<%= static_path(@conn, \"/images/logo_op.svg\") %>\" />\n+        <img src=\"{Routes.static_path(@conn, \"/images/logo_op.png\")}\" alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143409759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div>\n-        <img src=\"{Routes.static_path(@conn, \"/images/logo_op.png\")}\" alt=\"Optimal Finder\" />\n+        <img src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143430844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div>\n-        <img src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143603247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div>\n-        <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-[100px] grid grid-cols-1 gap-1\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n-    <div class=\"min-w-[430px]\">\n+    <div class=\"min-w-[430px] grid grid-cols-1 gap-1\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1658143670214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n+<main class=\"flex flex-wrap items-end justify-center gap-1 px-8 py-8 mt-5\">\n     <div>\n         <img class=\"w-[100px] grid grid-cols-1 gap-1\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px] grid grid-cols-1 gap-1\">\n"
+                },
+                {
+                    "date": 1658143691008,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n-<main class=\"flex flex-wrap items-end justify-center gap-1 px-8 py-8 mt-5\">\n+<main class=\"grid grid-cols-1 gap-1 px-8 py-8 mt-5\">\n     <div>\n-        <img class=\"w-[100px] grid grid-cols-1 gap-1\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n-    <div class=\"min-w-[430px] grid grid-cols-1 gap-1\">\n+    <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1658143714056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<main class=\"grid grid-cols-1 gap-1 px-8 py-8 mt-5\">\n+<main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div>\n         <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n"
+                },
+                {
+                    "date": 1658143808091,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div>\n+    <div class=\"w-full\">\n         <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n"
+                },
+                {
+                    "date": 1658143843717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"w-full\">\n+    <div class=\"w-full flex items-center\">\n         <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n"
+                },
+                {
+                    "date": 1658143864659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full flex items-center\">\n-        <img class=\"w-[100px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-[70px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143876544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full flex items-center\">\n-        <img class=\"w-[70px]\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-96\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143883278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full flex items-center\">\n-        <img class=\"w-96\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-60\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143888508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full flex items-center\">\n-        <img class=\"w-60\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-12\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143900448,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full flex items-center\">\n-        <img class=\"w-12\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143922281,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"w-full flex items-center\">\n+    <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n"
+                },
+                {
+                    "date": 1658143974265,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,11 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <div>\n+            <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n+            <span class=\"font-normal pl-1\">Admin</span>\n+        </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n             <.card_content>\n"
+                },
+                {
+                    "date": 1658143992526,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n     <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n         <div>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n-            <span class=\"font-normal pl-1\">Admin</span>\n+            <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n         <.card>\n"
+                },
+                {
+                    "date": 1658144019755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,9 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n         <div>\n+            <span class=\"font-normal pl-1 opacity-50\">Sign in</span>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658144048528,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n-        <div>\n+        <div class=\"pt-2\">\n             <span class=\"font-normal pl-1 opacity-50\">Sign in</span>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n"
+                },
+                {
+                    "date": 1658144055605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full grid justify-items-center\">\n         <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n-        <div class=\"pt-2\">\n+        <div class=\"pt-3\">\n             <span class=\"font-normal pl-1 opacity-50\">Sign in</span>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n"
+                },
+                {
+                    "date": 1658144101458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n     <div class=\"w-full grid justify-items-center\">\n-        <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n+        <!--<img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />-->\n         <div class=\"pt-3\">\n             <span class=\"font-normal pl-1 opacity-50\">Sign in</span>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n"
+                },
+                {
+                    "date": 1658144121233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n-        <.card>\n+        <.card outline>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1658144189977,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n-        <.card outline>\n+        <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1658144206541,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n-        <.card variant=\"outline\">\n+        <.card variant=\"outline_\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1658144217992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n-        <.card variant=\"outline_\">\n+        <.card>\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1658144223766,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>\n     <div class=\"min-w-[430px]\">\n-        <.card>\n+        <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n         </.card>\n"
+                },
+                {
+                    "date": 1658144268851,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,13 +1,13 @@\n <main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5\">\n-    <div class=\"w-full grid justify-items-center\">\n-        <!--<img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />-->\n+    <!--<div class=\"w-full grid justify-items-center\">\n+        <img class=\"w-16\" src={Routes.static_path(@conn, \"/images/logo_op.png\")} alt=\"Optimal Finder\" />\n         <div class=\"pt-3\">\n             <span class=\"font-normal pl-1 opacity-50\">Sign in</span>\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n-    </div>\n+    </div>-->\n     <div class=\"min-w-[430px]\">\n         <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n"
+                },
+                {
+                    "date": 1658144287540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>-->\n-    <div class=\"min-w-[430px]\">\n+    <div class=\"min-w-[430px] mt-5\">\n         <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1658144294562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>-->\n-    <div class=\"min-w-[430px] mt-5\">\n+    <div class=\"min-w-[430px] mt-10\">\n         <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                },
+                {
+                    "date": 1658144318157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n             <span class=\"text-amber-500 pr-0\">Optimal</span><span>Finder</span>\n             <span class=\"font-normal pl-1 opacity-50\">Admin</span>\n         </div>\n     </div>-->\n-    <div class=\"min-w-[430px] mt-10\">\n+    <div class=\"min-w-[430px] mt-16\">\n         <.card variant=\"outline\">\n             <.card_content>\n                 <%= @inner_content %>\n             </.card_content>\n"
+                }
+            ],
+            "date": 1657740401755,
+            "name": "Commit-0",
+            "content": "<main class=\"flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5 max-w-md\">\n    <.card>\n        <.card_content>\n            <%= @inner_content %>\n        </.card_content>\n      </.card>\n</main>"
+        }
+    ]
+}

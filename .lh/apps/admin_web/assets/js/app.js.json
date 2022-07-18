@@ -1,0 +1,22 @@
+{
+    "sourceFile": "apps/admin_web/assets/js/app.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1657793370017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657794825770,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n //\n //     import \"some-package\"\n //\n \n-import 'alpinejs'\n+import Alpine from 'alpinejs'\n \n window.Alpine = Alpine\n Alpine.start()\n \n"
+                }
+            ],
+            "date": 1657793370017,
+            "name": "Commit-0",
+            "content": "// We import the CSS which is extracted to its own file by esbuild.\n// Remove this line if you add a your own CSS build pipeline (e.g postcss).\n\n// If you want to use Phoenix channels, run `mix help phx.gen.channel`\n// to get started and then uncomment the line below.\n// import \"./user_socket.js\"\n\n// You can include dependencies in two ways.\n//\n// The simplest option is to put them in assets/vendor and\n// import them using relative paths:\n//\n//     import \"../vendor/some-package.js\"\n//\n// Alternatively, you can `npm install some-package --prefix assets` and import\n// them using a path starting with the package name:\n//\n//     import \"some-package\"\n//\n\nimport 'alpinejs'\n\nwindow.Alpine = Alpine\nAlpine.start()\n\n// Include phoenix_html to handle method=PUT/DELETE in forms and buttons.\nimport \"phoenix_html\"\n// Establish Phoenix Socket and LiveView configuration.\nimport {Socket} from \"phoenix\"\nimport {LiveSocket} from \"phoenix_live_view\"\nimport topbar from \"../vendor/topbar\"\n\nlet csrfToken = document.querySelector(\"meta[name='csrf-token']\").getAttribute(\"content\")\nlet liveSocket = new LiveSocket(\"/live\", Socket, {params: {_csrf_token: csrfToken}})\n\n// Show progress bar on live navigation and form submits\ntopbar.config({barColors: {0: \"#29d\"}, shadowColor: \"rgba(0, 0, 0, .3)\"})\nwindow.addEventListener(\"phx:page-loading-start\", info => topbar.show())\nwindow.addEventListener(\"phx:page-loading-stop\", info => topbar.hide())\n\n// connect if there are any LiveViews on the page\nliveSocket.connect()\n\n// expose liveSocket on window for web console debug logs and latency simulation:\n// >> liveSocket.enableDebug()\n// >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session\n// >> liveSocket.disableLatencySim()\nwindow.liveSocket = liveSocket\n\n"
+        }
+    ]
+}

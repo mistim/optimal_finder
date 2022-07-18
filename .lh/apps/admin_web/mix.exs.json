@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/mix.exs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1657900991330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1657900991330,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.MixProject do\n  use Mix.Project\n\n  def project do\n    [\n      app: :admin_web,\n      version: \"0.1.0\",\n      build_path: \"../../_build\",\n      config_path: \"../../config/config.exs\",\n      deps_path: \"../../deps\",\n      lockfile: \"../../mix.lock\",\n      elixir: \"~> 1.12\",\n      elixirc_paths: elixirc_paths(Mix.env()),\n      compilers: [:gettext] ++ Mix.compilers(),\n      start_permanent: Mix.env() == :prod,\n      aliases: aliases(),\n      deps: deps()\n    ]\n  end\n\n  # Configuration for the OTP application.\n  #\n  # Type `mix help compile.app` for more information.\n  def application do\n    [\n      mod: {AdminWeb.Application, []},\n      extra_applications: [:logger, :runtime_tools]\n    ]\n  end\n\n  # Specifies which paths to compile per environment.\n  defp elixirc_paths(:test), do: [\"lib\", \"test/support\"]\n  defp elixirc_paths(_), do: [\"lib\"]\n\n  # Specifies your project dependencies.\n  #\n  # Type `mix help deps` for examples and options.\n  defp deps do\n    [\n      {:phoenix, \"~> 1.6.10\"},\n      {:phoenix_ecto, \"~> 4.4\"},\n      {:phoenix_html, \"~> 3.0\"},\n      {:phoenix_live_reload, \"~> 1.2\", only: :dev},\n      {:phoenix_live_view, \"~> 0.17.5\"},\n      {:floki, \">= 0.30.0\", only: :test},\n      {:phoenix_live_dashboard, \"~> 0.6\"},\n      {:esbuild, \"~> 0.4\", runtime: Mix.env() == :dev},\n      {:telemetry_metrics, \"~> 0.6\"},\n      {:telemetry_poller, \"~> 1.0\"},\n      {:gettext, \"~> 0.18\"},\n      {:jason, \"~> 1.2\"},\n      {:optimal_finder, in_umbrella: true},\n      {:admin, in_umbrella: true},\n      {:exzeitable, \"~> 0.5\"},\n      {:swoosh, \"~> 1.4\"},\n      {:plug_cowboy, \"~> 2.5\"}\n    ]\n  end\n\n  # Aliases are shortcuts or tasks specific to the current project.\n  #\n  # See the documentation for `Mix` for more info on aliases.\n  defp aliases do\n    [\n      setup: [\"deps.get\"],\n      test: [\"ecto.create --quiet\", \"ecto.migrate --quiet\", \"test\"],\n      \"assets.deploy\": [\"tailwind admin --minify\", \"esbuild admin --minify\", \"phx.digest\"]\n    ]\n  end\nend\n"
+        }
+    ]
+}

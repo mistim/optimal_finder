@@ -1,0 +1,17 @@
+<main class="flex flex-wrap items-end justify-center gap-4 px-8 py-8 mt-5">
+    <!--<div class="w-full grid justify-items-center">
+        <img class="w-16" src={Routes.static_path(@conn, "/images/logo_op.png")} alt="Optimal Finder" />
+        <div class="pt-3">
+            <span class="font-normal pl-1 opacity-50">Sign in</span>
+            <span class="text-amber-500 pr-0">Optimal</span><span>Finder</span>
+            <span class="font-normal pl-1 opacity-50">Admin</span>
+        </div>
+    </div>-->
+    <div class="min-w-[430px] mt-16">
+        <.card variant="outline">
+            <.card_content>
+                <%= @inner_content %>
+            </.card_content>
+        </.card>
+    </div>
+</main>

@@ -26,7 +26,8 @@ defmodule OptimalFinder.Umbrella.MixProject do
   defp deps do
     [
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:petal_components, "~> 0.17"}
+      {:petal_components, "~> 0.17"},
+      {:as_nested_set, "~> 3.4"}
     ]
   end
 

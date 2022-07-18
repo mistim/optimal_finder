@@ -1,0 +1,70 @@
+{
+    "sourceFile": "apps/admin_web/assets/tailwind.config.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 13,
+            "patches": [
+                {
+                    "date": 1657808959527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657808970051,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       sm: '640px',\n       md: '768px',\n       lg: '976px',\n       xl: '1280px',\n-      2xl: '1536px',\n+      '2xl': '1536px',\n       'tablet': '600px',\n       'desktop': '1200px',\n       'portrait': {'raw': '(orientation: portrait)'}\n     },\n"
+                },
+                {
+                    "date": 1657809023402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,10 @@\n       md: '768px',\n       lg: '976px',\n       xl: '1280px',\n       '2xl': '1536px',\n-      'tablet': '600px',\n-      'desktop': '1200px',\n+      'tablet': '640px',\n+      'desktop': '1280px',\n       'portrait': {'raw': '(orientation: portrait)'}\n     },\n     extend: {\n       boxShadow: {\n"
+                },
+                {
+                    "date": 1657810668287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,10 @@\n       }\n     },\n   },\n   plugins: [\n-    require('@tailwindcss/forms')\n+    require('@tailwindcss/forms'),\n+    plugin(function({ addComponents }) {\n+      '.sidebar-link': 'text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group'\n+    })\n   ]\n }\n"
+                },
+                {
+                    "date": 1657810872558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,7 @@\n       }\n     },\n   },\n   plugins: [\n-    require('@tailwindcss/forms'),\n-    plugin(function({ addComponents }) {\n-      '.sidebar-link': 'text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group'\n-    })\n+    require('@tailwindcss/forms')\n   ]\n }\n"
+                },
+                {
+                    "date": 1657811196483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,7 +25,12 @@\n       }\n     },\n   },\n   plugins: [\n-    require('@tailwindcss/forms')\n+    require('@tailwindcss/forms'),\n+    plugin(function ({ addComponents, theme }) {\n+      addComponents({\n+        '.sidebar-link': {}\n+      })\n+    })\n   ]\n }\n"
+                },
+                {
+                    "date": 1657811484565,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n   plugins: [\n     require('@tailwindcss/forms'),\n     plugin(function ({ addComponents, theme }) {\n       addComponents({\n-        '.sidebar-link': {}\n+        // '.sidebar-link': {}\n       })\n     })\n   ]\n }\n"
+                },
+                {
+                    "date": 1657811540824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,11 @@\n   plugins: [\n     require('@tailwindcss/forms'),\n     plugin(function ({ addComponents, theme }) {\n       addComponents({\n-        // '.sidebar-link': {}\n+        '.sidebar-link': {\n+          \n+        }\n       })\n     })\n   ]\n }\n"
+                },
+                {
+                    "date": 1657811600270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n     require('@tailwindcss/forms'),\n     plugin(function ({ addComponents, theme }) {\n       addComponents({\n         '.sidebar-link': {\n-          \n+           \n         }\n       })\n     })\n   ]\n"
+                },
+                {
+                    "date": 1657811638543,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       sm: '640px',\n       md: '768px',\n       lg: '976px',\n       xl: '1280px',\n-      '2xl': '1536px',\n+      'xxl': '1536px',\n       'tablet': '640px',\n       'desktop': '1280px',\n       'portrait': {'raw': '(orientation: portrait)'}\n     },\n"
+                },
+                {
+                    "date": 1657811651818,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n       sm: '640px',\n       md: '768px',\n       lg: '976px',\n       xl: '1280px',\n-      'xxl': '1536px',\n+      '2xl': '1536px',\n       'tablet': '640px',\n       'desktop': '1280px',\n       'portrait': {'raw': '(orientation: portrait)'}\n     },\n"
+                },
+                {
+                    "date": 1657811691251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,14 +25,7 @@\n       }\n     },\n   },\n   plugins: [\n-    require('@tailwindcss/forms'),\n-    plugin(function ({ addComponents, theme }) {\n-      addComponents({\n-        '.sidebar-link': {\n-           \n-        }\n-      })\n-    })\n+    require('@tailwindcss/forms')\n   ]\n }\n"
+                },
+                {
+                    "date": 1657812198377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,13 @@\n     },\n     extend: {\n       boxShadow: {\n         border: '0 2px 0 0 #181b21'\n-      }\n+      },\n+      colors: {\n+        primary: colors.blue,\n+        secondary: colors.pink,\n+      },\n     },\n   },\n   plugins: [\n     require('@tailwindcss/forms')\n"
+                },
+                {
+                    "date": 1657812239699,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n // See the Tailwind configuration guide for advanced usage\n // https://tailwindcss.com/docs/configuration\n+const colors = require(\"tailwindcss/colors\");\n module.exports = {\n   content: [\n     './js/**/*.js',\n     '../lib/*_web.ex',\n"
+                }
+            ],
+            "date": 1657808959527,
+            "name": "Commit-0",
+            "content": "// See the Tailwind configuration guide for advanced usage\n// https://tailwindcss.com/docs/configuration\nmodule.exports = {\n  content: [\n    './js/**/*.js',\n    '../lib/*_web.ex',\n    '../lib/*_web/**/*.*ex',\n    \"../../../deps/petal_components/**/*.*ex\",\n  ],\n  theme: {\n    screens: {\n      xs: '480px',\n      sm: '640px',\n      md: '768px',\n      lg: '976px',\n      xl: '1280px',\n      2xl: '1536px',\n      'tablet': '600px',\n      'desktop': '1200px',\n      'portrait': {'raw': '(orientation: portrait)'}\n    },\n    extend: {\n      boxShadow: {\n        border: '0 2px 0 0 #181b21'\n      }\n    },\n  },\n  plugins: [\n    require('@tailwindcss/forms')\n  ]\n}\n"
+        }
+    ]
+}

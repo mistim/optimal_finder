@@ -1,0 +1,26 @@
+{
+    "sourceFile": "README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1658138336962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658138754150,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,11 @@\n # OptimalFinder.Umbrella\n \n-Goods => Catalog catalogs | Product products | Offer offers | Property properties | PropertySet property_sets | Media medias | Link links\n+Goods => Catalog catalogs | Product products | Offer offers | Property properties | PropertySet property_sets | Media medias | Link links | Semantic semantics\n \n Contents => Post posts | Seo? seo? | SearchSemantic search_semantics \n \n\\ No newline at end of file\n-Accounts => User users\n+Accounts => User users\n+\n+\n+\n+mix phx.gen.html Goods Catalog catalogs --context-app optimal_finder\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658139040827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n # OptimalFinder.Umbrella\n \n-Goods => Catalog catalogs | Product products | Offer offers | Property properties | PropertySet property_sets | Media medias | Link links | Semantic semantics\n+Goods => Catalog catalogs | Product products | Offer offers | Property properties | PropertySet property_sets | Media medias | Link links | Semantics semantics\n \n Contents => Post posts | Seo? seo? | SearchSemantic search_semantics \n \n Accounts => User users\n"
+                }
+            ],
+            "date": 1658138336962,
+            "name": "Commit-0",
+            "content": "# OptimalFinder.Umbrella\n\nGoods => Catalog catalogs | Product products | Offer offers | Property properties | PropertySet property_sets | Media medias | Link links\n\nContents => Post posts | Seo? seo? | SearchSemantic search_semantics \n\nAccounts => User users"
+        }
+    ]
+}

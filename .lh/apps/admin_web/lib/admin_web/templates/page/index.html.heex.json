@@ -1,0 +1,46 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/page/index.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1657789772807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657789789122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,10 +2,10 @@\n   <h1><%= gettext \"Welcome to %{name}!\", name: \"Phoenix\" %></h1>\n   <p>Peace of mind from prototype to production</p>\n </section>\n \n-<div class=\"rounded-full dorder-2 border-gray-300\">\n-  <Heroicons.Outline.user class=\"h-5 w-5\" />\n+<div class=\"rounded-full dorder-2 border-gray-300 w-5 h-5\">\n+  \n </div>\n \n <section class=\"row\">\n   <article class=\"column\">\n"
+                },
+                {
+                    "date": 1657789813266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,8 @@\n   <h1><%= gettext \"Welcome to %{name}!\", name: \"Phoenix\" %></h1>\n   <p>Peace of mind from prototype to production</p>\n </section>\n \n-<div class=\"rounded-full dorder-2 border-gray-300 w-5 h-5\">\n-  \n-</div>\n-\n <section class=\"row\">\n   <article class=\"column\">\n     <h2>Resources</h2>\n     <ul>\n"
+                },
+                {
+                    "date": 1657801840464,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,41 +1,3 @@\n-<section class=\"phx-hero\">\n-  <h1><%= gettext \"Welcome to %{name}!\", name: \"Phoenix\" %></h1>\n-  <p>Peace of mind from prototype to production</p>\n-</section>\n+<div class=\"pt-6 px-4\">\n \n-<section class=\"row\">\n-  <article class=\"column\">\n-    <h2>Resources</h2>\n-    <ul>\n-      <li>\n-        <a href=\"https://hexdocs.pm/phoenix/overview.html\">Guides &amp; Docs</a>\n-      </li>\n-      <li>\n-        <a href=\"https://github.com/phoenixframework/phoenix\">Source</a>\n-      </li>\n-      <li>\n-        <a href=\"https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md\">v1.6 Changelog</a>\n-      </li>\n-    </ul>\n-  </article>\n-  <article class=\"column\">\n-    <h2>Help</h2>\n-    <ul>\n-      <li>\n-        <a href=\"https://elixirforum.com/c/phoenix-forum\">Forum</a>\n-      </li>\n-      <li>\n-        <a href=\"https://web.libera.chat/#elixir\">#elixir on Libera Chat (IRC)</a>\n-      </li>\n-      <li>\n-        <a href=\"https://twitter.com/elixirphoenix\">Twitter @elixirphoenix</a>\n-      </li>\n-      <li>\n-        <a href=\"https://elixir-slackin.herokuapp.com/\">Elixir on Slack</a>\n-      </li>\n-      <li>\n-        <a href=\"https://discord.gg/elixir\">Elixir on Discord</a>\n-      </li>\n-    </ul>\n-  </article>\n-</section>\n+</div>\n"
+                },
+                {
+                    "date": 1657801887260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,3 @@\n <div class=\"pt-6 px-4\">\n-\n+  <div class=\"bg-white shadow rounded-lg p-4\"></div>\n </div>\n"
+                },
+                {
+                    "date": 1657801914755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n <div class=\"pt-6 px-4\">\n-  <div class=\"bg-white shadow rounded-lg p-4\"></div>\n+  <div class=\"bg-white shadow rounded-lg p-4\">\n+    <h1>Dashboard</h1>\n+  </div>\n </div>\n"
+                },
+                {
+                    "date": 1657801972207,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n <div class=\"pt-6 px-4\">\n-  <div class=\"bg-white shadow rounded-lg p-4\">\n+  <div class=\"bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2\">\n     <h1>Dashboard</h1>\n   </div>\n </div>\n"
+                },
+                {
+                    "date": 1657802078270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-<div class=\"pt-6 px-4\">\n+<div class=\"py-6 px-4\">\n   <div class=\"bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8  2xl:col-span-2\">\n     <h1>Dashboard</h1>\n   </div>\n </div>\n"
+                }
+            ],
+            "date": 1657789772807,
+            "name": "Commit-0",
+            "content": "<section class=\"phx-hero\">\n  <h1><%= gettext \"Welcome to %{name}!\", name: \"Phoenix\" %></h1>\n  <p>Peace of mind from prototype to production</p>\n</section>\n\n<div class=\"rounded-full dorder-2 border-gray-300\">\n  <Heroicons.Outline.user class=\"h-5 w-5\" />\n</div>\n\n<section class=\"row\">\n  <article class=\"column\">\n    <h2>Resources</h2>\n    <ul>\n      <li>\n        <a href=\"https://hexdocs.pm/phoenix/overview.html\">Guides &amp; Docs</a>\n      </li>\n      <li>\n        <a href=\"https://github.com/phoenixframework/phoenix\">Source</a>\n      </li>\n      <li>\n        <a href=\"https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md\">v1.6 Changelog</a>\n      </li>\n    </ul>\n  </article>\n  <article class=\"column\">\n    <h2>Help</h2>\n    <ul>\n      <li>\n        <a href=\"https://elixirforum.com/c/phoenix-forum\">Forum</a>\n      </li>\n      <li>\n        <a href=\"https://web.libera.chat/#elixir\">#elixir on Libera Chat (IRC)</a>\n      </li>\n      <li>\n        <a href=\"https://twitter.com/elixirphoenix\">Twitter @elixirphoenix</a>\n      </li>\n      <li>\n        <a href=\"https://elixir-slackin.herokuapp.com/\">Elixir on Slack</a>\n      </li>\n      <li>\n        <a href=\"https://discord.gg/elixir\">Elixir on Discord</a>\n      </li>\n    </ul>\n  </article>\n</section>\n"
+        }
+    ]
+}

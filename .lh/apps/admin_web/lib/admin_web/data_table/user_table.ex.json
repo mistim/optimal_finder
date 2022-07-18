@@ -1,0 +1,66 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/data_table/user_table.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 12,
+            "patches": [
+                {
+                    "date": 1657901269971,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657902194774,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n   import Ecto.Query, only: [from: 2]\n \n   alias AdminWeb.Router.Helpers, as: Routes\n-  alias AdminWeb.Accounts.User\n+  alias Admin.Accounts.User\n \n   use Exzeitable,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n"
+                },
+                {
+                    "date": 1657903863678,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n   routes: Routes,\n   path: :admin_user_path,\n   query: from(u in User),\n   fields: [\n-    artist: [label: \"Email\"],\n-    title: [label: \"Confirmed\"],\n+    email: [label: \"Email\"],\n+    confirmed: [label: \"Confirmed\"],\n     #summary: [label: \"Summary\", hidden: true]\n   ],\n   pagination: [:top],\n   per_page: 10\n"
+                },
+                {
+                    "date": 1658039900304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n   alias AdminWeb.Router.Helpers, as: Routes\n   alias Admin.Accounts.User\n \n-  use Exzeitable,\n+  use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :admin_user_path,\n   query: from(u in User),\n"
+                },
+                {
+                    "date": 1658060178331,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n     #summary: [label: \"Summary\", hidden: true]\n   ],\n-  pagination: [:top],\n+  pagination: [:top, :both],\n   per_page: 10\n \n   def render(assigns) do\n     ~H\"<%= build_table(assigns) %>\"\n"
+                },
+                {
+                    "date": 1658060194321,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n     #summary: [label: \"Summary\", hidden: true]\n   ],\n-  pagination: [:top, :both],\n+  pagination: [:top, :bottom],\n   per_page: 10\n \n   def render(assigns) do\n     ~H\"<%= build_table(assigns) %>\"\n"
+                },
+                {
+                    "date": 1658061028973,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n-  path: :admin_user_path,\n+  path: :user_path,\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658061064013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :user_path,\n+  action_buttons: [:show, :edit, :custom_button],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658061099086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :user_path,\n-  action_buttons: [:show, :edit, :custom_button],\n+  action_buttons: [:user_show, :user_edit, :custom_button],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658061108494,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :user_path,\n-  action_buttons: [:user_show, :user_edit, :custom_button],\n+  action_buttons: [:user_new, :user_show, :user_edit, :custom_button],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658061305511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :user_path,\n-  action_buttons: [:user_new, :user_show, :user_edit, :custom_button],\n+  action_buttons: [:],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658065271743,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,12 +5,12 @@\n   alias AdminWeb.Router.Helpers, as: Routes\n   alias Admin.Accounts.User\n \n   use DataTableLive,\n-  repo: OptimalFinder.Repo,\n+  repo: Admin.Repo,\n   routes: Routes,\n   path: :user_path,\n-  action_buttons: [:],\n+  action_buttons: [],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n     confirmed: [label: \"Confirmed\"],\n"
+                },
+                {
+                    "date": 1658073355237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   action_buttons: [],\n   query: from(u in User),\n   fields: [\n     email: [label: \"Email\"],\n-    confirmed: [label: \"Confirmed\"],\n+    confirmed_at: [label: \"Confirmed\"],\n     #summary: [label: \"Summary\", hidden: true]\n   ],\n   pagination: [:top, :bottom],\n   per_page: 10\n"
+                }
+            ],
+            "date": 1657901269971,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.DataTable.UserTable do\n\n  import Ecto.Query, only: [from: 2]\n\n  alias AdminWeb.Router.Helpers, as: Routes\n  alias AdminWeb.Accounts.User\n\n  use Exzeitable,\n  repo: OptimalFinder.Repo,\n  routes: Routes,\n  path: :admin_user_path,\n  query: from(u in User),\n  fields: [\n    artist: [label: \"Email\"],\n    title: [label: \"Confirmed\"],\n    #summary: [label: \"Summary\", hidden: true]\n  ],\n  pagination: [:top],\n  per_page: 10\n\n  def render(assigns) do\n    ~H\"<%= build_table(assigns) %>\"\n  end\n\nend\n"
+        }
+    ]
+}

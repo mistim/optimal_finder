@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/text.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658039754738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658039754738,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Text do\n  @moduledoc \"\"\"\n  Defines the behaviour for, and access to, text for the DataTableLive interface.\n\n  Default text is in DataTableLive.Text.Default\n  \"\"\"\n\n  alias DataTableLive.Params\n\n  @callback actions(map) :: String.t()\n  @callback new(map) :: String.t()\n  @callback show(map) :: String.t()\n  @callback edit(map) :: String.t()\n  @callback delete(map) :: String.t()\n  @callback confirm_action(map) :: String.t()\n  @callback previous(map) :: String.t()\n  @callback next(map) :: String.t()\n  @callback search(map) :: String.t()\n  @callback nothing_found(map) :: String.t()\n  @callback show_field_buttons(map) :: String.t()\n  @callback hide_field_buttons(map) :: String.t()\n  @callback show_field(map, String.t()) :: String.t()\n  @callback hide(map) :: String.t()\n  @callback sort(map) :: String.t()\n\n  @doc \"Call the text function with assigns\"\n  @spec text(Params.t(), atom) :: String.t()\n  def text(%Params{text: module, assigns: assigns}, function) do\n    apply(module, function, [assigns])\n  end\n\n  @doc \"Call the text function with assigns and an extra parameter\"\n  @spec text(Params.t(), atom, String.t()) :: String.t()\n  def text(%Params{text: module, assigns: assigns}, function, parameter) do\n    apply(module, function, [assigns, parameter])\n  end\nend\n"
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/user/index.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1657901579274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658040220623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div>\n+<div class=\"bg-white\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040271573,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"bg-white\">\n+<div class=\"bg-white p4\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040283890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"bg-white p4\">\n+<div class=\"bg-white p-4\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040295065,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"bg-white p-4\">\n+<div class=\"bg-white p-4 m-4\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040420589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"bg-white p-4 m-4\">\n+<div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040451562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5\">\n+<div class=\"m-4 p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040464888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"m-4 p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n+<div class=\"m-4 p-4 bg-white border-b border-gray-200\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040543316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"m-4 p-4 bg-white border-b border-gray-200\">\n+<div class=\"m-4 p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040554277,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,4 @@\n-<div class=\"m-4 p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n+<div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n     <h1> Users </h1>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040735267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,4 +1,6 @@\n <div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n-    <h1> Users </h1>\n+    <div class=\"mb-1 w-full\">\n+        <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n+    </div>\n     <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n </div>  \n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658040948776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n <div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n-    <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n-</div>  \n\\ No newline at end of file\n+</div>  \n+<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658060918723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n\\ No newline at end of file\n+<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658060932663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\\ No newline at end of file\n+<%= AdminWeb.DataTable.UserTable.live_table(@conn) %>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658060938247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn) %>\n\\ No newline at end of file\n+<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658060995387,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\\ No newline at end of file\n+<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: [:new, :show, :edit, :delete]) %>\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1658061151696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,5 +2,5 @@\n     <div class=\"mb-1 w-full\">\n         <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n     </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: [:new, :show, :edit, :delete]) %>\n\\ No newline at end of file\n+<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1657901579274,
+            "name": "Commit-0",
+            "content": "<div>\n    <h1> Users </h1>\n    <%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query, action_buttons: []) %>\n</div>  "
+        }
+    ]
+}

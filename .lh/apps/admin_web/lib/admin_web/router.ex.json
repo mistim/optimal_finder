@@ -1,0 +1,42 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/router.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1657740381956,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657782508108,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,16 +65,16 @@\n \n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :sign, :redirect_if_user_is_authenticated]\n \n-    get \"/users/register\", UserRegistrationController, :new\n-    post \"/users/register\", UserRegistrationController, :create\n-    get \"/users/log_in\", UserSessionController, :new\n-    post \"/users/log_in\", UserSessionController, :create\n-    get \"/users/reset_password\", UserResetPasswordController, :new\n-    post \"/users/reset_password\", UserResetPasswordController, :create\n-    get \"/users/reset_password/:token\", UserResetPasswordController, :edit\n-    put \"/users/reset_password/:token\", UserResetPasswordController, :update\n+    get \"/register\", UserRegistrationController, :new\n+    post \"/register\", UserRegistrationController, :create\n+    get \"/log_in\", UserSessionController, :new\n+    post \"/log_in\", UserSessionController, :create\n+    get \"/reset_password\", UserResetPasswordController, :new\n+    post \"/reset_password\", UserResetPasswordController, :create\n+    get \"/reset_password/:token\", UserResetPasswordController, :edit\n+    put \"/reset_password/:token\", UserResetPasswordController, :update\n   end\n \n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n@@ -86,9 +86,9 @@\n \n   scope \"/\", AdminWeb do\n     pipe_through [:browser]\n \n-    delete \"/users/log_out\", UserSessionController, :delete\n+    delete \"/log_out\", UserSessionController, :delete\n     get \"/users/confirm\", UserConfirmationController, :new\n     post \"/users/confirm\", UserConfirmationController, :create\n     get \"/users/confirm/:token\", UserConfirmationController, :edit\n     post \"/users/confirm/:token\", UserConfirmationController, :update\n"
+                },
+                {
+                    "date": 1657901632857,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n+    get \"/users\", Admin.UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                },
+                {
+                    "date": 1657901771913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n-    get \"/users\", Admin.UserController, :index\n+    get \"/users\", AdminWeb.UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                },
+                {
+                    "date": 1657901812182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n-    get \"/users\", AdminWeb.UserController, :index\n+    get \"/users\", UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                },
+                {
+                    "date": 1657901962218,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n-    get \"/users\", UserController, :index\n+    get \"/users/list\", UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                },
+                {
+                    "date": 1657901987283,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n-    get \"/users/list\", UserController, :index\n+    get \"/users\", UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                }
+            ],
+            "date": 1657740381956,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.Router do\n  use AdminWeb, :router\n\n  import AdminWeb.UserAuth\n\n  pipeline :browser do\n    plug :accepts, [\"html\"]\n    plug :fetch_session\n    plug :fetch_live_flash\n    plug :put_root_layout, {AdminWeb.LayoutView, :root}\n    plug :protect_from_forgery\n    plug :put_secure_browser_headers\n    plug :fetch_current_user\n  end\n\n  pipeline :sign do\n    plug :put_new_layout, {AdminWeb.LayoutView, :sign}\n  end\n\n  pipeline :api do\n    plug :accepts, [\"json\"]\n  end\n\n  scope \"/\", AdminWeb do\n    pipe_through [:browser, :require_authenticated_user]\n\n    get \"/\", PageController, :index\n  end\n\n  # Other scopes may use custom stacks.\n  # scope \"/api\", AdminWeb do\n  #   pipe_through :api\n  # end\n\n  # Enables LiveDashboard only for development\n  #\n  # If you want to use the LiveDashboard in production, you should put\n  # it behind authentication and allow only admins to access it.\n  # If your application does not have an admins-only section yet,\n  # you can use Plug.BasicAuth to set up some basic authentication\n  # as long as you are also using SSL (which you should anyway).\n  if Mix.env() in [:dev, :test] do\n    import Phoenix.LiveDashboard.Router\n\n    scope \"/\" do\n      pipe_through [:browser, :require_authenticated_user]\n\n      live_dashboard \"/dashboard\", metrics: AdminWeb.Telemetry\n    end\n  end\n\n  # Enables the Swoosh mailbox preview in development.\n  #\n  # Note that preview only shows emails that were sent by the same\n  # node running the Phoenix server.\n  if Mix.env() == :dev do\n    scope \"/dev\" do\n      pipe_through :browser\n\n      forward \"/mailbox\", Plug.Swoosh.MailboxPreview\n    end\n  end\n\n  ## Authentication routes\n\n  scope \"/\", AdminWeb do\n    pipe_through [:browser, :sign, :redirect_if_user_is_authenticated]\n\n    get \"/users/register\", UserRegistrationController, :new\n    post \"/users/register\", UserRegistrationController, :create\n    get \"/users/log_in\", UserSessionController, :new\n    post \"/users/log_in\", UserSessionController, :create\n    get \"/users/reset_password\", UserResetPasswordController, :new\n    post \"/users/reset_password\", UserResetPasswordController, :create\n    get \"/users/reset_password/:token\", UserResetPasswordController, :edit\n    put \"/users/reset_password/:token\", UserResetPasswordController, :update\n  end\n\n  scope \"/\", AdminWeb do\n    pipe_through [:browser, :require_authenticated_user]\n\n    get \"/users/settings\", UserSettingsController, :edit\n    put \"/users/settings\", UserSettingsController, :update\n    get \"/users/settings/confirm_email/:token\", UserSettingsController, :confirm_email\n  end\n\n  scope \"/\", AdminWeb do\n    pipe_through [:browser]\n\n    delete \"/users/log_out\", UserSessionController, :delete\n    get \"/users/confirm\", UserConfirmationController, :new\n    post \"/users/confirm\", UserConfirmationController, :create\n    get \"/users/confirm/:token\", UserConfirmationController, :edit\n    post \"/users/confirm/:token\", UserConfirmationController, :update\n  end\nend\n"
+        }
+    ]
+}

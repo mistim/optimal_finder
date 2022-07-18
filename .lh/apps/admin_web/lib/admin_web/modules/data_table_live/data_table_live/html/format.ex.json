@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/html/format.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658039735577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658039735577,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.HTML.Format do\n  @moduledoc \"Formatting text\"\n\n  alias DataTableLive.{Params, Text}\n\n  @doc \"\"\"\n  If function: true, will pass the entry to the function of the same name as the entry\n  Else just output the field\n  This function is tested but coveralls will not register it.\n  \"\"\"\n  @spec field(map, atom, map) :: String.t() | {:safe, iolist}\n  def field(entry, key, %{\n        socket: socket,\n        params: %Params{\n          fields: fields,\n          module: module,\n          assigns: assigns\n        }\n      }) do\n    if Kernel.get_in(fields, [key, :function]) do\n      socket = smush_assigns_together(socket, assigns)\n\n      apply(module, key, [socket, entry])\n    else\n      Map.get(entry, key, nil)\n    end\n    |> format_field(fields[key].formatter)\n  end\n\n  # coveralls-ignore-stop\n\n  @doc \"Will output the user supplied label or fall back on the atom\"\n  @spec header(Params.t(), {atom, map}) :: String.t()\n  def header(_params, {_key, %{label: label}}) when is_binary(label), do: label\n\n  def header(%Params{} = params, {:actions, _map}), do: Text.text(params, :actions)\n\n  def header(_params, {key, _map}) do\n    key\n    |> Atom.to_string()\n    |> String.replace(\"_\", \" \")\n    |> String.capitalize()\n  end\n\n  # We want socket.assigns, but not socket.assigns.assigns\n  defp smush_assigns_together(socket, assigns) do\n    socket\n    |> Map.fetch!(:assigns)\n    |> Map.delete(:assigns)\n    |> Map.merge(assigns)\n    |> then(&Map.put(socket, :assigns, &1))\n  end\n\n  @doc \"The default formatter\"\n  @spec format_field(any) :: String.t()\n  def format_field(value) do\n    to_string(value)\n  end\n\n  # Called for configured formatters which can be in the format\n  # {mod, fun}\n  # {mod, fun, args} in which case the value is prepended to `args`\n\n  defp format_field(value, {mod, fun}) do\n    apply(mod, fun, [value])\n  end\n\n  defp format_field(value, {mod, fun, args}) do\n    apply(mod, fun, [value | args])\n  end\nend\n"
+        }
+    ]
+}

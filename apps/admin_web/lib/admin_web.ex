@@ -98,6 +98,8 @@ defmodule AdminWeb do
       import AdminWeb.ErrorHelpers
       import AdminWeb.Gettext
       alias AdminWeb.Router.Helpers, as: Routes
+
+      use PetalComponents
     end
   end
 

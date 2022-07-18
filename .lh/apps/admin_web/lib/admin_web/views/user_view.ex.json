@@ -1,0 +1,22 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/views/user_view.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1657901551425,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657902106984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-defmodule AdminWeb.Admin.UserView do\n+defmodule AdminWeb.UserView do\n   use AdminWeb, :view\n \n   # Phoenix LiveDashboard is available only in development by default,\n   # so we instruct Elixir to not warn if the dashboard route is missing.\n"
+                }
+            ],
+            "date": 1657901551425,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.Admin.UserView do\n  use AdminWeb, :view\n\n  # Phoenix LiveDashboard is available only in development by default,\n  # so we instruct Elixir to not warn if the dashboard route is missing.\n  @compile {:no_warn_undefined, {Routes, :live_dashboard_path, 2}}\nend\n"
+        }
+    ]
+}

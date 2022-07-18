@@ -1,0 +1,34 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/html/search.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 4,
+            "patches": [
+                {
+                    "date": 1658039738219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658056864125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,24 +14,24 @@\n         \"#\",\n         # onkeypress to disable enter key in search field\n         [\n           phx_change: :search,\n-          class: \"exz-search-form\",\n+          class: Params.get_st_class('\"search_form'),\n           onkeypress: \"return event.keyCode != 13;\"\n         ],\n         fn f ->\n           [\n             Form.text_input(f, :search,\n               placeholder: Text.text(params, :search),\n-              class: \"exz-search-field\",\n+              class: Params.get_st_class('\"search_field'),\n               phx_debounce: debounce\n             ),\n             counter(params)\n           ]\n-          |> Helpers.tag(:div, class: \"exz-search-field-wrapper\")\n+          |> Helpers.tag(:div, class: Params.get_st_class('\"search_field_wrapper'))\n         end\n       )\n-      |> Helpers.tag(:div, class: \"exz-search-wrapper\")\n+      |> Helpers.tag(:div, class: Params.get_st_class('\"search_wrapper'))\n     else\n       {:safe, [\"\"]}\n     end\n   end\n"
+                },
+                {
+                    "date": 1658056946289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,24 +14,24 @@\n         \"#\",\n         # onkeypress to disable enter key in search field\n         [\n           phx_change: :search,\n-          class: Params.get_st_class('\"search_form'),\n+          class: Params.get_dt_class(:search_form),\n           onkeypress: \"return event.keyCode != 13;\"\n         ],\n         fn f ->\n           [\n             Form.text_input(f, :search,\n               placeholder: Text.text(params, :search),\n-              class: Params.get_st_class('\"search_field'),\n+              class: Params.get_dt_class(:search_field),\n               phx_debounce: debounce\n             ),\n             counter(params)\n           ]\n-          |> Helpers.tag(:div, class: Params.get_st_class('\"search_field_wrapper'))\n+          |> Helpers.tag(:div, class: Params.get_dt_class(:search_field_wrapper))\n         end\n       )\n-      |> Helpers.tag(:div, class: Params.get_st_class('\"search_wrapper'))\n+      |> Helpers.tag(:div, class: Params.get_dt_class(:search_wrapper))\n     else\n       {:safe, [\"\"]}\n     end\n   end\n"
+                },
+                {
+                    "date": 1658056993613,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,10 +37,10 @@\n   end\n \n   defp counter(%Params{count: count}) do\n     count\n-    |> Helpers.tag(:span, class: \"exz-counter-field\")\n-    |> Helpers.tag(:div, class: \"exz-counter-field-wrapper\")\n+    |> Helpers.tag(:span, class: Params.get_dt_class(:counter_field))\n+    |> Helpers.tag(:div, class: Params.get_dt_class(:counter_field_wrapper))\n   end\n \n   # Returns true if any of the fields have search enabled\n   defp search_enabled?(%Params{fields: fields}) do\n"
+                },
+                {
+                    "date": 1658058134768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n   end\n \n   defp counter(%Params{count: count}) do\n     count\n-    |> Helpers.tag(:span, class: Params.get_dt_class(:counter_field))\n+    |> Helpers.tag(:div, class: Params.get_dt_class(:counter_field))\n     |> Helpers.tag(:div, class: Params.get_dt_class(:counter_field_wrapper))\n   end\n \n   # Returns true if any of the fields have search enabled\n"
+                }
+            ],
+            "date": 1658039738219,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.HTML.Search do\n  @moduledoc \"Build the search field part of the HTML\"\n\n  alias DataTableLive.HTML.Helpers\n  alias DataTableLive.{Params, Text}\n  alias Phoenix.HTML.Form\n\n  @doc \"Returns the HTML search form\"\n  @spec build(map) :: {:safe, iolist}\n  def build(%{params: %Params{debounce: debounce} = params}) do\n    if search_enabled?(params) do\n      Form.form_for(\n        :search,\n        \"#\",\n        # onkeypress to disable enter key in search field\n        [\n          phx_change: :search,\n          class: \"exz-search-form\",\n          onkeypress: \"return event.keyCode != 13;\"\n        ],\n        fn f ->\n          [\n            Form.text_input(f, :search,\n              placeholder: Text.text(params, :search),\n              class: \"exz-search-field\",\n              phx_debounce: debounce\n            ),\n            counter(params)\n          ]\n          |> Helpers.tag(:div, class: \"exz-search-field-wrapper\")\n        end\n      )\n      |> Helpers.tag(:div, class: \"exz-search-wrapper\")\n    else\n      {:safe, [\"\"]}\n    end\n  end\n\n  defp counter(%Params{count: count}) do\n    count\n    |> Helpers.tag(:span, class: \"exz-counter-field\")\n    |> Helpers.tag(:div, class: \"exz-counter-field-wrapper\")\n  end\n\n  # Returns true if any of the fields have search enabled\n  defp search_enabled?(%Params{fields: fields}) do\n    fields\n    |> Enum.filter(fn {_k, field} -> Map.get(field, :search) end)\n    |> Enum.any?()\n  end\nend\n"
+        }
+    ]
+}

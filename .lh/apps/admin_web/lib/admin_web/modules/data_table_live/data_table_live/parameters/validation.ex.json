@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/parameters/validation.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658039742271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658039742271,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Params.Validations do\n  @moduledoc \"Using these instead of Keyword.fetch! to provide nice easily resolvable errors.\"\n\n  alias DataTableLive.Params.ParameterError\n\n  @doc \"If you have parent then you need belongs_to, and vice versa.\"\n  @spec paired_options(map) :: map\n  def paired_options(%{\"parent\" => nil, \"belongs_to\" => nil} = session) do\n    session\n  end\n\n  def paired_options(%{\"parent\" => nil}) do\n    raise ParameterError,\n      message:\n        \"[:parent] record needs to be defined if belongs_to is defined, i.e. Repo.find(site.id)\"\n  end\n\n  def paired_options(%{\"belongs_to\" => nil}) do\n    raise ParameterError,\n      message: \"[:belongs_to] needs to be defined if parent is defined, i.e. :site\"\n  end\n\n  def paired_options(session) do\n    session\n  end\n\n  @doc \"Raises if any of the required keys are not present\"\n  @spec required_keys_present(map, [atom]) :: map\n  def required_keys_present(params, required_keys) do\n    keys = Map.keys(params)\n\n    Enum.each(required_keys, fn required_key ->\n      required_key in keys || raise(ParameterError, parameter: required_key)\n    end)\n\n    params\n  end\nend\n"
+        }
+    ]
+}

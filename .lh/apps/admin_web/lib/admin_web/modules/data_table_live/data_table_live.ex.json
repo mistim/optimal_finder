@@ -1,0 +1,86 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 17,
+            "patches": [
+                {
+                    "date": 1657914588421,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657914608783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,3 +1,5 @@\n defmodule DataTableLive do\n+  defmacro __using__(opts) do\n \n+  end\n end\n"
+                },
+                {
+                    "date": 1658039261402,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,8 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n-\n+    use Phoenix.LiveView\n+    use Phoenix.HTML\n+    import Ecto.Query\n+    alias Phoenix.LiveView.Helpers\n   end\n end\n"
+                },
+                {
+                    "date": 1658039284291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,11 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n-    use Phoenix.LiveView\n-    use Phoenix.HTML\n-    import Ecto.Query\n-    alias Phoenix.LiveView.Helpers\n+\n+    quote do\n+      use Phoenix.LiveView\n+      use Phoenix.HTML\n+      import Ecto.Query\n+      alias Phoenix.LiveView.Helpers\n+    end\n   end\n end\n"
+                },
+                {
+                    "date": 1658039629488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,11 +1,181 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n+    alias DataTableLive.{Database, Params}\n \n+    search_string =\n+      opts\n+      |> Params.set_fields()\n+      |> Database.tsvector_string()\n+\n+    # coveralls-ignore-stop\n+\n     quote do\n       use Phoenix.LiveView\n       use Phoenix.HTML\n       import Ecto.Query\n       alias Phoenix.LiveView.Helpers\n+      alias DataTableLive.{Database, Filter, Format, HTML, Params, Validation}\n+      @callback render(map) :: {:ok, iolist}\n+      @type socket :: Phoenix.LiveView.Socket.t()\n+\n+      @doc \"\"\"\n+      Convenience helper so LiveView doesn't have to be called directly\n+\n+      ## Example\n+\n+      ```\n+      <%= YourAppWeb.Live.Site.live_table(@conn, query: @query) %>\n+      ```\n+\n+      \"\"\"\n+      defdelegate build_table(assigns), to: HTML, as: :build\n+\n+      @spec live_table(Plug.Conn.t(), keyword) :: {:safe, iolist}\n+      def live_table(conn, opts \\\\ []) do\n+        Helpers.live_render(conn, __MODULE__,\n+          # Live component ID\n+          id: Keyword.get(unquote(opts), :id, 1),\n+          session: Params.new(opts, unquote(opts), __MODULE__)\n+        )\n+      end\n+\n+      ###########################\n+      ######## CALLBACKS ########\n+      ###########################\n+\n+      @doc \"Initial setup on page load\"\n+      @spec mount(atom, map, socket) :: {:ok, socket}\n+      def mount(:not_mounted_at_router, assigns, socket) do\n+        assigns = Map.new(assigns, fn {k, v} -> {String.to_atom(k), v} end)\n+\n+        socket =\n+          socket\n+          |> assign(assigns)\n+          |> maybe_get_records()\n+          |> maybe_set_refresh()\n+\n+        {:ok, socket}\n+      end\n+\n+      @doc \"Clicking the hide button hides the column\"\n+      @spec handle_event(String.t(), map, socket) :: {:noreply, socket}\n+      def handle_event(\"hide_column\", %{\"column\" => column}, socket) do\n+        %{assigns: %{params: %Params{fields: fields}}} = socket\n+        fields = Kernel.put_in(fields, [String.to_existing_atom(column), :hidden], true)\n+\n+        {:noreply, assign_params(socket, :fields, fields)}\n+      end\n+\n+      @doc \"Clicking the show button shows the column\"\n+      def handle_event(\"show_column\", %{\"column\" => column}, socket) do\n+        %{assigns: %{params: %Params{fields: fields}}} = socket\n+        fields = Kernel.put_in(fields, [String.to_existing_atom(column), :hidden], false)\n+\n+        {:noreply, assign_params(socket, :fields, fields)}\n+      end\n+\n+      @doc \"Hide all the show buttons\"\n+      def handle_event(\"hide_buttons\", _, socket) do\n+        {:noreply, assign_params(socket, :show_field_buttons, false)}\n+      end\n+\n+      @doc \"Show all the show buttons\"\n+      def handle_event(\"show_buttons\", _, socket) do\n+        {:noreply, assign_params(socket, :show_field_buttons, true)}\n+      end\n+\n+      @doc \"Changes page when pagination buttons are clicked\"\n+      def handle_event(\"change_page\", %{\"page\" => page}, %{assigns: %{params: params}} = socket) do\n+        new_params = Map.put(params, :page, String.to_integer(page))\n+\n+        socket\n+        |> assign_params(:page, new_params.page)\n+        |> assign_params(:list, Database.get_records(new_params))\n+        |> then(&{:noreply, &1})\n+      end\n+\n+      @doc \"Clicking the sort button sorts the column\"\n+      def handle_event(\n+            \"sort_column\",\n+            %{\"column\" => column},\n+            %{assigns: %{params: params}} = socket\n+          ) do\n+        column = String.to_existing_atom(column)\n+\n+        new_order =\n+          case params.order do\n+            [asc: ^column] -> [desc: column]\n+            _ -> [asc: column]\n+          end\n+\n+        new_params = Map.merge(params, %{order: new_order, page: 1})\n+\n+        socket\n+        |> assign_params(:page, 1)\n+        |> assign_params(:order, new_order)\n+        |> assign_params(:list, Database.get_records(new_params))\n+        |> then(&{:noreply, &1})\n+      end\n+\n+      @doc \"Typing into the search box... searches. Crazy, right?\"\n+      def handle_event(\"search\", %{\"search\" => %{\"search\" => search}}, socket) do\n+        socket\n+        |> assign_params(:search, search)\n+        |> assign_params(:page, 1)\n+        |> maybe_get_records()\n+        |> then(&{:noreply, &1})\n+      end\n+\n+      @doc \"Refresh periodically grabs new records from the database\"\n+      def handle_info(:refresh, socket) do\n+        {:noreply, maybe_get_records(socket)}\n+      end\n+\n+      defp maybe_get_records(socket) do\n+        %{assigns: %{params: params}} = socket\n+\n+        if connected?(socket) do\n+          socket\n+          |> assign_params(:list, Database.get_records(params))\n+          |> assign_params(:count, Database.get_record_count(params))\n+        else\n+          socket\n+          |> assign_params(:list, [])\n+          |> assign_params(:count, 0)\n+        end\n+      end\n+\n+      defp maybe_set_refresh(%{socket: %{assigns: %{refresh: refresh}}} = socket)\n+           when is_integer(refresh) do\n+        with true <- connected?(socket),\n+             {:ok, _tref} <- :timer.send_interval(refresh, self(), :refresh) do\n+          socket\n+        else\n+          _ -> socket\n+        end\n+      end\n+\n+      defp maybe_set_refresh(socket) do\n+        socket\n+      end\n+\n+      defp assign_params(%{assigns: %{params: params}} = socket, key, value) do\n+        params\n+        |> Map.put(key, value)\n+        |> then(&assign(socket, :params, &1))\n+      end\n+\n+      # Need to unquote the search string because string interpolation is not allowed.\n+      @spec do_search(Ecto.Query.t(), String.t()) :: Ecto.Query.t()\n+      def do_search(query, search) do\n+        where(\n+          query,\n+          fragment(\n+            unquote(search_string),\n+            ^Database.prefix_search(search)\n+          )\n+        )\n+      end\n     end\n   end\n end\n"
+                },
+                {
+                    "date": 1658071183968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n     search_string =\n       opts\n       |> Params.set_fields()\n-      |> Database.tsvector_string()\n+      # |> Database.tsvector_string()\n \n     # coveralls-ignore-stop\n \n     quote do\n"
+                },
+                {
+                    "date": 1658071614645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n     search_string =\n       opts\n       |> Params.set_fields()\n-      # |> Database.tsvector_string()\n+      |> Database.tsvector_string()\n \n     # coveralls-ignore-stop\n \n     quote do\n"
+                },
+                {
+                    "date": 1658082287803,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n \n     search_string =\n       opts\n       |> Params.set_fields()\n-      |> Database.tsvector_string()\n+      |> Database.search_like()\n \n     # coveralls-ignore-stop\n \n     quote do\n"
+                },
+                {
+                    "date": 1658087244097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -171,9 +171,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.prefix_search(search)\n+            ^Database.like_list(search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087372222,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n     alias DataTableLive.{Database, Params}\n \n+    fields =\n+      opts\n+      |> Params.set_fields()\n+\n     search_string =\n       opts\n       |> Params.set_fields()\n       |> Database.search_like()\n"
+                },
+                {
+                    "date": 1658087383398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -175,9 +175,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(search)\n+            ^Database.like_list(fields, search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087515070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n     alias DataTableLive.{Database, Params}\n \n-    fields =\n-      opts\n-      |> Params.set_fields()\n-\n     search_string =\n       opts\n       |> Params.set_fields()\n       |> Database.search_like()\n@@ -168,16 +164,21 @@\n         |> Map.put(key, value)\n         |> then(&assign(socket, :params, &1))\n       end\n \n+      defp get_fields(opts) do\n+        opts\n+        |> Params.set_fields()\n+      end\n+\n       # Need to unquote the search string because string interpolation is not allowed.\n       @spec do_search(Ecto.Query.t(), String.t()) :: Ecto.Query.t()\n       def do_search(query, search) do\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(fields, search)\n+            ^Database.like_list(get_fields(), search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087536280,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -176,9 +176,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(get_fields(), search)\n+            ^Database.like_list(get_fields(opts), search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087588000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -164,9 +164,9 @@\n         |> Map.put(key, value)\n         |> then(&assign(socket, :params, &1))\n       end\n \n-      defp get_fields(opts) do\n+      defp get_fields() do\n         opts\n         |> Params.set_fields()\n       end\n \n@@ -176,9 +176,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(get_fields(opts), search)\n+            ^Database.like_list(get_fields(), search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087683195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -164,9 +164,9 @@\n         |> Map.put(key, value)\n         |> then(&assign(socket, :params, &1))\n       end\n \n-      defp get_fields() do\n+      def get_fields() do\n         opts\n         |> Params.set_fields()\n       end\n \n"
+                },
+                {
+                    "date": 1658087742388,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,12 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n     alias DataTableLive.{Database, Params}\n \n+    fields =\n+      opts\n+      |> Params.set_fields()\n+\n     search_string =\n       opts\n       |> Params.set_fields()\n       |> Database.search_like()\n@@ -164,21 +168,16 @@\n         |> Map.put(key, value)\n         |> then(&assign(socket, :params, &1))\n       end\n \n-      def get_fields() do\n-        opts\n-        |> Params.set_fields()\n-      end\n-\n       # Need to unquote the search string because string interpolation is not allowed.\n       @spec do_search(Ecto.Query.t(), String.t()) :: Ecto.Query.t()\n       def do_search(query, search) do\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(get_fields(), search)\n+            ^Database.like_list(fields, search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658087815097,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -175,9 +175,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(fields, search)\n+            ^Database.like_list(unquote(fields), search)\n           )\n         )\n       end\n     end\n"
+                },
+                {
+                    "date": 1658089224838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,8 @@\n defmodule DataTableLive do\n   defmacro __using__(opts) do\n     alias DataTableLive.{Database, Params}\n \n-    fields =\n-      opts\n-      |> Params.set_fields()\n-\n     search_string =\n       opts\n       |> Params.set_fields()\n       |> Database.search_like()\n@@ -175,9 +171,9 @@\n         where(\n           query,\n           fragment(\n             unquote(search_string),\n-            ^Database.like_list(unquote(fields), search)\n+            ^Database.prefix_search(search)\n           )\n         )\n       end\n     end\n"
+                }
+            ],
+            "date": 1657914588421,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive do\n\nend\n"
+        }
+    ]
+}

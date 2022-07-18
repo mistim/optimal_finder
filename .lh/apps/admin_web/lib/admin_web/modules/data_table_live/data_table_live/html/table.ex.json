@@ -1,0 +1,122 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/html/table.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 26,
+            "patches": [
+                {
+                    "date": 1658039740292,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658058666104,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,11 +19,14 @@\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n       |> Helpers.tag(:tbody, [])\n \n     [head, body]\n-    |> Helpers.tag(:table, class: \"exz-table\")\n+    |> Helpers.tag(:table, class: \"flex flex-col\")\n+    |> Helpers.tag(:table, class: \"overflow-x-auto\")\n+    |> Helpers.tag(:table, class: \"align-middle inline-block min-w-full\")\n+    |> Helpers.tag(:table, class: \"shadow overflow-hidden\")\n     |> maybe_nothing_found(params)\n-    |> Helpers.tag(:div, class: \"exz-table-wrapper\")\n+    |> Helpers.tag(:div, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n   end\n \n   @spec add_actions_header(keyword, map) :: keyword\n   defp add_actions_header(fields, %{params: %Params{action_buttons: []}}), do: fields\n"
+                },
+                {
+                    "date": 1658058762195,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,14 +19,14 @@\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n       |> Helpers.tag(:tbody, [])\n \n     [head, body]\n-    |> Helpers.tag(:table, class: \"flex flex-col\")\n-    |> Helpers.tag(:table, class: \"overflow-x-auto\")\n-    |> Helpers.tag(:table, class: \"align-middle inline-block min-w-full\")\n-    |> Helpers.tag(:table, class: \"shadow overflow-hidden\")\n+    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n     |> maybe_nothing_found(params)\n-    |> Helpers.tag(:div, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n+    |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n+    |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n+    |> Helpers.tag(:div, class: \"overflow-x-auto\")\n+    |> Helpers.tag(:div, class: \"flex flex-col\")\n   end\n \n   @spec add_actions_header(keyword, map) :: keyword\n   defp add_actions_header(fields, %{params: %Params{action_buttons: []}}), do: fields\n"
+                },
+                {
+                    "date": 1658058855527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       fields\n       |> Filter.fields_where_not(:hidden)\n       |> add_actions_header(assigns)\n       |> Enum.map(fn column -> table_header(column, params) end)\n-      |> Helpers.tag(:thead, [])\n+      |> Helpers.tag(:thead, class: \"bg-gray-100\")\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n"
+                },
+                {
+                    "date": 1658058875143,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n-      |> Helpers.tag(:tbody, [])\n+      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n \n     [head, body]\n     |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n     |> maybe_nothing_found(params)\n"
+                },
+                {
+                    "date": 1658058973892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \n   @spec table_header({atom, map}, Params.t()) :: {:safe, iolist}\n   defp table_header(field, %Params{} = params) do\n     [Format.header(params, field), hide_link_for(field, params), sort_link_for(field, params)]\n-    |> Helpers.tag(:th, [])\n+    |> Helpers.tag(:th, class: \"p-4 text-left text-xs font-medium text-gray-500 uppercase\")\n   end\n \n   @spec build_row(atom, map) :: {:safe, iolist}\n   defp build_row(entry, %{params: %Params{fields: fields}} = assigns) do\n"
+                },
+                {
+                    "date": 1658059009382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n     params\n     |> Map.get(:action_buttons)\n     |> Kernel.--([:new])\n     |> Enum.map(fn action -> ActionButton.build(action, entry, assigns) end)\n-    |> Helpers.tag(:td, [])\n+    |> Helpers.tag(:td, class: \"p-4 whitespace-nowrap space-x-2\")\n   end\n \n   @spec hide_link_for({atom, map}, Params.t()) :: {:safe, iolist}\n   defp hide_link_for({:actions, _value}, _params), do: {:safe, [\"\"]}\n"
+                },
+                {
+                    "date": 1658059058058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n       |> Enum.map(fn value -> Helpers.tag(value, :td, []) end)\n \n     values\n     |> Kernel.++([build_actions(entry, assigns)])\n-    |> Helpers.tag(:tr, [])\n+    |> Helpers.tag(:tr, class: \"hover:bg-gray-100\")\n   end\n \n   @spec build_actions(atom, map) :: {:safe, iolist}\n   defp build_actions(_entry, %{params: %Params{action_buttons: []}}), do: \"\"\n"
+                },
+                {
+                    "date": 1658059139879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n       fields\n       |> Filter.fields_where_not(:hidden)\n       |> Keyword.keys()\n       |> Enum.map(fn key -> Format.field(entry, key, assigns) end)\n-      |> Enum.map(fn value -> Helpers.tag(value, :td, []) end)\n+      |> Enum.map(fn value -> Helpers.tag(value, :td, class: \"p-4 whitespace-nowrap space-x-2\") end)\n \n     values\n     |> Kernel.++([build_actions(entry, assigns)])\n     |> Helpers.tag(:tr, class: \"hover:bg-gray-100\")\n"
+                },
+                {
+                    "date": 1658059302043,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n       |> Enum.map(fn value -> Helpers.tag(value, :td, class: \"p-4 whitespace-nowrap space-x-2\") end)\n \n     values\n     |> Kernel.++([build_actions(entry, assigns)])\n-    |> Helpers.tag(:tr, class: \"hover:bg-gray-100\")\n+    |> Helpers.tag(:tr, class: \"hover:bg-gray-100 border-b border-gray-300\")\n   end\n \n   @spec build_actions(atom, map) :: {:safe, iolist}\n   defp build_actions(_entry, %{params: %Params{action_buttons: []}}), do: \"\"\n"
+                },
+                {
+                    "date": 1658059328858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     |> maybe_nothing_found(params)\n     |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n     |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n     |> Helpers.tag(:div, class: \"overflow-x-auto\")\n-    |> Helpers.tag(:div, class: \"flex flex-col\")\n+    |> Helpers.tag(:div, class: \"flex flex-col mb-4\")\n   end\n \n   @spec add_actions_header(keyword, map) :: keyword\n   defp add_actions_header(fields, %{params: %Params{action_buttons: []}}), do: fields\n"
+                },
+                {
+                    "date": 1658060097783,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     |> maybe_nothing_found(params)\n     |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n     |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n     |> Helpers.tag(:div, class: \"overflow-x-auto\")\n-    |> Helpers.tag(:div, class: \"flex flex-col mb-4\")\n+    |> Helpers.tag(:div, class: \"flex flex-col mb-4 border-t border-gray-200\")\n   end\n \n   @spec add_actions_header(keyword, map) :: keyword\n   defp add_actions_header(fields, %{params: %Params{action_buttons: []}}), do: fields\n"
+                },
+                {
+                    "date": 1658090082366,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"exz-nothing-found\")\n+      |> Helpers.tag(:div, class: \"p-4\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658090260158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n       |> Enum.map(fn value -> Helpers.tag(value, :td, class: \"p-4 whitespace-nowrap space-x-2\") end)\n \n     values\n     |> Kernel.++([build_actions(entry, assigns)])\n-    |> Helpers.tag(:tr, class: \"hover:bg-gray-100 border-b border-gray-300\")\n+    |> Helpers.tag(:tr, class: \"hover:bg-gray-100\")\n   end\n \n   @spec build_actions(atom, map) :: {:safe, iolist}\n   defp build_actions(_entry, %{params: %Params{action_buttons: []}}), do: \"\"\n"
+                },
+                {
+                    "date": 1658090319330,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,14 +11,14 @@\n       fields\n       |> Filter.fields_where_not(:hidden)\n       |> add_actions_header(assigns)\n       |> Enum.map(fn column -> table_header(column, params) end)\n-      |> Helpers.tag(:thead, class: \"bg-gray-100\")\n+      |> Helpers.tag(:thead, class: \"bg-gray-100 border-b border-gray-300\")\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n-      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n+      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200 border-b border-gray-300\")\n \n     [head, body]\n     |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n     |> maybe_nothing_found(params)\n"
+                },
+                {
+                    "date": 1658090358378,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       fields\n       |> Filter.fields_where_not(:hidden)\n       |> add_actions_header(assigns)\n       |> Enum.map(fn column -> table_header(column, params) end)\n-      |> Helpers.tag(:thead, class: \"bg-gray-100 border-b border-gray-300\")\n+      |> Helpers.tag(:thead, class: \"bg-gray-100\")\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n"
+                },
+                {
+                    "date": 1658090374235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n-      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200 border-b border-gray-300\")\n+      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n \n     [head, body]\n     |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n     |> maybe_nothing_found(params)\n"
+                },
+                {
+                    "date": 1658090384298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n       |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n \n     [head, body]\n-    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n+    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200 border-b border-gray-300\")\n     |> maybe_nothing_found(params)\n     |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n     |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n     |> Helpers.tag(:div, class: \"overflow-x-auto\")\n"
+                },
+                {
+                    "date": 1658090470898,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658090502717,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n       |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n \n     [head, body]\n-    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200 border-b border-gray-300\")\n+    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n     |> maybe_nothing_found(params)\n     |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n     |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n     |> Helpers.tag(:div, class: \"overflow-x-auto\")\n"
+                },
+                {
+                    "date": 1658090545030,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 border-t border-gray-200\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658090640823,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 border-t border-gray-200\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 divide-y divide-gray-200\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658090649481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 divide-y divide-gray-200\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 border-t border-gray-200\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658090792453,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -51,9 +51,9 @@\n       |> Enum.map(fn value -> Helpers.tag(value, :td, class: \"p-4 whitespace-nowrap space-x-2\") end)\n \n     values\n     |> Kernel.++([build_actions(entry, assigns)])\n-    |> Helpers.tag(:tr, class: \"hover:bg-gray-100\")\n+    |> Helpers.tag(:tr, class: \"hover:bg-gray-100 border-b border-gray-300\")\n   end\n \n   @spec build_actions(atom, map) :: {:safe, iolist}\n   defp build_actions(_entry, %{params: %Params{action_buttons: []}}), do: \"\"\n"
+                },
+                {
+                    "date": 1658090886289,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n       |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n \n     [head, body]\n-    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y divide-gray-200\")\n+    |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y_ divide-gray-200_\")\n     |> maybe_nothing_found(params)\n     |> Helpers.tag(:div, class: \"shadow overflow-hidden\")\n     |> Helpers.tag(:div, class: \"align-middle inline-block min-w-full\")\n     |> Helpers.tag(:div, class: \"overflow-x-auto\")\n"
+                },
+                {
+                    "date": 1658091043260,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n       fields\n       |> Filter.fields_where_not(:hidden)\n       |> add_actions_header(assigns)\n       |> Enum.map(fn column -> table_header(column, params) end)\n-      |> Helpers.tag(:thead, class: \"bg-gray-100\")\n+      |> Helpers.tag(:thead, class: \"bg-gray-100 border-b border-gray-300\")\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n"
+                },
+                {
+                    "date": 1658091091657,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 border-t border-gray-200\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300\")\n \n     [content, nothing_found]\n   end\n \n"
+                }
+            ],
+            "date": 1658039740292,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.HTML.Table do\n  @moduledoc \"Builds the table part of the HTML\"\n  alias DataTableLive.{Params, Text}\n  alias DataTableLive.HTML.{ActionButton, Filter, Format, Helpers}\n  alias Phoenix.HTML.Tag\n\n  @doc \"Output the table as HTML\"\n  @spec build(map) :: {:safe, iolist}\n  def build(%{params: %Params{fields: fields, list: list} = params} = assigns) do\n    head =\n      fields\n      |> Filter.fields_where_not(:hidden)\n      |> add_actions_header(assigns)\n      |> Enum.map(fn column -> table_header(column, params) end)\n      |> Helpers.tag(:thead, [])\n\n    body =\n      list\n      |> Enum.map(fn entry -> build_row(entry, assigns) end)\n      |> Helpers.tag(:tbody, [])\n\n    [head, body]\n    |> Helpers.tag(:table, class: \"exz-table\")\n    |> maybe_nothing_found(params)\n    |> Helpers.tag(:div, class: \"exz-table-wrapper\")\n  end\n\n  @spec add_actions_header(keyword, map) :: keyword\n  defp add_actions_header(fields, %{params: %Params{action_buttons: []}}), do: fields\n\n  defp add_actions_header(fields, _assigns) do\n    fields ++ [actions: %{sort: false, search: false, order: false}]\n  end\n\n  @spec table_header({atom, map}, Params.t()) :: {:safe, iolist}\n  defp table_header(field, %Params{} = params) do\n    [Format.header(params, field), hide_link_for(field, params), sort_link_for(field, params)]\n    |> Helpers.tag(:th, [])\n  end\n\n  @spec build_row(atom, map) :: {:safe, iolist}\n  defp build_row(entry, %{params: %Params{fields: fields}} = assigns) do\n    values =\n      fields\n      |> Filter.fields_where_not(:hidden)\n      |> Keyword.keys()\n      |> Enum.map(fn key -> Format.field(entry, key, assigns) end)\n      |> Enum.map(fn value -> Helpers.tag(value, :td, []) end)\n\n    values\n    |> Kernel.++([build_actions(entry, assigns)])\n    |> Helpers.tag(:tr, [])\n  end\n\n  @spec build_actions(atom, map) :: {:safe, iolist}\n  defp build_actions(_entry, %{params: %Params{action_buttons: []}}), do: \"\"\n\n  defp build_actions(entry, %{params: params} = assigns) do\n    params\n    |> Map.get(:action_buttons)\n    |> Kernel.--([:new])\n    |> Enum.map(fn action -> ActionButton.build(action, entry, assigns) end)\n    |> Helpers.tag(:td, [])\n  end\n\n  @spec hide_link_for({atom, map}, Params.t()) :: {:safe, iolist}\n  defp hide_link_for({:actions, _value}, _params), do: {:safe, [\"\"]}\n  defp hide_link_for(_, %Params{disable_hide: true}), do: {:safe, [\"\"]}\n\n  defp hide_link_for({key, _value}, %Params{} = params) do\n    params\n    |> Text.text(:hide)\n    |> Helpers.tag(:a,\n      class: \"exz-hide-link\",\n      \"phx-click\": \"hide_column\",\n      \"phx-value-column\": key\n    )\n  end\n\n  @spec sort_link_for({atom, map}, Params.t()) :: {:safe, iolist}\n  defp sort_link_for({:actions, _v}, _params), do: {:safe, [\"\"]}\n  defp sort_link_for({_key, %{order: false}}, _params), do: {:safe, [\"\"]}\n\n  defp sort_link_for({key, _v}, %Params{order: order} = params) do\n    sort = Text.text(params, :sort)\n\n    label =\n      case order do\n        [desc: ^key] -> \"#{sort} ▲\"\n        [asc: ^key] -> \"#{sort} ▼\"\n        _ -> \"#{sort}  \"\n      end\n\n    Tag.content_tag(:a, label,\n      class: \"exz-sort-link\",\n      \"phx-click\": \"sort_column\",\n      \"phx-value-column\": key\n    )\n  end\n\n  defp maybe_nothing_found(content, %Params{list: []} = params) do\n    nothing_found =\n      params\n      |> Text.text(:nothing_found)\n      |> Helpers.tag(:div, class: \"exz-nothing-found\")\n\n    [content, nothing_found]\n  end\n\n  defp maybe_nothing_found(content, _params) do\n    content\n  end\nend\n"
+        }
+    ]
+}

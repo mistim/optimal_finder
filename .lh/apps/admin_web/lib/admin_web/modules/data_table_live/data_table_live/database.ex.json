@@ -1,0 +1,202 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/database.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 46,
+            "patches": [
+                {
+                    "date": 1658039750799,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658069580954,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,9 @@\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> inspect\n+    # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658069690057,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,11 +81,11 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n+    inspect(Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end))\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> inspect\n-    # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658069727833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,8 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    inspect(Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end))\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658070158160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,8 +83,10 @@\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> Enum.map_join(\" OR \", fn {key, v} -> \"#{Atom.to_string(key)} LIKE ''%{v}%\" end)\n+    |> then(&\"&1\")\n+    # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658070194035,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, v} -> \"#{Atom.to_string(key)} LIKE ''%{v}%\" end)\n-    |> then(&\"&1\")\n+    |> then(&\"#{&1}\")\n     # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658070207641,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,9 +83,9 @@\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, v} -> \"#{Atom.to_string(key)} LIKE ''%{v}%\" end)\n+    |> Enum.map_join(\" OR \", fn {key, v} -> \"#{Atom.to_string(key)} LIKE ''%#{v}%\" end)\n     |> then(&\"#{&1}\")\n     # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n"
+                },
+                {
+                    "date": 1658070236534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,9 +83,9 @@\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, v} -> \"#{Atom.to_string(key)} LIKE ''%#{v}%\" end)\n+    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE ''%%\" end)\n     |> then(&\"#{&1}\")\n     # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n"
+                },
+                {
+                    "date": 1658070250000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -83,9 +83,9 @@\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE ''%%\" end)\n+    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%%'\" end)\n     |> then(&\"#{&1}\")\n     # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n"
+                },
+                {
+                    "date": 1658070614089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,8 +81,9 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n+    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%%'\" end)\n     |> then(&\"#{&1}\")\n"
+                },
+                {
+                    "date": 1658070893338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,13 +81,10 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%%'\" end)\n-    |> then(&\"#{&1}\")\n-    # |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071072220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,8 +81,9 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n+    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071172753,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,8 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071220499,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,10 +81,12 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n+    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> then(&)\n   end\n end\n"
+                },
+                {
+                    "date": 1658071234740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,7 +86,7 @@\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&)\n+    |> then(&\"\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071256306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,7 +86,7 @@\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\"\")\n+    |> then(&\" \")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071272458,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n   def tsvector_string(fields) do\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\" \")\n+    |> then(&\" #{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071344858,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,7 +86,7 @@\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\" #{&1}\")\n+    # |> then(&\" #{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071358013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,7 +86,7 @@\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    # |> then(&\" #{&1}\")\n+    |> then(&\" #{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071425060,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n   def tsvector_string(fields) do\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"\" end)\n+    |> Enum.map_join(\"  \", fn {key, _v} -> \"(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\" #{&1}\")\n+    |> then(&\" \")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071448369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,7 +86,7 @@\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\"  \", fn {key, _v} -> \"(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\" \")\n+    |> then(&\" #{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071482556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect(fields)\n+    # IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\"  \", fn {key, _v} -> \"(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071495594,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,9 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    # IO.inspect(fields)\n+    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\"  \", fn {key, _v} -> \"(#{Atom.to_string(key)}, ' ')\" end)\n     # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071516832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,8 @@\n   def tsvector_string(fields) do\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\"  \", fn {key, _v} -> \"(#{Atom.to_string(key)}, ' ')\" end)\n-    # |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n-    |> then(&\" #{&1}\")\n+    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658071531301,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,8 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071668400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,8 +81,9 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n+    IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658071712020,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,7 +85,7 @@\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> then(&\" #{&1}) \")\n   end\n end\n"
+                },
+                {
+                    "date": 1658072250746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,7 +85,7 @@\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\" #{&1}) \")\n+    |> then(fn x -> x end))\n   end\n end\n"
+                },
+                {
+                    "date": 1658072280511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,7 +85,7 @@\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(fn x -> x end))\n+    |> then(fn x -> x end)\n   end\n end\n"
+                },
+                {
+                    "date": 1658072703374,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,7 +85,7 @@\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(fn x -> x end)\n+    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658073211244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,8 +84,8 @@\n   def tsvector_string(fields) do\n     IO.inspect(fields)\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n-    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+    |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n+    |> then(&\"(#{&1}) LIKE '%?%'\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658081362032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,11 +81,18 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect(fields)\n+    IO.inspect()\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n+    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n+    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n+  end\n+\n+  def search_like($fields) do\n+    fields\n+    |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n-    |> then(&\"(#{&1}) LIKE '%?%'\")\n+    |> then(&\"#{&1} LIKE '%?%'\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658081380144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n \n-  def search_like($fields) do\n+  def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n     |> then(&\"#{&1} LIKE '%?%'\")\n"
+                },
+                {
+                    "date": 1658081389285,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,8 +88,9 @@\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n \n+  @spec tsvector_string([keyword]) :: String.t()\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n"
+                },
+                {
+                    "date": 1658081396648,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,8 +90,9 @@\n   end\n \n   @spec tsvector_string([keyword]) :: String.t()\n   def search_like(fields) do\n+    IO.inspect()\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n     |> then(&\"#{&1} LIKE '%?%'\")\n"
+                },
+                {
+                    "date": 1658081412603,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n \n-  @spec tsvector_string([keyword]) :: String.t()\n+  @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n     IO.inspect()\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n"
+                },
+                {
+                    "date": 1658081439868,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,8 @@\n   end\n \n   @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n-    IO.inspect()\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n     |> then(&\"#{&1} LIKE '%?%'\")\n"
+                },
+                {
+                    "date": 1658082266844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -81,9 +81,8 @@\n     Created outside macro to bypass ecto restrictions\n   \"\"\"\n   @spec tsvector_string([keyword]) :: String.t()\n   def tsvector_string(fields) do\n-    IO.inspect()\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n"
+                },
+                {
+                    "date": 1658087180291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,8 +87,14 @@\n     |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n     |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n   end\n \n+  def like_list(fields, search) do\n+    fields\n+    |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n+    |> Enum.reduce([], fn x, acc -> [search | acc] end)\n+  end\n+\n   @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n"
+                },
+                {
+                    "date": 1658087208193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n \n   def like_list(fields, search) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.reduce([], fn x, acc -> [search | acc] end)\n+    |> Enum.reduce([], fn _x, acc -> [search | acc] end)\n   end\n \n   @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n"
+                },
+                {
+                    "date": 1658088158484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,8 +97,8 @@\n   @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, _v} -> Atom.to_string(key) end)\n-    |> then(&\"#{&1} LIKE '%?%'\")\n+    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%?%'\" end)\n+    |> then(&\"#{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658088314673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,7 +98,6 @@\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%?%'\" end)\n-    |> then(&\"#{&1}\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658089197910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,7 +97,8 @@\n   @spec search_like([keyword]) :: String.t()\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n-    |> Enum.map_join(\" OR \", fn {key, _v} -> \"#{Atom.to_string(key)} LIKE '%?%'\" end)\n+    |> Enum.map_join(\", \", fn {key, _v} -> \"#{Atom.to_string(key)}\" end)\n+    |> then(&\"CONCAT_WS(' ', #{&1}) LIKE '%?%'\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658089341962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,10 +70,10 @@\n   def prefix_search(terms) do\n     terms\n     |> String.trim()\n     |> String.replace(~r/[^\\w\\s]|_/u, \"\")\n-    |> String.replace(~r/\\s+/u, \":* & \")\n-    |> Kernel.<>(\":*\")\n+    # |> String.replace(~r/\\s+/u, \":* & \")\n+    # |> Kernel.<>(\":*\")\n   end\n \n   @doc \"\"\"\n     Generates the magic SQL fragment that performs search dynamically.\n"
+                },
+                {
+                    "date": 1658089492381,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,7 +98,7 @@\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\", \", fn {key, _v} -> \"#{Atom.to_string(key)}\" end)\n-    |> then(&\"CONCAT_WS(' ', #{&1}) LIKE '%?%'\")\n+    |> then(&\"CONCAT_WS(' ', #{&1}) LIKE '?'\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658089842866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,7 +98,7 @@\n   def search_like(fields) do\n     fields\n     |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n     |> Enum.map_join(\", \", fn {key, _v} -> \"#{Atom.to_string(key)}\" end)\n-    |> then(&\"CONCAT_WS(' ', #{&1}) LIKE '?'\")\n+    |> then(&\"CONCAT_WS(' ', #{&1}) LIKE ?\")\n   end\n end\n"
+                },
+                {
+                    "date": 1658089958141,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -72,8 +72,9 @@\n     |> String.trim()\n     |> String.replace(~r/[^\\w\\s]|_/u, \"\")\n     # |> String.replace(~r/\\s+/u, \":* & \")\n     # |> Kernel.<>(\":*\")\n+    |> then(&\"%#{&1}%\")\n   end\n \n   @doc \"\"\"\n     Generates the magic SQL fragment that performs search dynamically.\n"
+                }
+            ],
+            "date": 1658039750799,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Database do\n  @moduledoc \"Database interactions\"\n  import Ecto.Query\n\n  @doc \"Get the data using query\"\n  @spec get_records(map) :: [map]\n  def get_records(%{query: query} = params) do\n    query\n    |> order_query(params)\n    |> search_query(params)\n    |> paginate_query(params)\n    |> get_query(params)\n  end\n\n  @spec order_query(Ecto.Query.t(), map) :: Ecto.Query.t()\n  defp order_query(query, %{order: nil}), do: query\n\n  defp order_query(query, %{order: order}) do\n    from(q in exclude(query, :order_by), order_by: ^order)\n  end\n\n  @spec search_query(Ecto.Query.t(), map) :: Ecto.Query.t()\n  defp search_query(query, %{search: \"\"}), do: query\n\n  defp search_query(query, %{search: search, module: module}) do\n    module.do_search(query, search)\n  end\n\n  @spec remove_order(Ecto.Query.t()) :: Ecto.Query.t()\n  defp remove_order(query), do: exclude(query, :order_by)\n\n  @spec paginate_query(Ecto.Query.t(), map) :: Ecto.Query.t()\n  defp paginate_query(query, %{per_page: per_page, page: 1}) do\n    from(q in query, limit: ^per_page)\n  end\n\n  defp paginate_query(query, %{per_page: per_page, page: page}) do\n    offset = (page - 1) * per_page\n    from(q in query, limit: ^per_page, offset: ^offset)\n  end\n\n  # Filter out the previous selects and preloads, because we only need the ids to get a count\n  @spec select_ids(Ecto.Query.t()) :: Ecto.Query.t()\n  defp select_ids(query) do\n    query =\n      query\n      |> exclude(:select)\n      |> exclude(:preload)\n\n    from(q in query, select: count(q.id))\n  end\n\n  # Repo.all\n  @spec get_query(Ecto.Query.t(), map) :: [map]\n  defp get_query(query, %{repo: repo}), do: repo.all(query)\n\n  @doc \"I want to just do a select: count(c.id)\"\n  @spec get_record_count(map) :: integer\n  def get_record_count(%{query: query} = params) do\n    query\n    |> select_ids()\n    |> search_query(params)\n    |> remove_order()\n    |> get_query(params)\n    |> List.first()\n  end\n\n  @doc \"We only want letters to avoid SQL injection attacks\"\n  @spec prefix_search(String.t()) :: String.t()\n  def prefix_search(terms) do\n    terms\n    |> String.trim()\n    |> String.replace(~r/[^\\w\\s]|_/u, \"\")\n    |> String.replace(~r/\\s+/u, \":* & \")\n    |> Kernel.<>(\":*\")\n  end\n\n  @doc \"\"\"\n    Generates the magic SQL fragment that performs search dynamically.\n    Searches across columns that are searchable. Replaces nulls with a space.\n    Created outside macro to bypass ecto restrictions\n  \"\"\"\n  @spec tsvector_string([keyword]) :: String.t()\n  def tsvector_string(fields) do\n    fields\n    |> Stream.filter(fn {_k, field} -> Keyword.fetch!(field, :search) end)\n    |> Enum.map_join(\" || ' ' || \", fn {key, _v} -> \"coalesce(#{Atom.to_string(key)}, ' ')\" end)\n    |> then(&\"to_tsvector('english', #{&1}) @@ to_tsquery(?)\")\n  end\nend\n"
+        }
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/parameters/parameter_error.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1658039741205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1658039741205,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Params.ParameterError do\n  @moduledoc \"An exception for missing or bad parameters\"\n  defexception [:parameter, :message]\n\n  @doc \"Sets the correct message based on the missing parameter\"\n  @impl true\n  def message(%{parameter: :repo}) do\n    \"You need to set the repo, i.e. MyApp.Repo\"\n  end\n\n  def message(%{parameter: :query}) do\n    \"You need to set the query, i.e. from(s in Site, select: [:id, :number, :address])\"\n  end\n\n  def message(%{parameter: :routes}) do\n    \"You need to set the routes module, i.e. MyAppWeb.Router.Helpers\"\n  end\n\n  def message(%{parameter: :path}) do\n    \"You need to set the path, i.e. :user_path\"\n  end\n\n  def message(%{parameter: parameter}) do\n    \"Required parameter #{inspect(parameter)} is not defined\"\n  end\n\n  def message(%{message: message}) do\n    message\n  end\nend\n"
+        }
+    ]
+}

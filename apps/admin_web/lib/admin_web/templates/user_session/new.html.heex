@@ -1,0 +1,47 @@
+<.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
+  <%= if @error_message do %>
+    <div class="alert alert-danger">
+      <p><%= @error_message %></p>
+    </div>
+  <% end %>
+
+  <div class="relative">
+    <span class="absolute right-0 -mt-1 font-bold">
+      <span class="text-amber-500 pr-0">Optimal</span><span>Finder</span>
+      <span class="font-normal pl-1">Admin</span>
+    </span>
+    <.form_label form={f} field={:email} label="Login" />
+    <div class="relative">
+      <.email_input form={f} field={:email} placeholder="email" required="{true}" class="pl-8" />
+      <Heroicons.Solid.user class="h-5 w-5 absolute top-2 left-2 opacity-50" />
+    </div>
+    <.form_field_error form={f} field={:email} class="mt-1" />
+  </div>
+
+  <div class="mt-5">
+    <.form_label form={f} field={:password} />
+    <div class="relative">
+      <.password_input form={f} field={:password} placeholder="password" required="{true}" class="pl-8" />
+      <Heroicons.Solid.lock_closed class="h-5 w-5 absolute top-2 left-2 opacity-50" />
+    </div>
+    <.form_field_error form={f} field={:password} class="mt-1" />
+  </div>
+
+  <div class="mt-3">
+    <.form_field type="checkbox" wrapper_classes="mb-0" form={f} field={:remember_me} label="Keep me logged in for 60 days" />
+  </div>
+  
+  <div class="flex justify-between">
+    <div class="flex items-center">
+      <span class="mr-1">
+        <%= link "Register", to: Routes.user_registration_path(@conn, :new) %>
+      </span>|
+      <span class="ml-1">
+        <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+      </span>
+    </div>
+    <div>
+      <.button type="submit" color="info" label="Log in" />
+    </div>
+  </div>
+</.form>

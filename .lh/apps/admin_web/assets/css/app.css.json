@@ -1,0 +1,62 @@
+{
+    "sourceFile": "apps/admin_web/assets/css/app.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 11,
+            "patches": [
+                {
+                    "date": 1657810039623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657810107034,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n \n /* This file is for your main application CSS */\n \n @layer components {\n-  .btn-primary {\n-    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;\n+  .sidebar-link {\n+    @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n }\n \n /* Alerts and form errors used by phx.new */\n"
+                },
+                {
+                    "date": 1657810262668,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n @import \"tailwindcss/base\";\n @import \"tailwindcss/components\";\n @import \"tailwindcss/utilities\";\n+@tailwind components;\n \n /* This file is for your main application CSS */\n \n @layer components {\n"
+                },
+                {
+                    "date": 1657810297582,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n @import \"tailwindcss/base\";\n @import \"tailwindcss/components\";\n @import \"tailwindcss/utilities\";\n-@tailwind components;\n \n /* This file is for your main application CSS */\n \n @layer components {\n"
+                },
+                {
+                    "date": 1657810321704,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-@layer components {\n+/* @layer components { */\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-}\n+/* } */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657810489943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-/* @layer components { */\n+/* @layer components {\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-/* } */\n+} */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811110816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-/* @layer components {\n+/* @layer components { */\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-} */\n+/* } */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811436773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-/* @layer components { */\n+@layer components {\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-/* } */\n+}\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811522908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-@layer components {\n+/* @layer components {\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-}\n+} */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811543311,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-/* @layer components {\n+@layer components {\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-} */\n+}\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811583302,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-@layer components {\n+/* @layer components { */\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-}\n+/* } */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                },
+                {
+                    "date": 1657811714916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,13 +3,13 @@\n @import \"tailwindcss/utilities\";\n \n /* This file is for your main application CSS */\n \n-/* @layer components { */\n+/* @layer components {\n   .sidebar-link {\n     @apply text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group;\n   }\n-/* } */\n+} */\n \n /* Alerts and form errors used by phx.new */\n .alert {\n   padding: 15px;\n"
+                }
+            ],
+            "date": 1657810039623,
+            "name": "Commit-0",
+            "content": "@import \"tailwindcss/base\";\n@import \"tailwindcss/components\";\n@import \"tailwindcss/utilities\";\n\n/* This file is for your main application CSS */\n\n@layer components {\n  .btn-primary {\n    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;\n  }\n}\n\n/* Alerts and form errors used by phx.new */\n.alert {\n  padding: 15px;\n  margin-bottom: 20px;\n  border: 1px solid transparent;\n  border-radius: 4px;\n}\n.alert-info {\n  color: #31708f;\n  background-color: #d9edf7;\n  border-color: #bce8f1;\n}\n.alert-warning {\n  color: #8a6d3b;\n  background-color: #fcf8e3;\n  border-color: #faebcc;\n}\n.alert-danger {\n  color: #a94442;\n  background-color: #f2dede;\n  border-color: #ebccd1;\n}\n.alert p {\n  margin-bottom: 0;\n}\n.alert:empty {\n  display: none;\n}\n.invalid-feedback {\n  color: #a94442;\n  display: block;\n  margin: -1rem 0 2rem;\n}\n\n/* LiveView specific classes for your customization */\n.phx-no-feedback.invalid-feedback,\n.phx-no-feedback .invalid-feedback {\n  display: none;\n}\n\n.phx-click-loading {\n  opacity: 0.5;\n  transition: opacity 1s ease-out;\n}\n\n.phx-loading{\n  cursor: wait;\n}\n\n.phx-modal {\n  opacity: 1!important;\n  position: fixed;\n  z-index: 1;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: auto;\n  background-color: rgba(0,0,0,0.4);\n}\n\n.phx-modal-content {\n  background-color: #fefefe;\n  margin: 15vh auto;\n  padding: 20px;\n  border: 1px solid #888;\n  width: 80%;\n}\n\n.phx-modal-close {\n  color: #aaa;\n  float: right;\n  font-size: 28px;\n  font-weight: bold;\n}\n\n.phx-modal-close:hover,\n.phx-modal-close:focus {\n  color: black;\n  text-decoration: none;\n  cursor: pointer;\n}\n\n.fade-in-scale {\n  animation: 0.2s ease-in 0s normal forwards 1 fade-in-scale-keys;\n}\n\n.fade-out-scale {\n  animation: 0.2s ease-out 0s normal forwards 1 fade-out-scale-keys;\n}\n\n.fade-in {\n  animation: 0.2s ease-out 0s normal forwards 1 fade-in-keys;\n}\n.fade-out {\n  animation: 0.2s ease-out 0s normal forwards 1 fade-out-keys;\n}\n\n@keyframes fade-in-scale-keys{\n  0% { scale: 0.95; opacity: 0; }\n  100% { scale: 1.0; opacity: 1; }\n}\n\n@keyframes fade-out-scale-keys{\n  0% { scale: 1.0; opacity: 1; }\n  100% { scale: 0.95; opacity: 0; }\n}\n\n@keyframes fade-in-keys{\n  0% { opacity: 0; }\n  100% { opacity: 1; }\n}\n\n@keyframes fade-out-keys{\n  0% { opacity: 1; }\n  100% { opacity: 0; }\n}\n\n"
+        }
+    ]
+}

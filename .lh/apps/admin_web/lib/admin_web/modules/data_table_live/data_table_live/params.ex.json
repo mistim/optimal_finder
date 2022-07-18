@@ -1,0 +1,418 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/modules/data_table_live/data_table_live/params.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 100,
+            "patches": [
+                {
+                    "date": 1658039753848,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658046504959,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,8 +84,12 @@\n     search: false,\n     order: false\n   ]\n \n+  @defaukt_classes %{\n+    pagination_wrapper: \"mb-1\"\n+  }\n+\n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n   def set_fields(opts) do\n     opts\n"
+                },
+                {
+                    "date": 1658046574431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,10 @@\n     order: false\n   ]\n \n   @defaukt_classes %{\n-    pagination_wrapper: \"mb-1\"\n+    wrapper: \"bg-white p-4\",\n+    pager_wrapper: \"mb-1\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658046586772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n     search: false,\n     order: false\n   ]\n \n-  @defaukt_classes %{\n+  @default_classes %{\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\"\n   }\n \n"
+                },
+                {
+                    "date": 1658046771481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -127,6 +127,6 @@\n     |> Validations.paired_options()\n     |> Validations.required_keys_present(@enforce_keys)\n     |> then(&struct!(__MODULE__, &1))\n     |> then(&%{\"params\" => &1})\n-  end\n+  end\\\n end\n"
+                },
+                {
+                    "date": 1658046800976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n     search: false,\n     order: false\n   ]\n \n-  @default_classes %{\n+  dt_classes %{\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\"\n   }\n \n@@ -127,6 +127,6 @@\n     |> Validations.paired_options()\n     |> Validations.required_keys_present(@enforce_keys)\n     |> then(&struct!(__MODULE__, &1))\n     |> then(&%{\"params\" => &1})\n-  end\\\n+  end\n end\n"
+                },
+                {
+                    "date": 1658046812158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -84,9 +84,9 @@\n     search: false,\n     order: false\n   ]\n \n-  dt_classes %{\n+  @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\"\n   }\n \n"
+                },
+                {
+                    "date": 1658046912324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -128,5 +128,9 @@\n     |> Validations.required_keys_present(@enforce_keys)\n     |> then(&struct!(__MODULE__, &1))\n     |> then(&%{\"params\" => &1})\n   end\n+\n+  def get_dt_class(key) do\n+    dt_classes[key]\n+  end\n end\n"
+                },
+                {
+                    "date": 1658047191127,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,7 +130,7 @@\n     |> then(&%{\"params\" => &1})\n   end\n \n   def get_dt_class(key) do\n-    dt_classes[key]\n+    @dt_classes[key]\n   end\n end\n"
+                },
+                {
+                    "date": 1658047289614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -130,7 +130,11 @@\n     |> then(&%{\"params\" => &1})\n   end\n \n   def get_dt_class(key) do\n-    @dt_classes[key]\n+    if Map.has_key?(@dt_classes, key) do\n+      @dt_classes[key]\n+    else\n+      \"\"\n+    end\n   end\n end\n"
+                },
+                {
+                    "date": 1658047388570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,10 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n-    pager_wrapper: \"mb-1\"\n+    pager_wrapper: \"mb-1\",\n+    pager_nav: \"mb-1\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658047616947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,11 @@\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n-    pager_nav: \"mb-1\"\n+    pager_nav: \"mb-1\",\n+    pager_ul: \"\",\n+    pager-li: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658047622590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager-li: \"\"\n+    pager_li: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658047642133,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,10 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"\"\n+    pager_li: \"\",\n+    info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658047729047,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"\",\n+    pager_li: \"inline\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658048483667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,8 +90,10 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n+    pager_li_active: \"inline\",\n+    pager_li_disabled: \"opacity-50\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658048500924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n-    pager_li_active: \"inline\",\n+    pager_li_active: \"bg-primary-\",\n     pager_li_disabled: \"opacity-50\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658048713978,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n-    pager_li_active: \"bg-primary-\",\n+    pager_li_active: \"bg-primary\",\n     pager_li_disabled: \"opacity-50\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658048722550,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n-    pager_li_active: \"bg-primary\",\n+    pager_li_active: \"bg-primary text-white\",\n     pager_li_disabled: \"opacity-50\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658048826319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n     pager_li_active: \"bg-primary text-white\",\n-    pager_li_disabled: \"opacity-50\",\n+    pager_li_disable: \"opacity-50\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658048928836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline\",\n-    pager_li_active: \"bg-primary text-white\",\n+    pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658048978920,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline\",\n+    pager_li: \"inline p-1\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50\",\n     info_button: \"\"\n   }\n"
+                },
+                {
+                    "date": 1658049010580,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline p-1\",\n+    pager_li: \"inline py-1 px-2\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50\",\n     info_button: \"\"\n   }\n"
+                },
+                {
+                    "date": 1658049120267,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2\",\n     pager_li_active: \"bg-primary-700 text-white\",\n-    pager_li_disable: \"opacity-50\",\n+    pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-20\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658049134435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2\",\n     pager_li_active: \"bg-primary-700 text-white\",\n-    pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-20\",\n+    pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-300\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658049159293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2\",\n-    pager_li_active: \"bg-primary-700 text-white\",\n+    pager_li_active: \"bg-primary-700 text-white border-primary-900\",\n     pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-300\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658049175017,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2\",\n-    pager_li_active: \"bg-primary-700 text-white border-primary-900\",\n+    pager_li_active: \"bg-primary-700 text-white border border-primary-900\",\n     pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-300\",\n     info_button: \"\"\n   }\n \n"
+                },
+                {
+                    "date": 1658049213718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,11 +89,11 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2\",\n-    pager_li_active: \"bg-primary-700 text-white border border-primary-900\",\n-    pager_li_disable: \"opacity-50 bg-gray-100 border border-gray-300\",\n+    pager_li: \"inline py-1 px-2 border border-gray-700\",\n+    pager_li_active: \"bg-primary-700 text-white border-primary-900\",\n+    pager_li_disable: \"opacity-50 bg-gray-100 border-gray-300\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658049247773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 border border-gray-700\",\n+    pager_li: \"inline py-1 px-2 border border-gray-700 rounded\",\n     pager_li_active: \"bg-primary-700 text-white border-primary-900\",\n     pager_li_disable: \"opacity-50 bg-gray-100 border-gray-300\",\n     info_button: \"\"\n   }\n"
+                },
+                {
+                    "date": 1658049298694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,11 +89,11 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 border border-gray-700 rounded\",\n-    pager_li_active: \"bg-primary-700 text-white border-primary-900\",\n-    pager_li_disable: \"opacity-50 bg-gray-100 border-gray-300\",\n+    pager_li: \"inline py-1 px-2 rounded-xl\",\n+    pager_li_active: \"bg-primary-700 text-white\",\n+    pager_li_disable: \"opacity-50 bg-gray-100\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658049319028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 rounded-xl\",\n+    pager_li: \"inline py-1 px-2 rounded-xl mx-2\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100\",\n     info_button: \"\"\n   }\n"
+                },
+                {
+                    "date": 1658049369694,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -89,9 +89,9 @@\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 rounded-xl mx-2\",\n+    pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100\",\n     info_button: \"\"\n   }\n"
+                },
+                {
+                    "date": 1658049408555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -91,9 +91,9 @@\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n-    pager_li_disable: \"opacity-50 bg-gray-100\",\n+    pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658049836287,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -87,9 +87,9 @@\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     pager_wrapper: \"mb-1\",\n-    pager_nav: \"mb-1\",\n+    pager_nav: \"mb-1 flex items-stretch\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n"
+                },
+                {
+                    "date": 1658049855867,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,10 +86,10 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n-    pager_wrapper: \"mb-1\",\n-    pager_nav: \"mb-1 flex items-stretch\",\n+    pager_wrapper: \"mb-1 flex items-stretch\",\n+    pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n"
+                },
+                {
+                    "date": 1658049942562,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -92,8 +92,9 @@\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n+    search_wrappwer: \"\",\n     info_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658050016667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,8 +86,9 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n+    nav_row: \"flex items-stretch\",\n     pager_wrapper: \"mb-1 flex items-stretch\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n"
+                },
+                {
+                    "date": 1658050396102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,10 +86,10 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n-    nav_row: \"flex items-stretch\",\n-    pager_wrapper: \"mb-1 flex items-stretch\",\n+    nav_row: \"flex items-center justify-between\",\n+    pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n"
+                },
+                {
+                    "date": 1658050689255,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,10 @@\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"\"\n+    info_button: \"\",\n+    show_button: \"\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658050760747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,10 +94,10 @@\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"\",\n-    show_button: \"\"\n+    info_button: \"rounded-xl mx-2 cursor-pointer px-2 mx-2\",\n+    show_button: \"rounded-xl mx-2 cursor-pointer px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658052839943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,10 +94,10 @@\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl mx-2 cursor-pointer px-2 mx-2\",\n-    show_button: \"rounded-xl mx-2 cursor-pointer px-2 mx-2\"\n+    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\",\n+    show_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658052946714,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n-    pager_nav: \"mb-1\",\n+    pager_nav: \"1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n"
+                },
+                {
+                    "date": 1658055770251,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,15 +88,15 @@\n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n-    pager_nav: \"1\",\n+    pager_nav: \"mb-1\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\",\n+    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2 border border-gray-500\",\n     show_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658055855086,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,9 +94,9 @@\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2 border border-gray-500\",\n+    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n"
+                },
+                {
+                    "date": 1658055900263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -88,9 +88,9 @@\n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n-    pager_nav: \"mb-1\",\n+    pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n"
+                },
+                {
+                    "date": 1658055939879,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -94,10 +94,10 @@\n     pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n-    show_button: \"rounded-xl mx-2 cursor-pointer py-1 px-2 mx-2\"\n+    info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n+    show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658056109032,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,11 +90,12 @@\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n+    pager_li: \"inline\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n+    pager_link: \"py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     search_wrappwer: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n   }\n"
+                },
+                {
+                    "date": 1658056376182,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,12 +90,12 @@\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n-    pager_li: \"inline\",\n+    pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n-    pager_link: \"py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n+    pager_link: \"\",\n     search_wrappwer: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n   }\n"
+                },
+                {
+                    "date": 1658056413635,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,10 +95,10 @@\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n-    show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n+    info_button: \"rounded-xl cursor-pointer py-0 px-2 mx-2 border border-gray-300\",\n+    show_button: \"rounded-xl cursor-pointer py-0 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658056454226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,15 +90,15 @@\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-1 px-2 rounded-xl mx-2 cursor-pointer\",\n+    pager_li: \"inline py-2 px-2 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n-    info_button: \"rounded-xl cursor-pointer py-0 px-2 mx-2 border border-gray-300\",\n-    show_button: \"rounded-xl cursor-pointer py-0 px-2 mx-2\"\n+    info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n+    show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658056464763,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-2 px-2 rounded-xl mx-2 cursor-pointer\",\n+    pager_li: \"inline py-2 px-3 rounded-xl mx-2 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n"
+                },
+                {
+                    "date": 1658056489239,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     nav_row: \"flex items-center justify-between\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n-    pager_li: \"inline py-2 px-3 rounded-xl mx-2 cursor-pointer\",\n+    pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n"
+                },
+                {
+                    "date": 1658056553187,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,10 +95,11 @@\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n+    search_form: \"relative\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n-    show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\"\n+    show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n   @doc \"Gets fields from options and merges it into the defaults\"\n   @spec set_fields(keyword) :: [any]\n"
+                },
+                {
+                    "date": 1658056590644,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,8 +96,9 @@\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n+    search_field_wrapper: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658056608681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,8 +97,9 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"\",\n+    count_field_wrapper: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658056614364,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"\",\n-    count_field_wrapper: \"\",\n+    counter_field_wrapper: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658056626118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"\",\n-    counter_field_wrapper: \"\",\n+    counter_field_wrapper: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658056692852,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,11 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"\",\n+    search_field: \"\",\n     counter_field_wrapper: \"absolute\",\n+    counter_field: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658056737545,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n-    search_field_wrapper: \"\",\n+    search_field_wrapper: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n     search_field: \"\",\n     counter_field_wrapper: \"absolute\",\n     counter_field: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n"
+                },
+                {
+                    "date": 1658056763329,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n     search_field: \"\",\n-    counter_field_wrapper: \"absolute\",\n+    counter_field_wrapper: \"absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none\",\n     counter_field: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057045619,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,10 +96,10 @@\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n-    search_field_wrapper: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n-    search_field: \"\",\n+    search_field_wrapper: \"\",\n+    search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n     counter_field_wrapper: \"absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none\",\n     counter_field: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n"
+                },
+                {
+                    "date": 1658057054481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n-    search_field_wrapper: \"\",\n+    search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n     counter_field_wrapper: \"absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none\",\n     counter_field: \"absolute\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n"
+                },
+                {
+                    "date": 1658057102655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white p-4\",\n-    nav_row: \"flex items-center justify-between\",\n+    nav_row: \"flex items-center justify-between mb-4\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n"
+                },
+                {
+                    "date": 1658057130968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,10 +98,10 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none\",\n-    counter_field: \"absolute\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 pl-3 flex items-center pointer-events-none\",\n+    counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n \n"
+                },
+                {
+                    "date": 1658057141456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 pl-3 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057173870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,9 +97,9 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n-    search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pl-10 p-2.5\",\n+    search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n     counter_field_wrapper: \"absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n"
+                },
+                {
+                    "date": 1658057189373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057232412,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-4 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057261041,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-4 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 w-4 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057310677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 w-4 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057343711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 border border-l-gray-900 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057383320,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 border border-l-gray-900 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 border border-l-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057397040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 border border-l-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border border-l-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057438009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border border-l-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border border-l border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057490386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border border-l border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057559073,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057611362,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer z-50\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057641082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer z-50\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057734204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -97,10 +97,10 @@\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"relative\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n-    search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n+    search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n+    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057857263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,12 +95,12 @@\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n-    search_form: \"relative\",\n+    search_form: \"flex items-center\",\n     search_field_wrapper: \"mt-0 relative lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"absolute inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \" inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057891715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -95,10 +95,10 @@\n     pager_li_active: \"bg-primary-700 text-white\",\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n-    search_form: \"flex items-center\",\n-    search_field_wrapper: \"mt-0 relative lg:w-64\",\n+    search_form: \"\",\n+    search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n     counter_field_wrapper: \" inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n"
+                },
+                {
+                    "date": 1658057916969,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \" inset-y-0 right-0 mr-3 pl-3 border-l border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \" inset-y-0 right-0 mr-3 pl-3 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057955209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \" inset-y-0 right-0 mr-3 pl-3 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \" inset-y-0 right-0 pr-1 py-3 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057966839,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \" inset-y-0 right-0 pr-1 py-3 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \" inset-y-0 right-0 pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658057994548,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \" inset-y-0 right-0 pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058010191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"text-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058089336,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"text-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"grid justify-items-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058253180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"grid justify-items-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"flex justify-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058309707,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"flex justify-center pr-1 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"flex justify-center px-2 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058324214,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"flex justify-center px-2 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none\",\n+    counter_field_wrapper: \"flex justify-center px-2 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058393708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"flex justify-center px-2 py-2 border border-l-0 border-gray-300 flex items-center pointer-events-none cursor-pointer\",\n+    counter_field_wrapper: \"px-2 py-2 border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058431199,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"px-2 py-2 border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n+    counter_field_wrapper: \"px-2 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658058450976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"px-2 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n+    counter_field_wrapper: \"px-3 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658059383870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,11 +85,11 @@\n     order: false\n   ]\n \n   @dt_classes %{\n-    wrapper: \"bg-white p-4\",\n+    wrapper: \"bg-white\",\n     nav_row: \"flex items-center justify-between mb-4\",\n-    pager_wrapper: \"mb-1 flex items-center\",\n+    pager_wrapper: \"mb-1 p-4 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n"
+                },
+                {
+                    "date": 1658059415449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,10 +86,10 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white\",\n-    nav_row: \"flex items-center justify-between mb-4\",\n-    pager_wrapper: \"mb-1 p-4 flex items-center\",\n+    nav_row: \"flex items-center justify-between mb-4 p-4\",\n+    pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n     pager_li_active: \"bg-primary-700 text-white\",\n"
+                },
+                {
+                    "date": 1658059461449,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,9 +85,9 @@\n     order: false\n   ]\n \n   @dt_classes %{\n-    wrapper: \"bg-white\",\n+    wrapper: \"bg-white pb-4\",\n     nav_row: \"flex items-center justify-between mb-4 p-4\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n"
+                },
+                {
+                    "date": 1658060010258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white pb-4\",\n-    nav_row: \"flex items-center justify-between mb-4 p-4\",\n+    nav_row: \"flex items-center justify-between mb-4 p-4 border-b border-gray-200\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n"
+                },
+                {
+                    "date": 1658060027692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -85,10 +85,10 @@\n     order: false\n   ]\n \n   @dt_classes %{\n-    wrapper: \"bg-white pb-4\",\n-    nav_row: \"flex items-center justify-between mb-4 p-4 border-b border-gray-200\",\n+    wrapper: \"bg-white pb-4 border-b border-gray-200\",\n+    nav_row: \"flex items-center justify-between mb-4 p-4\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n"
+                },
+                {
+                    "date": 1658061405004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -96,9 +96,9 @@\n     pager_li_disable: \"opacity-50 bg-gray-100 cursor-not-allowed\",\n     pager_link: \"\",\n     search_wrappwer: \"\",\n     search_form: \"\",\n-    search_field_wrapper: \"mt-0 flex items-center lg:w-64\",\n+    search_field_wrapper: \"mt-0 flex items-center lg:w-96\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n     counter_field_wrapper: \"px-3 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n"
+                },
+                {
+                    "date": 1658063927124,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -98,9 +98,9 @@\n     search_wrappwer: \"\",\n     search_form: \"\",\n     search_field_wrapper: \"mt-0 flex items-center lg:w-96\",\n     search_field: \"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-l-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full pr-10 p-2.5\",\n-    counter_field_wrapper: \"px-3 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30 cursor-pointer\",\n+    counter_field_wrapper: \"px-3 py-2 rounded-r-lg border border-l-0 border-gray-300 flex items-center z-30\",\n     counter_field: \"\",\n     info_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2 border border-gray-300\",\n     show_button: \"rounded-xl cursor-pointer py-1 px-2 mx-2\",\n   }\n"
+                },
+                {
+                    "date": 1658091252637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -86,9 +86,9 @@\n   ]\n \n   @dt_classes %{\n     wrapper: \"bg-white pb-4 border-b border-gray-200\",\n-    nav_row: \"flex items-center justify-between mb-4 p-4\",\n+    nav_row: \"flex items-center justify-between p-4\",\n     pager_wrapper: \"mb-1 flex items-center\",\n     pager_nav: \"\",\n     pager_ul: \"\",\n     pager_li: \"inline py-2 px-3 rounded-xl mx-1 cursor-pointer\",\n"
+                }
+            ],
+            "date": 1658039753848,
+            "name": "Commit-0",
+            "content": "defmodule DataTableLive.Params do\n  @moduledoc \"\"\"\n  Gets default parameters, replaces with module opts and then with the function opts.\n\n  Validates that parameters are valid.\n  \"\"\"\n  alias DataTableLive.HTML.Format\n  alias DataTableLive.Params.Validations\n\n  @enforce_keys [:query, :repo, :routes, :path, :fields, :module, :csrf_token]\n\n  @type column :: atom\n  @type function_name :: atom\n\n  @type t :: %__MODULE__{\n          # required\n          query: Ecto.Query.t(),\n          repo: module,\n          routes: module,\n          path: atom,\n          fields: [{column, keyword}],\n          module: module,\n          csrf_token: String.t(),\n          # optional\n          order: [{:asc | :desc, column}] | nil,\n          parent: struct | nil,\n          belongs_to: atom | nil,\n          page: pos_integer,\n          count: non_neg_integer,\n          list: [struct],\n          search: String.t(),\n          show_field_buttons: boolean,\n          action_buttons: [:new | :show | :edit | :delete],\n          per_page: pos_integer,\n          debounce: pos_integer,\n          refresh: boolean,\n          disable_hide: boolean,\n          pagination: [:top | :bottom],\n          assigns: map,\n          text: module,\n          formatter: {module, function_name} | {module, function_name, list}\n        }\n\n  defstruct [\n    # required\n    :query,\n    :repo,\n    :routes,\n    :path,\n    :fields,\n    :module,\n    :csrf_token,\n    # optional\n    :order,\n    :parent,\n    :belongs_to,\n    page: 1,\n    count: 0,\n    list: [],\n    search: \"\",\n    show_field_buttons: false,\n    action_buttons: [:new, :show, :edit, :delete],\n    per_page: 20,\n    debounce: 300,\n    refresh: false,\n    disable_hide: false,\n    pagination: [:top, :bottom],\n    assigns: %{},\n    text: DataTableLive.Text.Default,\n    formatter: {Format, :format_field}\n  ]\n\n  @default_fields [\n    label: nil,\n    function: false,\n    hidden: false,\n    search: true,\n    order: true,\n    formatter: {Format, :format_field}\n  ]\n\n  @virtual_fields [\n    function: true,\n    search: false,\n    order: false\n  ]\n\n  @doc \"Gets fields from options and merges it into the defaults\"\n  @spec set_fields(keyword) :: [any]\n  def set_fields(opts) do\n    opts\n    |> Keyword.get(:fields, [])\n    |> Enum.map(fn {key, field} -> {key, merge_fields(field)} end)\n  end\n\n  # If virtual: true, a number of other options have to be overridden\n  @spec merge_fields(keyword) :: keyword\n  defp merge_fields(field) do\n    if Keyword.get(field, :virtual) do\n      @default_fields\n      |> Keyword.merge(field)\n      |> Keyword.merge(@virtual_fields)\n    else\n      Keyword.merge(@default_fields, field)\n    end\n  end\n\n  @doc \"Creates a new params struct, holds state for liveview\"\n  @spec new(keyword, keyword, atom) :: map\n  def new(function_opts, module_opts, module) do\n    fields =\n      module_opts\n      |> set_fields()\n      |> Enum.map(fn {k, f} -> {k, Enum.into(f, %{})} end)\n\n    token = Phoenix.Controller.get_csrf_token()\n\n    module_opts\n    |> Keyword.merge(function_opts)\n    |> Map.new()\n    |> Map.merge(%{fields: fields, module: module, csrf_token: token})\n    |> Validations.paired_options()\n    |> Validations.required_keys_present(@enforce_keys)\n    |> then(&struct!(__MODULE__, &1))\n    |> then(&%{\"params\" => &1})\n  end\nend\n"
+        }
+    ]
+}

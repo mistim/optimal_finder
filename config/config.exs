@@ -26,8 +26,8 @@ config :admin, Admin.Mailer, adapter: Swoosh.Adapters.Local
 config :swoosh, :api_client, false
 
 config :admin_web,
-  ecto_repos: [AdminWeb.Repo],
-  generators: [context_app: false]
+  ecto_repos: [Admin.Repo],
+  generators: [context_app: :admin]
 
 # Configures the endpoint
 config :admin_web, AdminWeb.Endpoint,

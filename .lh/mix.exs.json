@@ -1,0 +1,26 @@
+{
+    "sourceFile": "mix.exs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1657744123890,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1657744971759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,9 @@\n   # and cannot be accessed from applications inside the apps/ folder.\n   defp deps do\n     [\n       {:tailwind, \"~> 0.1\", runtime: Mix.env() == :dev},\n-      {:petal_components, \"~> 0.17\"},\n-      {:heroicons, \"~> 0.3.2\"}\n+      {:petal_components, \"~> 0.17\"}\n     ]\n   end\n \n   # Aliases are shortcuts or tasks specific to the current project.\n"
+                },
+                {
+                    "date": 1658163762611,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,10 @@\n   # and cannot be accessed from applications inside the apps/ folder.\n   defp deps do\n     [\n       {:tailwind, \"~> 0.1\", runtime: Mix.env() == :dev},\n-      {:petal_components, \"~> 0.17\"}\n+      {:petal_components, \"~> 0.17\"},\n+      {:as_nested_set, \"~> 3.4\"}\n     ]\n   end\n \n   # Aliases are shortcuts or tasks specific to the current project.\n"
+                }
+            ],
+            "date": 1657744123890,
+            "name": "Commit-0",
+            "content": "defmodule OptimalFinder.Umbrella.MixProject do\n  use Mix.Project\n\n  def project do\n    [\n      apps_path: \"apps\",\n      version: \"0.1.0\",\n      start_permanent: Mix.env() == :prod,\n      deps: deps(),\n      aliases: aliases()\n    ]\n  end\n\n  # Dependencies can be Hex packages:\n  #\n  #   {:mydep, \"~> 0.3.0\"}\n  #\n  # Or git/path repositories:\n  #\n  #   {:mydep, git: \"https://github.com/elixir-lang/mydep.git\", tag: \"0.1.0\"}\n  #\n  # Type \"mix help deps\" for more examples and options.\n  #\n  # Dependencies listed here are available only for this project\n  # and cannot be accessed from applications inside the apps/ folder.\n  defp deps do\n    [\n      {:tailwind, \"~> 0.1\", runtime: Mix.env() == :dev},\n      {:petal_components, \"~> 0.17\"},\n      {:heroicons, \"~> 0.3.2\"}\n    ]\n  end\n\n  # Aliases are shortcuts or tasks specific to the current project.\n  # For example, to install project dependencies and perform other setup tasks, run:\n  #\n  #     $ mix setup\n  #\n  # See the documentation for `Mix` for more info on aliases.\n  #\n  # Aliases listed here are available only for this project\n  # and cannot be accessed from applications inside the apps/ folder.\n  defp aliases do\n    [\n      # run `mix setup` in all child apps\n      setup: [\"cmd mix setup\"]\n    ]\n  end\nend\n"
+        }
+    ]
+}
