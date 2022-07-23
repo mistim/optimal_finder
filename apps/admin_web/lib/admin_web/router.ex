@@ -26,6 +26,8 @@ defmodule AdminWeb.Router do
 
     get "/", PageController, :index
     get "/users", UserController, :index
+
+    resources "/catalogs", CatalogController
   end
 
   # Other scopes may use custom stacks.

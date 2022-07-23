@@ -1,0 +1,22 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/controllers/catalog_controller.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1658249515192,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658249548750,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     # render(conn, \"index.html\", catalogs: catalogs)\n \n     import Ecto.Query, only: [from: 2]\n \n-    query = from(u in User, select: u)\n+    query = from(c in Catalog, select: c)\n     render(conn, \"index.html\", query: query)\n   end\n \n   def new(conn, _params) do\n"
+                }
+            ],
+            "date": 1658249515192,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.CatalogController do\n  use AdminWeb, :controller\n\n  alias OptimalFinder.Goods\n  alias OptimalFinder.Goods.Catalog\n\n  def index(conn, _params) do\n    # catalogs = Goods.list_catalogs()\n    # render(conn, \"index.html\", catalogs: catalogs)\n\n    import Ecto.Query, only: [from: 2]\n\n    query = from(u in User, select: u)\n    render(conn, \"index.html\", query: query)\n  end\n\n  def new(conn, _params) do\n    changeset = Goods.change_catalog(%Catalog{})\n    render(conn, \"new.html\", changeset: changeset)\n  end\n\n  def create(conn, %{\"catalog\" => catalog_params}) do\n    case Goods.create_catalog(catalog_params) do\n      {:ok, catalog} ->\n        conn\n        |> put_flash(:info, \"Catalog created successfully.\")\n        |> redirect(to: Routes.catalog_path(conn, :show, catalog))\n\n      {:error, %Ecto.Changeset{} = changeset} ->\n        render(conn, \"new.html\", changeset: changeset)\n    end\n  end\n\n  def show(conn, %{\"id\" => id}) do\n    catalog = Goods.get_catalog!(id)\n    render(conn, \"show.html\", catalog: catalog)\n  end\n\n  def edit(conn, %{\"id\" => id}) do\n    catalog = Goods.get_catalog!(id)\n    changeset = Goods.change_catalog(catalog)\n    render(conn, \"edit.html\", catalog: catalog, changeset: changeset)\n  end\n\n  def update(conn, %{\"id\" => id, \"catalog\" => catalog_params}) do\n    catalog = Goods.get_catalog!(id)\n\n    case Goods.update_catalog(catalog, catalog_params) do\n      {:ok, catalog} ->\n        conn\n        |> put_flash(:info, \"Catalog updated successfully.\")\n        |> redirect(to: Routes.catalog_path(conn, :show, catalog))\n\n      {:error, %Ecto.Changeset{} = changeset} ->\n        render(conn, \"edit.html\", catalog: catalog, changeset: changeset)\n    end\n  end\n\n  def delete(conn, %{\"id\" => id}) do\n    catalog = Goods.get_catalog!(id)\n    {:ok, _catalog} = Goods.delete_catalog(catalog)\n\n    conn\n    |> put_flash(:info, \"Catalog deleted successfully.\")\n    |> redirect(to: Routes.catalog_path(conn, :index))\n  end\nend\n"
+        }
+    ]
+}

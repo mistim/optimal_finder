@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1657740381956,
@@ -32,6 +32,10 @@
                 {
                     "date": 1657901987283,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n   scope \"/\", AdminWeb do\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n-    get \"/users/list\", UserController, :index\n+    get \"/users\", UserController, :index\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
+                },
+                {
+                    "date": 1658164379502,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,10 @@\n     pipe_through [:browser, :require_authenticated_user]\n \n     get \"/\", PageController, :index\n     get \"/users\", UserController, :index\n+\n+    resources \"/catalogs\", CatalogController\n   end\n \n   # Other scopes may use custom stacks.\n   # scope \"/api\", AdminWeb do\n"
                 }
             ],
             "date": 1657740381956,

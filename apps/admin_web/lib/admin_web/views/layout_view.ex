@@ -18,6 +18,10 @@ defmodule AdminWeb.LayoutView do
         label: "Users",
         icon: "user_group",
         route: Routes.user_path(Endpoint, :index)
+      }, %{
+        label: "Catalogs",
+        icon: "folder_open",
+        route: Routes.catalog_path(Endpoint, :index)
       }
     ]
   end

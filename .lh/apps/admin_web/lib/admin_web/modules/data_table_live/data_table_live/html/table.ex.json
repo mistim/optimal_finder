@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 26,
+            "activePatchIndex": 27,
             "patches": [
                 {
                     "date": 1658039740292,
@@ -112,6 +112,10 @@
                 {
                     "date": 1658091091657,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -104,9 +104,9 @@\n   defp maybe_nothing_found(content, %Params{list: []} = params) do\n     nothing_found =\n       params\n       |> Text.text(:nothing_found)\n-      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300 border-t border-gray-200\")\n+      |> Helpers.tag(:div, class: \"p-4 border-b border-gray-300\")\n \n     [content, nothing_found]\n   end\n \n"
+                },
+                {
+                    "date": 1658438661917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \n     body =\n       list\n       |> Enum.map(fn entry -> build_row(entry, assigns) end)\n-      |> Helpers.tag(:tbody, class: \"bg-white divide-y divide-gray-200\")\n+      |> Helpers.tag(:tbody, class: \"bg-white divide-y_ divide-gray-200_\")\n \n     [head, body]\n     |> Helpers.tag(:table, class: \"table-fixed min-w-full divide-y_ divide-gray-200_\")\n     |> maybe_nothing_found(params)\n"
                 }
             ],
             "date": 1658039740292,

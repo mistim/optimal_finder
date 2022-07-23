@@ -128,3 +128,7 @@
   100% { opacity: 0; }
 }
 
+.text-red-500 {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}

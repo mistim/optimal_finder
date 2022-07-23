@@ -1,0 +1,138 @@
+{
+    "sourceFile": "apps/optimal_finder/lib/optimal_finder/goods/catalog.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 30,
+            "patches": [
+                {
+                    "date": 1658167754827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658170581135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,10 @@\n     field :type, Ecto.Enum, values: [desc: 1, no_desc: 2, half_desc: 5]\n     field :parent_id\n     field :lft\n     field :rgt\n+    belongs_to :creator, Admin.User\n+    belongs_to :editor, Admin.User\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658171970834,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n defmodule OptimalFinder.Goods.Catalog do\n   use Ecto.Schema\n   import Ecto.Changeset\n+  alias Admin.User\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n@@ -9,10 +10,10 @@\n     field :type, Ecto.Enum, values: [desc: 1, no_desc: 2, half_desc: 5]\n     field :parent_id\n     field :lft\n     field :rgt\n-    belongs_to :creator, Admin.User\n-    belongs_to :editor, Admin.User\n+    belongs_to :creator, User\n+    belongs_to :editor, User\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658173139893,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,10 +10,10 @@\n     field :type, Ecto.Enum, values: [desc: 1, no_desc: 2, half_desc: 5]\n     field :parent_id\n     field :lft\n     field :rgt\n-    belongs_to :creator, User\n-    belongs_to :editor, User\n+    belongs_to :creator, User, foreign_key: :creator_id\n+    belongs_to :editor, User, foreign_key: :edito_id\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658256551489,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n defmodule OptimalFinder.Goods.Catalog do\n   use Ecto.Schema\n+  use AsNestedSet, scope: [:id]\n   import Ecto.Changeset\n   alias Admin.User\n \n   schema \"catalogs\" do\n@@ -11,9 +12,9 @@\n     field :parent_id\n     field :lft\n     field :rgt\n     belongs_to :creator, User, foreign_key: :creator_id\n-    belongs_to :editor, User, foreign_key: :edito_id\n+    belongs_to :editor, User, foreign_key: :editor_id\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658257002341,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n     field :status, Ecto.Enum, values: [active: 1, stop: 2]\n-    field :type, Ecto.Enum, values: [desc: 1, no_desc: 2, half_desc: 5]\n+    field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 5]\n     field :parent_id\n     field :lft\n     field :rgt\n     belongs_to :creator, User, foreign_key: :creator_id\n"
+                },
+                {
+                    "date": 1658257314725,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n \n   @doc false\n   def changeset(catalog, attrs) do\n     catalog\n-    |> cast(attrs, [])\n+    |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validate_required([])\n   end\n end\n"
+                },
+                {
+                    "date": 1658257325352,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n   @doc false\n   def changeset(catalog, attrs) do\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n-    |> validate_required([])\n+    |> validate_required([:name, :singular_name])\n   end\n end\n"
+                },
+                {
+                    "date": 1658258132138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,5 +23,12 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validate_required([:name, :singular_name])\n   end\n+\n+  defp validation_name(changeset) do\n+    changeset\n+    |> validate_required([:name])\n+    |> validate_length(:name, max: 160)\n+    |> unique_constraint(:name)\n+  end\n end\n"
+                },
+                {
+                    "date": 1658336206808,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,14 +21,22 @@\n   @doc false\n   def changeset(catalog, attrs) do\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n-    |> validate_required([:name, :singular_name])\n+    |> validation_name()\n+    |> validation_singular_name()\n   end\n \n   defp validation_name(changeset) do\n     changeset\n     |> validate_required([:name])\n     |> validate_length(:name, max: 160)\n     |> unique_constraint(:name)\n   end\n+\n+  defp validation_singular_name(changeset) do\n+    changeset\n+    |> validate_required([:singular_name])\n+    |> validate_length(:singular_name, max: 160)\n+    |> unique_constraint(:singular_name)\n+  end\n end\n"
+                },
+                {
+                    "date": 1658336542910,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n     field :status, Ecto.Enum, values: [active: 1, stop: 2]\n-    field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 5]\n+    field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n     belongs_to :creator, User, foreign_key: :creator_id\n@@ -23,8 +23,12 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n+    |> validate_number(:status, greater_than: 0)\n+    |> validate_number(:status, less_than: 3)\n+    |> validate_number(:status, greater_than_or_equal_to: 0)\n+    |> validate_number(:status, less_than: 4)\n   end\n \n   defp validation_name(changeset) do\n     changeset\n"
+                },
+                {
+                    "date": 1658336556242,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [active: 1, stop: 2]\n+    field :status, Ecto.Enum, values: [active: 1, stop: 0]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658336564038,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n-    |> validate_number(:status, greater_than: 0)\n+    |> validate_number(:status, greater_than_or_equal_to: 0)\n     |> validate_number(:status, less_than: 3)\n     |> validate_number(:status, greater_than_or_equal_to: 0)\n     |> validate_number(:status, less_than: 4)\n   end\n"
+                },
+                {
+                    "date": 1658336587493,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,11 @@\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n     |> validate_number(:status, greater_than_or_equal_to: 0)\n-    |> validate_number(:status, less_than: 3)\n+    |> validate_number(:status, less_than_or_equal_to: 2)\n     |> validate_number(:status, greater_than_or_equal_to: 0)\n-    |> validate_number(:status, less_than: 4)\n+    |> validate_number(:status, less_than_or_equal_to: 3)\n   end\n \n   defp validation_name(changeset) do\n     changeset\n"
+                },
+                {
+                    "date": 1658338642656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,12 +23,12 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n-    |> validate_number(:status, greater_than_or_equal_to: 0)\n-    |> validate_number(:status, less_than_or_equal_to: 2)\n-    |> validate_number(:status, greater_than_or_equal_to: 0)\n-    |> validate_number(:status, less_than_or_equal_to: 3)\n+    # |> validate_number(:status, greater_than_or_equal_to: 0)\n+    # |> validate_number(:status, less_than_or_equal_to: 2)\n+    # |> validate_number(:status, greater_than_or_equal_to: 0)\n+    # |> validate_number(:status, less_than_or_equal_to: 3)\n   end\n \n   defp validation_name(changeset) do\n     changeset\n"
+                },
+                {
+                    "date": 1658340099618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [active: 1, stop: 0]\n+    field :status, Ecto.Enum, values: [stop: 0, active: 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658415034659,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n   end\n \n   @doc false\n   def changeset(catalog, attrs) do\n+    IO.inspect(attrs)\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n"
+                },
+                {
+                    "date": 1658416664837,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,10 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n+    |> validate_inclusion(:status, 0..1)\n+    |> validate_inclusion(:type, 0..3)\n     # |> validate_number(:status, greater_than_or_equal_to: 0)\n     # |> validate_number(:status, less_than_or_equal_to: 2)\n     # |> validate_number(:status, greater_than_or_equal_to: 0)\n     # |> validate_number(:status, less_than_or_equal_to: 3)\n"
+                },
+                {
+                    "date": 1658418251952,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,12 +25,12 @@\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n     |> validate_inclusion(:status, 0..1)\n-    |> validate_inclusion(:type, 0..3)\n+    # |> validate_inclusion(:type, 0..3)\n+    |> validate_number(:status, greater_than_or_equal_to: 0, message: \"error 0\")\n+    |> validate_number(:status, less_than_or_equal_to: 2, message: \"error 1\")\n     # |> validate_number(:status, greater_than_or_equal_to: 0)\n-    # |> validate_number(:status, less_than_or_equal_to: 2)\n-    # |> validate_number(:status, greater_than_or_equal_to: 0)\n     # |> validate_number(:status, less_than_or_equal_to: 3)\n   end\n \n   defp validation_name(changeset) do\n"
+                },
+                {
+                    "date": 1658418330369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,9 +24,9 @@\n     catalog\n     |> cast(attrs, [:name, :singular_name, :status, :type, :parent_id, :lft, :rgt, :creator_id, :editor_id])\n     |> validation_name()\n     |> validation_singular_name()\n-    |> validate_inclusion(:status, 0..1)\n+    # |> validate_inclusion(:status, 0..1)\n     # |> validate_inclusion(:type, 0..3)\n     |> validate_number(:status, greater_than_or_equal_to: 0, message: \"error 0\")\n     |> validate_number(:status, less_than_or_equal_to: 2, message: \"error 1\")\n     # |> validate_number(:status, greater_than_or_equal_to: 0)\n"
+                },
+                {
+                    "date": 1658429579987,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [stop: 0, active: 1]\n-    field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n+    field :status, :integer #Ecto.Enum, values: [stop: 0, active: 1]\n+    field :type, :integer #Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n     belongs_to :creator, User, foreign_key: :creator_id\n"
+                },
+                {
+                    "date": 1658429635521,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, :integer #Ecto.Enum, values: [stop: 0, active: 1]\n-    field :type, :integer #Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n+    field :status, Ecto.Enum, values: [stop: 0, active: 1]\n+    field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n     belongs_to :creator, User, foreign_key: :creator_id\n"
+                },
+                {
+                    "date": 1658430057050,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [stop: 0, active: 1]\n+    field :status, Ecto.Enum, values: [inactive: 0, active: 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435626483,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [inactive: 0, active: 1]\n+    field :status, :integer, [0, 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435636261,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, :integer, [0, 1]\n+    field :status, :integer, [inactive: 0, active: 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435649662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, :integer, [inactive: 0, active: 1]\n+    field :status, :integer, values: [0, 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435670929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, :integer, values: [0, 1]\n+    field :status, Ecto.Enum, values: [0, 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435696812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, Ecto.Enum, values: [0, 1]\n+    field :status, :integer, values: [0, 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658435710390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n \n   schema \"catalogs\" do\n     field :name, :string\n     field :singular_name, :string\n-    field :status, :integer, values: [0, 1]\n+    field :status, Ecto.Enum, values: [inactive: 0, active: 1]\n     field :type, Ecto.Enum, values: [none: 0, desc: 1, no_desc: 2, half_desc: 3]\n     field :parent_id\n     field :lft\n     field :rgt\n"
+                },
+                {
+                    "date": 1658438463905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n     # |> validate_inclusion(:status, 0..1)\n     # |> validate_inclusion(:type, 0..3)\n     |> validate_number(:status, greater_than_or_equal_to: 0, message: \"error 0\")\n     |> validate_number(:status, less_than_or_equal_to: 2, message: \"error 1\")\n-    # |> validate_number(:status, greater_than_or_equal_to: 0)\n-    # |> validate_number(:status, less_than_or_equal_to: 3)\n+    |> validate_number(:type, greater_than_or_equal_to: 0)\n+    |> validate_number(:type, less_than_or_equal_to: 3)\n   end\n \n   defp validation_name(changeset) do\n     changeset\n"
+                },
+                {
+                    "date": 1658438488112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,12 +26,12 @@\n     |> validation_name()\n     |> validation_singular_name()\n     # |> validate_inclusion(:status, 0..1)\n     # |> validate_inclusion(:type, 0..3)\n-    |> validate_number(:status, greater_than_or_equal_to: 0, message: \"error 0\")\n-    |> validate_number(:status, less_than_or_equal_to: 2, message: \"error 1\")\n-    |> validate_number(:type, greater_than_or_equal_to: 0)\n-    |> validate_number(:type, less_than_or_equal_to: 3)\n+    # |> validate_number(:status, greater_than_or_equal_to: 0, message: \"error 0\")\n+    # |> validate_number(:status, less_than_or_equal_to: 2, message: \"error 1\")\n+    # |> validate_number(:type, greater_than_or_equal_to: 0)\n+    # |> validate_number(:type, less_than_or_equal_to: 3)\n   end\n \n   defp validation_name(changeset) do\n     changeset\n"
+                }
+            ],
+            "date": 1658167754827,
+            "name": "Commit-0",
+            "content": "defmodule OptimalFinder.Goods.Catalog do\n  use Ecto.Schema\n  import Ecto.Changeset\n\n  schema \"catalogs\" do\n    field :name, :string\n    field :singular_name, :string\n    field :status, Ecto.Enum, values: [active: 1, stop: 2]\n    field :type, Ecto.Enum, values: [desc: 1, no_desc: 2, half_desc: 5]\n    field :parent_id\n    field :lft\n    field :rgt\n\n    timestamps()\n  end\n\n  @doc false\n  def changeset(catalog, attrs) do\n    catalog\n    |> cast(attrs, [])\n    |> validate_required([])\n  end\nend\n"
+        }
+    ]
+}

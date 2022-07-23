@@ -36,6 +36,8 @@ config :admin_web, AdminWeb.Endpoint,
   pubsub_server: AdminWeb.PubSub,
   live_view: [signing_salt: "cv2D7uTB"]
 
+config :petal_components, :error_translator_function, {AdminWeb.ErrorHelpers, :translate_error}
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

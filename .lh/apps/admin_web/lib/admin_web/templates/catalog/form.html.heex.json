@@ -1,0 +1,270 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/catalog/form.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 63,
+            "patches": [
+                {
+                    "date": 1658253394377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658253433617,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,11 +4,12 @@\n       <div class=\"alert alert-danger\">\n         <p>Oops, something went wrong! Please check the errors below.</p>\n       </div>\n     <% end %>\n+\n   </div>\n \n \n-  <div>\n+  <div class=\"items-center p-6 border-t border-gray-200 rounded-b\">\n     <%= submit \"Save\" %>\n   </div>\n </.form>\n"
+                },
+                {
+                    "date": 1658253498833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n   </div>\n \n-\n-  <div class=\"items-center p-6 border-t border-gray-200 rounded-b\">\n-    <%= submit \"Save\" %>\n+  <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n+    <div><%= submit \"Save\" %></div>\n+    <div><%= submit \"Save\" %></div>\n   </div>\n </.form>\n"
+                },
+                {
+                    "date": 1658253505970,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,8 @@\n \n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n+    <div><%= submit \"Reset\" %></div>\n     <div><%= submit \"Save\" %></div>\n-    <div><%= submit \"Save\" %></div>\n   </div>\n </.form>\n"
+                },
+                {
+                    "date": 1658253522815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,8 +8,12 @@\n \n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n-    <div><%= submit \"Reset\" %></div>\n-    <div><%= submit \"Save\" %></div>\n+    <div>\n+      <%= submit \"Reset\" %>\n+    </div>\n+    <div>\n+      <%= reset \"Save\" %><\n+      /div>\n   </div>\n </.form>\n"
+                },
+                {
+                    "date": 1658253529787,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,8 @@\n     <div>\n       <%= submit \"Reset\" %>\n     </div>\n     <div>\n-      <%= reset \"Save\" %><\n-      /div>\n+      <%= reset \"Save\" %></div>\n   </div>\n+  \n </.form>\n"
+                },
+                {
+                    "date": 1658253535074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,8 +12,9 @@\n     <div>\n       <%= submit \"Reset\" %>\n     </div>\n     <div>\n-      <%= reset \"Save\" %></div>\n+      <%= reset \"Save\" %>\n+    </div>\n   </div>\n-  \n+\n </.form>\n"
+                },
+                {
+                    "date": 1658253791989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,12 +9,12 @@\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n-      <%= submit \"Reset\" %>\n+      <%= reset \"Reset\" %>\n     </div>\n     <div>\n-      <%= reset \"Save\" %>\n+      <%= submit \"Save\" %>\n     </div>\n   </div>\n \n </.form>\n"
+                },
+                {
+                    "date": 1658253800445,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n     <div>\n       <%= reset \"Reset\" %>\n     </div>\n     <div>\n-      <%= submit \"Save\" %>\n+      <%= submit \"Save\", class: \"border-transparent text-white bg-green-600 active:bg-green-700 hover:bg-green-700 active:bg-green-700 focus:bg-green-700 text-sm leading-5 px-4 py-2 font-medium rounded-md inline-flex items-center justify-center border focus:outline-none transition duration-150 ease-in-out\" %>\n     </div>\n   </div>\n \n </.form>\n"
+                },
+                {
+                    "date": 1658253840711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n-      <%= reset \"Reset\" %>\n+      <%= reset \"Reset\", class: \"text-gray-700 bg-white border-gray-300 hover:text-gray-900 hover:text-gray-900 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:border-gray-400 focus:bg-gray-100 focus:text-gray-900 active:border-gray-400 active:bg-gray-200 active:text-black dark:bg-white dark:hover:bg-gray-200 dark:hover:border-transparent dark:border-transparent text-sm leading-5 px-4 py-2 font-medium rounded-md inline-flex items-center justify-center border focus:outline-none transition duration-150 ease-in-out\" %>\n     </div>\n     <div>\n       <%= submit \"Save\", class: \"border-transparent text-white bg-green-600 active:bg-green-700 hover:bg-green-700 active:bg-green-700 focus:bg-green-700 text-sm leading-5 px-4 py-2 font-medium rounded-md inline-flex items-center justify-center border focus:outline-none transition duration-150 ease-in-out\" %>\n     </div>\n"
+                },
+                {
+                    "date": 1658253999696,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,11 @@\n         <p>Oops, something went wrong! Please check the errors below.</p>\n       </div>\n     <% end %>\n \n+    <div class=\"grid grid-cols-6 gap-6\">\n+\n+    </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n"
+                },
+                {
+                    "date": 1658254006744,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-6\">\n-\n+      <div></div>\n     </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n"
+                },
+                {
+                    "date": 1658254016846,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-6\">\n-      <div></div>\n+      <div class=\"col-span-6 sm:col-span-3\"></div>\n     </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n"
+                },
+                {
+                    "date": 1658254047726,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-6\">\n+      <div class=\"col-span-3 sm:col-span-3\"></div>\n       <div class=\"col-span-6 sm:col-span-3\"></div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658254258080,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,15 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-6\">\n-      <div class=\"col-span-3 sm:col-span-3\"></div>\n-      <div class=\"col-span-6 sm:col-span-3\"></div>\n+      <div class=\"col-span-3 sm:col-span-3\">\n+        <.form_label form={f} field={:name} label=\"Name\" />\n+      </div>\n+      <div class=\"col-span-6 sm:col-span-3\">\n+        <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" class=\"pl-8\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+      </div>\n     </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n"
+                },
+                {
+                    "date": 1658254280217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,9 @@\n       <div class=\"col-span-3 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n       <div class=\"col-span-6 sm:col-span-3\">\n-        <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" class=\"pl-8\" />\n+        <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658254306577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     <div class=\"grid grid-cols-6 gap-6\">\n       <div class=\"col-span-3 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n-      <div class=\"col-span-6 sm:col-span-3\">\n+      <div class=\"col-span-9 sm:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658254367120,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,12 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-6\">\n-      <div class=\"col-span-3 sm:col-span-3\">\n+      <div class=\"col-span-2 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n-      <div class=\"col-span-9 sm:col-span-3\">\n+      <div class=\"col-span-6 sm:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658254471475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         <p>Oops, something went wrong! Please check the errors below.</p>\n       </div>\n     <% end %>\n \n-    <div class=\"grid grid-cols-6 gap-6\">\n+    <div class=\"grid grid-cols-6\">\n       <div class=\"col-span-2 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n       <div class=\"col-span-6 sm:col-span-3\">\n"
+                },
+                {
+                    "date": 1658254487115,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n         <p>Oops, something went wrong! Please check the errors below.</p>\n       </div>\n     <% end %>\n \n-    <div class=\"grid grid-cols-6\">\n+    <div class=\"grid grid-cols-6 gap-6\">\n       <div class=\"col-span-2 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n       <div class=\"col-span-6 sm:col-span-3\">\n"
+                },
+                {
+                    "date": 1658254566107,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,13 +5,13 @@\n         <p>Oops, something went wrong! Please check the errors below.</p>\n       </div>\n     <% end %>\n \n-    <div class=\"grid grid-cols-6 gap-6\">\n+    <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-2 sm:col-span-3\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n-      <div class=\"col-span-6 sm:col-span-3\">\n+      <div class=\"col-span-4 sm:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658254694623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,12 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-2 sm:col-span-3\">\n+      <div class=\"col-span-6 lg:col-span-2\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n-      <div class=\"col-span-4 sm:col-span-3\">\n+      <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658254736999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-6 lg:col-span-2\">\n+      <div class=\"col-span-6 lg:col-span-2 items-center\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n"
+                },
+                {
+                    "date": 1658254759994,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-6 lg:col-span-2 items-center\">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-center\">\n         <.form_label form={f} field={:name} label=\"Name\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n"
+                },
+                {
+                    "date": 1658254780404,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-center\">\n-        <.form_label form={f} field={:name} label=\"Name\" />\n+        <.form_label form={f} field={:name} label=\"Name\" class=\"mt-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658254798965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-center\">\n-        <.form_label form={f} field={:name} label=\"Name\" class=\"mt-0\" />\n+        <.form_label form={f} field={:name} label=\"Name\" class=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658254972663,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n         <.form_label form={f} field={:name} label=\"Name\" class=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+        <.form_field_error form={f} field={:name} cclasseslass=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658254994706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,13 +7,13 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-center\">\n-        <.form_label form={f} field={:name} label=\"Name\" class=\"mb-0\" />\n+        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} cclasseslass=\"mt-1\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658255036271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-6 lg:col-span-2 flex items-center\">\n+      <div class=\"col-span-6 lg:col-span-2 \">\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n"
+                },
+                {
+                    "date": 1658255052157,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-6 lg:col-span-2 \">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-center justify=end\">\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n"
+                },
+                {
+                    "date": 1658255072511,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n       </div>\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n-      <div class=\"col-span-6 lg:col-span-2 flex items-center justify=end\">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n"
+                },
+                {
+                    "date": 1658255110152,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0\" />\n+        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658255118250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1\" />\n+        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-2\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658255124424,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n     <% end %>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-2\" />\n+        <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658255161377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,18 @@\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n+\n+    <div class=\"grid grid-cols-6 gap-4\">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n+        <.form_label form={f} field={:singular_name} label=\"Singular name\" classes=\"mb-0 mt-1.5\" />\n+      </div>\n+      <div class=\"col-span-6 lg:col-span-4\">\n+        <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+      </div>\n+    </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n"
+                },
+                {
+                    "date": 1658255369482,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:singular_name} label=\"Singular name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n+        <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658255515742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,18 @@\n         <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n+\n+    <div class=\"grid grid-cols-6 gap-4\">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n+        <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0 mt-1.5\" />\n+      </div>\n+      <div class=\"col-span-6 lg:col-span-4\">\n+        <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+      </div>\n+    </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n"
+                },
+                {
+                    "date": 1658255553547,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+        <.checkbox form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n+        <.form_field_error form={f} field={:status} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658255614206,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.checkbox form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n+        <.checkbox form={f} field={:singular_name} />\n         <.form_field_error form={f} field={:status} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658255626325,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,9 @@\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0 mt-1.5\" />\n+        <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.checkbox form={f} field={:singular_name} />\n         <.form_field_error form={f} field={:status} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658255694513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,12 +30,22 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.checkbox form={f} field={:singular_name} />\n+        <.checkbox form={f} field={:status} />\n         <.form_field_error form={f} field={:status} class=\"mt-1\" />\n       </div>\n     </div>\n+\n+    <div class=\"grid grid-cols-6 gap-4\">\n+      <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n+        <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0\" />\n+      </div>\n+      <div class=\"col-span-6 lg:col-span-4\">\n+        <.select form={f} field={:type} />\n+        <.form_field_error form={f} field={:type} class=\"mt-1\" />\n+      </div>\n+    </div>\n   </div>\n \n   <div class=\"flex items-center justify-between p-6 border-t border-gray-200 rounded-b\">\n     <div>\n"
+                },
+                {
+                    "date": 1658255735976,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.select form={f} field={:type} />\n+        <.select form={f} field={:type} options />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658255812792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.select form={f} field={:type} options />\n+        <.select form={f} field={:type} options={Ecto.Enum.mappings(EnumSchema, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658255860510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n-        <.select form={f} field={:type} options={Ecto.Enum.mappings(EnumSchema, :type)} />\n+        <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658255886667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0\" />\n+        <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658255913161,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n-        <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-1.5\" />\n+        <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-4\">\n         <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n"
+                },
+                {
+                    "date": 1658334687405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n-      <div class=\"col-span-6 lg:col-span-4\">\n+      <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n@@ -19,9 +19,9 @@\n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:singular_name} label=\"Singular name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n-      <div class=\"col-span-6 lg:col-span-4\">\n+      <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n         <.form_field_error form={f} field={:name} class=\"mt-1\" />\n       </div>\n     </div>\n@@ -29,9 +29,9 @@\n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n-      <div class=\"col-span-6 lg:col-span-4\">\n+      <div class=\"col-span-6 lg:col-span-3\">\n         <.checkbox form={f} field={:status} />\n         <.form_field_error form={f} field={:status} class=\"mt-1\" />\n       </div>\n     </div>\n@@ -39,9 +39,9 @@\n     <div class=\"grid grid-cols-6 gap-4\">\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n-      <div class=\"col-span-6 lg:col-span-4\">\n+      <div class=\"col-span-6 lg:col-span-3\">\n         <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-1\" />\n       </div>\n     </div>\n"
+                },
+                {
+                    "date": 1658338954838,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n-        <.form_field_error form={f} field={:type} class=\"mt-1\" />\n+        <.form_field_error form={f} field={:type} class=\"mt-5\" />\n       </div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658338968905,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-5\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n@@ -21,9 +21,9 @@\n         <.form_label form={f} field={:singular_name} label=\"Singular name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-1\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-5\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n@@ -31,9 +31,9 @@\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.checkbox form={f} field={:status} />\n-        <.form_field_error form={f} field={:status} class=\"mt-1\" />\n+        <.form_field_error form={f} field={:status} class=\"mt-5\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n"
+                },
+                {
+                    "date": 1658339012400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,9 +11,9 @@\n         <.form_label form={f} field={:name} label=\"Name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:name} placeholder=\"Name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-5\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-0\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n@@ -21,9 +21,9 @@\n         <.form_label form={f} field={:singular_name} label=\"Singular name\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.text_input form={f} field={:singular_name} placeholder=\"Singular name\" required=\"{true}\" />\n-        <.form_field_error form={f} field={:name} class=\"mt-5\" />\n+        <.form_field_error form={f} field={:name} class=\"mt-0\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n@@ -31,9 +31,9 @@\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.checkbox form={f} field={:status} />\n-        <.form_field_error form={f} field={:status} class=\"mt-5\" />\n+        <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n     <div class=\"grid grid-cols-6 gap-4\">\n@@ -41,9 +41,9 @@\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n         <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n-        <.form_field_error form={f} field={:type} class=\"mt-5\" />\n+        <.form_field_error form={f} field={:type} class=\"mt-0\" />\n       </div>\n     </div>\n   </div>\n \n"
+                },
+                {
+                    "date": 1658341279974,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} />\n+        <.checkbox form={f} field={:status} checked_value=1 checked_value=0 />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658341293553,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=1 checked_value=0 />\n+        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658341678248,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n+        <.checkbox form={f} field={:status} value=\"1\" checked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658341712125,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} value=\"1\" checked_value=\"0\" />\n+        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658341999676,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n+        <.checkbox form={f} field={:status} checked_value=\"{1}\" checked_value=\"{0}\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658342028946,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"{1}\" checked_value=\"{0}\" />\n+        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658342041173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"1\" checked_value=\"0\" />\n+        <.checkbox form={f} field={:status} checked_value=\"1\" unchecked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658418896480,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n+        <.select form={f} field={:type} options={0..3} />\n         <.form_field_error form={f} field={:type} class=\"mt-0\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658418935293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.select form={f} field={:type} options={0..3} />\n+        <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-0\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658434343428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,9 +40,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:type} label=\"Type\" classes=\"mb-0 mt-1.5\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.select form={f} field={:type} options={Ecto.Enum.mappings(OptimalFinder.Goods.Catalog, :type)} />\n+        <.select form={f} field={:type} options={Ecto.Enum.values(OptimalFinder.Goods.Catalog, :type)} />\n         <.form_field_error form={f} field={:type} class=\"mt-0\" />\n       </div>\n     </div>\n   </div>\n"
+                },
+                {
+                    "date": 1658434416764,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"1\" unchecked_value=\"0\" />\n+        <.checkbox form={f} field={:status} checked_value=\"active\" unchecked_value=\"inactive\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658435275268,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"active\" unchecked_value=\"inactive\" />\n+        <.checkbox form={f} field={:status} checked_value=\"{:active}\" unchecked_value=\"{:inactive}\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658435348814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"{:active}\" unchecked_value=\"{:inactive}\" />\n+        <.checkbox form={f} field={:status} checked_value=\"1\" unchecked_value=\"0\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                },
+                {
+                    "date": 1658438502274,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n       <div class=\"col-span-6 lg:col-span-2 flex items-start justify-end\">\n         <.form_label form={f} field={:status} label=\"Status\" classes=\"mb-0\" />\n       </div>\n       <div class=\"col-span-6 lg:col-span-3\">\n-        <.checkbox form={f} field={:status} checked_value=\"1\" unchecked_value=\"0\" />\n+        <.checkbox form={f} field={:status} checked_value=\"active\" unchecked_value=\"inactive\" />\n         <.form_field_error form={f} field={:status} class=\"mt-0\" />\n       </div>\n     </div>\n \n"
+                }
+            ],
+            "date": 1658253394377,
+            "name": "Commit-0",
+            "content": "<.form let={f} for={@changeset} action={@action}>\n  <div class=\"p-6 space-y-6\">\n    <%= if @changeset.action do %>\n      <div class=\"alert alert-danger\">\n        <p>Oops, something went wrong! Please check the errors below.</p>\n      </div>\n    <% end %>\n  </div>\n\n\n  <div>\n    <%= submit \"Save\" %>\n  </div>\n</.form>\n"
+        }
+    ]
+}

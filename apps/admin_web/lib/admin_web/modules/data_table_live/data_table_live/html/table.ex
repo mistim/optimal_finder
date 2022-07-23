@@ -17,7 +17,7 @@ defmodule DataTableLive.HTML.Table do
     body =
       list
       |> Enum.map(fn entry -> build_row(entry, assigns) end)
-      |> Helpers.tag(:tbody, class: "bg-white divide-y divide-gray-200")
+      |> Helpers.tag(:tbody, class: "bg-white divide-y_ divide-gray-200_")
 
     [head, body]
     |> Helpers.tag(:table, class: "table-fixed min-w-full divide-y_ divide-gray-200_")

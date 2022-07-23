@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 4,
             "patches": [
                 {
                     "date": 1658039739098,
@@ -16,6 +16,14 @@
                 {
                     "date": 1658050663905,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n     params\n     |> Text.text(:show_field, name)\n     |> Helpers.tag(:a,\n-      class: \"exz-show-button\",\n+      class: Params.get_dt_class(:show_button),\n       \"phx-click\": \"show_column\",\n       \"phx-value-column\": key\n     )\n   end\n"
+                },
+                {
+                    "date": 1658250911815,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n     params\n     |> Text.text(:show_field, name)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:show_button),\n+      class: Params.get_dt_class(:dfault_button),\n       \"phx-click\": \"show_column\",\n       \"phx-value-column\": key\n     )\n   end\n@@ -37,18 +37,18 @@\n   def build_show_hide_fields_button(%Params{show_field_buttons: true} = params) do\n     params\n     |> Text.text(:hide_field_buttons)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:info_button),\n+      class: Params.get_dt_class(:dfault_button),\n       \"phx-click\": \"hide_buttons\"\n     )\n   end\n \n   def build_show_hide_fields_button(%Params{} = params) do\n     params\n     |> Text.text(:show_field_buttons)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:info_button),\n+      class: Params.get_dt_class(:dfault_button),\n       \"phx-click\": \"show_buttons\"\n     )\n   end\n end\n"
+                },
+                {
+                    "date": 1658253874496,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n     params\n     |> Text.text(:show_field, name)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:dfault_button),\n+      class: Params.get_dt_class(:default_button),\n       \"phx-click\": \"show_column\",\n       \"phx-value-column\": key\n     )\n   end\n@@ -37,18 +37,18 @@\n   def build_show_hide_fields_button(%Params{show_field_buttons: true} = params) do\n     params\n     |> Text.text(:hide_field_buttons)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:dfault_button),\n+      class: Params.get_dt_class(:default_button),\n       \"phx-click\": \"hide_buttons\"\n     )\n   end\n \n   def build_show_hide_fields_button(%Params{} = params) do\n     params\n     |> Text.text(:show_field_buttons)\n     |> Helpers.tag(:a,\n-      class: Params.get_dt_class(:dfault_button),\n+      class: Params.get_dt_class(:default_button),\n       \"phx-click\": \"show_buttons\"\n     )\n   end\n end\n"
                 }
             ],
             "date": 1658039739098,

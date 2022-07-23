@@ -3,11 +3,107 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 24,
             "patches": [
                 {
                     "date": 1658039721430,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658250520092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,29 +142,29 @@\n   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n     params\n     |> Text.text(:new)\n-    |> Link.link(to: route, class: \"exz-action-new\")\n+    |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n     |> Text.text(:show)\n-    |> Link.link(to: route, class: \"exz-action-show\")\n+    |> Link.link(to: route, class: Params.get_dt_class(:action_show))\n   end\n \n   defp html(route, :edit, %Params{} = params) do\n     params\n     |> Text.text(:edit)\n-    |> Link.link(to: route, class: \"exz-action-edit\")\n+    |> Link.link(to: route, class: Params.get_dt_class(:action_edit))\n   end\n \n   defp html(route, :delete, %Params{csrf_token: csrf_token} = params) do\n     params\n     |> Text.text(:delete)\n     |> Link.link(\n       to: route,\n-      class: \"exz-action-delete\",\n+      class: Params.get_dt_class(:action_delete),\n       method: :delete,\n       \"data-confirm\": Text.text(params, :confirm_action),\n       csrf_token: csrf_token\n     )\n"
+                },
+                {
+                    "date": 1658559783870,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,8 +142,12 @@\n   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n     params\n     |> Text.text(:new)\n+    |> IO.inspct\n+\n+    params\n+    |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n   end\n \n   defp html(route, :show, %Params{} = params) do\n"
+                },
+                {
+                    "date": 1658559801476,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,9 +142,9 @@\n   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n     params\n     |> Text.text(:new)\n-    |> IO.inspct\n+    |> IO.inspect\n \n     params\n     |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n"
+                },
+                {
+                    "date": 1658560289738,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -140,15 +140,15 @@\n   end\n \n   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n-    params\n-    |> Text.text(:new)\n-    |> IO.inspect\n+    # params\n+    # |> Text.text(:new)\n+    # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    params\n-    |> Text.text(:new)\n-    |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n+    ~H\"\"\"\n+    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658560505558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,11 @@\n     # |> Text.text(:new)\n     # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n     ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    <.link\n+      to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\"\n+    />\n     \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n"
+                },
+                {
+                    "date": 1658560511581,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,11 +145,9 @@\n     # |> Text.text(:new)\n     # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n     ~H\"\"\"\n-    <.link\n-      to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\"\n-    />\n+    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n     \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n"
+                },
+                {
+                    "date": 1658560626534,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -138,9 +138,9 @@\n   def build(custom_action, entry, %{module: module, socket: socket, csrf_token: csrf_token}) do\n     apply(module, custom_action, [socket, entry, csrf_token])\n   end\n \n-  @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n+  # @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n     # params\n     # |> Text.text(:new)\n     # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n"
+                },
+                {
+                    "date": 1658560644618,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,9 +145,9 @@\n     # |> Text.text(:new)\n     # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n     ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    <.link to=\"{@route}\" method={:delete} \" />\n     \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n"
+                },
+                {
+                    "date": 1658560660642,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -138,17 +138,17 @@\n   def build(custom_action, entry, %{module: module, socket: socket, csrf_token: csrf_token}) do\n     apply(module, custom_action, [socket, entry, csrf_token])\n   end\n \n-  # @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n+  @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n-    # params\n-    # |> Text.text(:new)\n-    # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n+    params\n+    |> Text.text(:new)\n+    |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} \" />\n-    \"\"\"\n+    # ~H\"\"\"\n+    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    # \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658560713243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n     end\n   ```\n   \"\"\"\n \n+  use PetalComponents\n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n \n   @typedoc \"Controller action\"\n"
+                },
+                {
+                    "date": 1658560725258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,11 +145,11 @@\n     params\n     |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    # ~H\"\"\"\n-    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    # \"\"\"\n+    ~H\"\"\"\n+    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658560732314,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,8 @@\n     end\n   ```\n   \"\"\"\n \n-  use PetalComponents\n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n \n   @typedoc \"Controller action\"\n@@ -145,11 +144,11 @@\n     params\n     |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    \"\"\"\n+    # ~H\"\"\"\n+    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    # \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658561166531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,9 @@\n     end\n   ```\n   \"\"\"\n \n+  use Phoenix.Component\n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n \n   @typedoc \"Controller action\"\n"
+                },
+                {
+                    "date": 1658561176013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -145,11 +145,11 @@\n     params\n     |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    # ~H\"\"\"\n-    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    # \"\"\"\n+    ~H\"\"\"\n+    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658561209456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,9 @@\n   ```\n   \"\"\"\n \n   use Phoenix.Component\n+  import PetalComponents.Helpers\n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n \n   @typedoc \"Controller action\"\n"
+                },
+                {
+                    "date": 1658561219427,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,8 @@\n     end\n   ```\n   \"\"\"\n \n-  use Phoenix.Component\n-  import PetalComponents.Helpers\n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n \n   @typedoc \"Controller action\"\n@@ -146,11 +144,11 @@\n     params\n     |> Text.text(:new)\n     |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    \"\"\"\n+    # ~H\"\"\"\n+    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    # \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658561336370,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n   ```\n   \"\"\"\n \n   alias DataTableLive.{Params, Text}\n-  alias Phoenix.HTML.Link\n+  # alias Phoenix.HTML.Link\n+  alias PetalComponents.Link\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658561410437,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   \"\"\"\n \n   alias DataTableLive.{Params, Text}\n   # alias Phoenix.HTML.Link\n-  alias PetalComponents.Link\n+  alias PetalComponents as Link\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658561443005,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   \"\"\"\n \n   alias DataTableLive.{Params, Text}\n   # alias Phoenix.HTML.Link\n-  alias PetalComponents as Link\n+  alias PetalComponents, as: Link\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658561465745,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n   \"\"\"\n \n   alias DataTableLive.{Params, Text}\n   # alias Phoenix.HTML.Link\n-  alias PetalComponents, as: Link\n+  alias PetalComponents.Link\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658561703488,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,10 @@\n   ```\n   \"\"\"\n \n   alias DataTableLive.{Params, Text}\n-  # alias Phoenix.HTML.Link\n-  alias PetalComponents.Link\n+  alias Phoenix.HTML.Link\n+  # alias PetalComponents.Link\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658566360740,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,9 @@\n \n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n   # alias PetalComponents.Link\n+  use PetalComponents\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n"
+                },
+                {
+                    "date": 1658566414282,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -142,15 +142,15 @@\n   end\n \n   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}\n   defp html(route, :new, %Params{} = params) do\n-    params\n-    |> Text.text(:new)\n-    |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n+    # params\n+    # |> Text.text(:new)\n+    # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    # ~H\"\"\"\n-    # <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    # \"\"\"\n+    ~H\"\"\"\n+    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n+    \"\"\"\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
+                },
+                {
+                    "date": 1658567161759,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,9 @@\n \n   alias DataTableLive.{Params, Text}\n   alias Phoenix.HTML.Link\n   # alias PetalComponents.Link\n-  use PetalComponents\n+  # use PetalComponents\n \n   @typedoc \"Controller action\"\n   @type action :: :new | :delete | :show | :edit\n \n@@ -146,11 +146,9 @@\n     # params\n     # |> Text.text(:new)\n     # |> Link.link(to: route, class: Params.get_dt_class(:action_new))\n \n-    ~H\"\"\"\n-    <.link to=\"{@route}\" method={:delete} class=\"{class: Params.get_dt_class(:action_new)}\" label=\"{Text.text(:new)}\" />\n-    \"\"\"\n+    PetalComponents.Link.link(params)\n   end\n \n   defp html(route, :show, %Params{} = params) do\n     params\n"
                 }
             ],
             "date": 1658039721430,

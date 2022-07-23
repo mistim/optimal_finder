@@ -3,11 +3,35 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1657786542764,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658170427755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,8 +6,9 @@\n     field :email, :string\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n+    has_many :catalogs_created, Admin.User\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658170449996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,9 @@\n     field :email, :string\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n-    has_many :catalogs_created, Admin.User\n+    has_many :catalogs_created, OptimalFinder.Catalog\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658170489004,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,9 @@\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n     has_many :catalogs_created, OptimalFinder.Catalog\n+    has_many :catalogs_edited, OptimalFinder.Catalog\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658171948225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,15 +1,16 @@\n defmodule Admin.Accounts.User do\n   use Ecto.Schema\n   import Ecto.Changeset\n+  alias OptimalFinder.Catalog\n \n   schema \"users\" do\n     field :email, :string\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n-    has_many :catalogs_created, OptimalFinder.Catalog\n-    has_many :catalogs_edited, OptimalFinder.Catalog\n+    has_many :catalogs_created, Catalog\n+    has_many :catalogs_edited, Catalog\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658172581917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n     field :email, :string\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n-    has_many :catalogs_created, Catalog\n-    has_many :catalogs_edited, Catalog\n+    has_many :catalogs_created, Catalog, foreign_key: :creator_id\n+    has_many :catalogs_edited, Catalog, foreign_key: :editor_id\n \n     timestamps()\n   end\n \n"
+                },
+                {
+                    "date": 1658173241598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n     field :email, :string\n     field :password, :string, virtual: true, redact: true\n     field :hashed_password, :string, redact: true\n     field :confirmed_at, :naive_datetime\n-    has_many :catalogs_created, Catalog, foreign_key: :creator_id\n-    has_many :catalogs_edited, Catalog, foreign_key: :editor_id\n+    has_many :catalogs_created, Catalog\n+    has_many :catalogs_edited, Catalog\n \n     timestamps()\n   end\n \n"
                 }
             ],
             "date": 1657786542764,

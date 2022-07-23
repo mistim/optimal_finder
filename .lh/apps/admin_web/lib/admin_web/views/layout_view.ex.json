@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 14,
+            "activePatchIndex": 19,
             "patches": [
                 {
                     "date": 1657829135602,
@@ -64,6 +64,26 @@
                 {
                     "date": 1657901998893,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n         route: Routes.page_path(Endpoint, :index)\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n-        route: Routes.users_path(Endpoint, :index)\n+        route: Routes.user_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1658171421158,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,12 @@\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n         route: Routes.user_path(Endpoint, :index)\n+      }, %{\n+        label: \"Catalogs\",\n+        icon: \"user_group\",\n+        route: Routes.catalot_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1658171466587,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n         route: Routes.user_path(Endpoint, :index)\n       }, %{\n         label: \"Catalogs\",\n         icon: \"user_group\",\n-        route: Routes.catalot_path(Endpoint, :index)\n+        route: Routes.catalod_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1658171483465,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,12 +17,8 @@\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n         route: Routes.user_path(Endpoint, :index)\n-      }, %{\n-        label: \"Catalogs\",\n-        icon: \"user_group\",\n-        route: Routes.catalod_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1658171594525,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,12 @@\n       }, %{\n         label: \"Users\",\n         icon: \"user_group\",\n         route: Routes.user_path(Endpoint, :index)\n+      }, %{\n+        label: \"Catalogs\",\n+        icon: \"user_group\",\n+        route: Routes.catalog_path(Endpoint, :index)\n       }\n     ]\n   end\n end\n"
+                },
+                {
+                    "date": 1658171726040,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n         icon: \"user_group\",\n         route: Routes.user_path(Endpoint, :index)\n       }, %{\n         label: \"Catalogs\",\n-        icon: \"user_group\",\n+        icon: \"folder_open\",\n         route: Routes.catalog_path(Endpoint, :index)\n       }\n     ]\n   end\n"
                 }
             ],
             "date": 1657829135602,

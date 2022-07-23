@@ -22,7 +22,7 @@ defmodule DataTableLive.HTML.ShowButton do
     params
     |> Text.text(:show_field, name)
     |> Helpers.tag(:a,
-      class: Params.get_dt_class(:show_button),
+      class: Params.get_dt_class(:default_button),
       "phx-click": "show_column",
       "phx-value-column": key
     )
@@ -38,7 +38,7 @@ defmodule DataTableLive.HTML.ShowButton do
     params
     |> Text.text(:hide_field_buttons)
     |> Helpers.tag(:a,
-      class: Params.get_dt_class(:info_button),
+      class: Params.get_dt_class(:default_button),
       "phx-click": "hide_buttons"
     )
   end
@@ -47,7 +47,7 @@ defmodule DataTableLive.HTML.ShowButton do
     params
     |> Text.text(:show_field_buttons)
     |> Helpers.tag(:a,
-      class: Params.get_dt_class(:info_button),
+      class: Params.get_dt_class(:default_button),
       "phx-click": "show_buttons"
     )
   end

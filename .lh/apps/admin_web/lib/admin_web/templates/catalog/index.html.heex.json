@@ -1,0 +1,26 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/templates/catalog/index.html.heex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 2,
+            "patches": [
+                {
+                    "date": 1658249464924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658249675590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,7 +2,7 @@\n   <div class=\"mb-1 w-full\">\n       <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n   </div>\n </div>  \n-<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n+<%= AdminWeb.DataTable.CatalogTable.live_table(@conn, query: @query) %>\n \n <span><%= link \"New Catalog\", to: Routes.catalog_path(@conn, :new) %></span>\n"
+                },
+                {
+                    "date": 1658249698450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,6 +3,4 @@\n       <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n   </div>\n </div>  \n <%= AdminWeb.DataTable.CatalogTable.live_table(@conn, query: @query) %>\n-\n-<span><%= link \"New Catalog\", to: Routes.catalog_path(@conn, :new) %></span>\n"
+                }
+            ],
+            "date": 1658249464924,
+            "name": "Commit-0",
+            "content": "<div class=\"p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200\">\n  <div class=\"mb-1 w-full\">\n      <h1 class=\"text-xl sm:text-2xl font-semibold text-gray-900\">All users</h1>\n  </div>\n</div>  \n<%= AdminWeb.DataTable.UserTable.live_table(@conn, query: @query) %>\n\n<span><%= link \"New Catalog\", to: Routes.catalog_path(@conn, :new) %></span>\n"
+        }
+    ]
+}

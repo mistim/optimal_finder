@@ -19,7 +19,7 @@ defmodule DataTableLive.HTML do
     bottom_pagination = maybe_render_pagination(:bottom, assigns, pagination)
     show_hide_fields = ShowButton.build_show_hide_fields_button(params)
     table = Table.build(assigns)
-    bottom_buttons = div_wrap([new_button])
+    # bottom_buttons = div_wrap([new_button], "flex justify-start px-4")
 
     top_navigation =
       div_wrap(
@@ -46,7 +46,7 @@ defmodule DataTableLive.HTML do
         show_buttons,
         table,
         show_buttons,
-        bottom_buttons,
+        # bottom_buttons,
         bottom_navigation
       ],
       class: Params.get_dt_class(:wrapper),

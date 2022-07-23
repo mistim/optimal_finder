@@ -22,6 +22,8 @@ defmodule DataTableLive.HTML.ActionButton do
 
   alias DataTableLive.{Params, Text}
   alias Phoenix.HTML.Link
+  # alias PetalComponents.Link
+  # use PetalComponents
 
   @typedoc "Controller action"
   @type action :: :new | :delete | :show | :edit
@@ -141,21 +143,23 @@ defmodule DataTableLive.HTML.ActionButton do
 
   @spec html(String.t(), action, Params.t()) :: {:safe, iolist}
   defp html(route, :new, %Params{} = params) do
-    params
-    |> Text.text(:new)
-    |> Link.link(to: route, class: "exz-action-new")
+    # params
+    # |> Text.text(:new)
+    # |> Link.link(to: route, class: Params.get_dt_class(:action_new))
+
+    PetalComponents.Link.link(params)
   end
 
   defp html(route, :show, %Params{} = params) do
     params
     |> Text.text(:show)
-    |> Link.link(to: route, class: "exz-action-show")
+    |> Link.link(to: route, class: Params.get_dt_class(:action_show))
   end
 
   defp html(route, :edit, %Params{} = params) do
     params
     |> Text.text(:edit)
-    |> Link.link(to: route, class: "exz-action-edit")
+    |> Link.link(to: route, class: Params.get_dt_class(:action_edit))
   end
 
   defp html(route, :delete, %Params{csrf_token: csrf_token} = params) do
@@ -163,7 +167,7 @@ defmodule DataTableLive.HTML.ActionButton do
     |> Text.text(:delete)
     |> Link.link(
       to: route,
-      class: "exz-action-delete",
+      class: Params.get_dt_class(:action_delete),
       method: :delete,
       "data-confirm": Text.text(params, :confirm_action),
       csrf_token: csrf_token

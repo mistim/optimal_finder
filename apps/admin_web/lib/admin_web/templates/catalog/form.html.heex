@@ -1,0 +1,59 @@
+<.form let={f} for={@changeset} action={@action}>
+  <div class="p-6 space-y-6">
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6 lg:col-span-2 flex items-start justify-end">
+        <.form_label form={f} field={:name} label="Name" classes="mb-0 mt-1.5" />
+      </div>
+      <div class="col-span-6 lg:col-span-3">
+        <.text_input form={f} field={:name} placeholder="Name" required="{true}" />
+        <.form_field_error form={f} field={:name} class="mt-0" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6 lg:col-span-2 flex items-start justify-end">
+        <.form_label form={f} field={:singular_name} label="Singular name" classes="mb-0 mt-1.5" />
+      </div>
+      <div class="col-span-6 lg:col-span-3">
+        <.text_input form={f} field={:singular_name} placeholder="Singular name" required="{true}" />
+        <.form_field_error form={f} field={:name} class="mt-0" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6 lg:col-span-2 flex items-start justify-end">
+        <.form_label form={f} field={:status} label="Status" classes="mb-0" />
+      </div>
+      <div class="col-span-6 lg:col-span-3">
+        <.checkbox form={f} field={:status} checked_value="active" unchecked_value="inactive" />
+        <.form_field_error form={f} field={:status} class="mt-0" />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-6 gap-4">
+      <div class="col-span-6 lg:col-span-2 flex items-start justify-end">
+        <.form_label form={f} field={:type} label="Type" classes="mb-0 mt-1.5" />
+      </div>
+      <div class="col-span-6 lg:col-span-3">
+        <.select form={f} field={:type} options={Ecto.Enum.values(OptimalFinder.Goods.Catalog, :type)} />
+        <.form_field_error form={f} field={:type} class="mt-0" />
+      </div>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between p-6 border-t border-gray-200 rounded-b">
+    <div>
+      <%= reset "Reset", class: "text-gray-700 bg-white border-gray-300 hover:text-gray-900 hover:text-gray-900 hover:border-gray-400 hover:bg-gray-50 focus:outline-none focus:border-gray-400 focus:bg-gray-100 focus:text-gray-900 active:border-gray-400 active:bg-gray-200 active:text-black dark:bg-white dark:hover:bg-gray-200 dark:hover:border-transparent dark:border-transparent text-sm leading-5 px-4 py-2 font-medium rounded-md inline-flex items-center justify-center border focus:outline-none transition duration-150 ease-in-out" %>
+    </div>
+    <div>
+      <%= submit "Save", class: "border-transparent text-white bg-green-600 active:bg-green-700 hover:bg-green-700 active:bg-green-700 focus:bg-green-700 text-sm leading-5 px-4 py-2 font-medium rounded-md inline-flex items-center justify-center border focus:outline-none transition duration-150 ease-in-out" %>
+    </div>
+  </div>
+
+</.form>

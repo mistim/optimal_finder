@@ -1,0 +1,46 @@
+{
+    "sourceFile": "apps/admin_web/lib/admin_web/data_table/catalog_table.ex",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 7,
+            "patches": [
+                {
+                    "date": 1658248981561,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658249020316,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n   import Ecto.Query, only: [from: 2]\n \n   alias AdminWeb.Router.Helpers, as: Routes\n-  alias Admin.Accounts.Catalog\n+  alias Admin.OptimalFinder.Catalog\n \n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n"
+                },
+                {
+                    "date": 1658249053361,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n \n   import Ecto.Query, only: [from: 2]\n \n   alias AdminWeb.Router.Helpers, as: Routes\n-  alias Admin.OptimalFinder.Catalog\n+  alias OptimalFinder.Goods.Catalog\n \n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n"
+                },
+                {
+                    "date": 1658249188433,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,8 +3,9 @@\n   import Ecto.Query, only: [from: 2]\n \n   alias AdminWeb.Router.Helpers, as: Routes\n   alias OptimalFinder.Goods.Catalog\n+  alias OptimalFinder\n \n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n"
+                },
+                {
+                    "date": 1658249194813,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,8 @@\n   import Ecto.Query, only: [from: 2]\n \n   alias AdminWeb.Router.Helpers, as: Routes\n   alias OptimalFinder.Goods.Catalog\n-  alias OptimalFinder\n \n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n"
+                },
+                {
+                    "date": 1658249615768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :catalog_path,\n-  action_buttons: [],\n+  action_buttons: [:new],\n   query: from(c in Catalog),\n   fields: [\n     name: [label: \"Name\"],\n     singular_name: [label: \"Singular name\"],\n"
+                },
+                {
+                    "date": 1658439003191,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :catalog_path,\n-  action_buttons: [:new],\n+  action_buttons: [:new, :edit],\n   query: from(c in Catalog),\n   fields: [\n     name: [label: \"Name\"],\n     singular_name: [label: \"Singular name\"],\n"
+                },
+                {
+                    "date": 1658439025165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n   use DataTableLive,\n   repo: OptimalFinder.Repo,\n   routes: Routes,\n   path: :catalog_path,\n-  action_buttons: [:new, :edit],\n+  action_buttons: [:new, :show, :edit, :delete],\n   query: from(c in Catalog),\n   fields: [\n     name: [label: \"Name\"],\n     singular_name: [label: \"Singular name\"],\n"
+                }
+            ],
+            "date": 1658248981561,
+            "name": "Commit-0",
+            "content": "defmodule AdminWeb.DataTable.CatalogTable do\n\n  import Ecto.Query, only: [from: 2]\n\n  alias AdminWeb.Router.Helpers, as: Routes\n  alias Admin.Accounts.Catalog\n\n  use DataTableLive,\n  repo: OptimalFinder.Repo,\n  routes: Routes,\n  path: :catalog_path,\n  action_buttons: [],\n  query: from(c in Catalog),\n  fields: [\n    name: [label: \"Name\"],\n    singular_name: [label: \"Singular name\"],\n    status: [lbel: \"Status\"],\n    type: [label: \"Type\"]\n    #summary: [label: \"Summary\", hidden: true]\n  ],\n  pagination: [:top, :bottom],\n  per_page: 10\n\n  def render(assigns) do\n    ~H\"<%= build_table(assigns) %>\"\n  end\n\nend\n"
+        }
+    ]
+}

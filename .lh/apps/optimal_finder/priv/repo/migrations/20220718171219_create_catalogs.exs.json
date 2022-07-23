@@ -1,0 +1,38 @@
+{
+    "sourceFile": "apps/optimal_finder/priv/repo/migrations/20220718171219_create_catalogs.exs",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1658166538885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1658166851235,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,10 @@\n \n   def change do\n     create table(:catalogs) do\n       add :name, :string, null: false, size: 160\n-      add :status, :string, null: false\n+      add :singular_name, :string, null: false, size: 160\n+      add :status, :integer, default: 0\n       add :confirmed_at, :naive_datetime\n       add :parent_id, :id\n       add :lft, :integer\n       add :rgt, :integer\n"
+                },
+                {
+                    "date": 1658167349009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n     create table(:catalogs) do\n       add :name, :string, null: false, size: 160\n       add :singular_name, :string, null: false, size: 160\n       add :status, :integer, default: 0\n-      add :confirmed_at, :naive_datetime\n+      add :type, :integer\n       add :parent_id, :id\n       add :lft, :integer\n       add :rgt, :integer\n       timestamps()\n"
+                },
+                {
+                    "date": 1658167390365,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n   def change do\n     create table(:catalogs) do\n       add :name, :string, null: false, size: 160\n       add :singular_name, :string, null: false, size: 160\n-      add :status, :integer, default: 0\n+      add :status, :integer\n       add :type, :integer\n       add :parent_id, :id\n       add :lft, :integer\n       add :rgt, :integer\n"
+                },
+                {
+                    "date": 1658169885569,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,10 @@\n       add :type, :integer\n       add :parent_id, :id\n       add :lft, :integer\n       add :rgt, :integer\n+      add :creator_id, references(:users)\n+      add :editor_id, references(:users)\n       timestamps()\n     end\n   end\n end\n"
+                },
+                {
+                    "date": 1658415592840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n   use Ecto.Migration\n \n   def change do\n     create table(:catalogs) do\n-      add :name, :string, null: false, size: 160\n+      add :name, :string, null: false, size: 160, unique: true\n       add :singular_name, :string, null: false, size: 160\n       add :status, :integer\n       add :type, :integer\n       add :parent_id, :id\n"
+                }
+            ],
+            "date": 1658166538885,
+            "name": "Commit-0",
+            "content": "defmodule OptimalFinder.Repo.Migrations.CreateCatalogs do\n  use Ecto.Migration\n\n  def change do\n    create table(:catalogs) do\n      add :name, :string, null: false, size: 160\n      add :status, :string, null: false\n      add :confirmed_at, :naive_datetime\n      add :parent_id, :id\n      add :lft, :integer\n      add :rgt, :integer\n      timestamps()\n    end\n  end\nend\n"
+        }
+    ]
+}

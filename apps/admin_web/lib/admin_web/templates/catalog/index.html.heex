@@ -1,0 +1,6 @@
+<div class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200">
+  <div class="mb-1 w-full">
+      <h1 class="text-xl sm:text-2xl font-semibold text-gray-900">All users</h1>
+  </div>
+</div>  
+<%= AdminWeb.DataTable.CatalogTable.live_table(@conn, query: @query) %>
